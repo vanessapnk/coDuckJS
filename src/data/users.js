@@ -4,7 +4,7 @@ const collectionName = "userData";
 
 async function getUsers() {
     const collection = await connectToCollection(collectionName)
-    const result = collection.find().toArray()
+    const result = await collection.find().toArray()
     return result
 }
 
