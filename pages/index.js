@@ -1,11 +1,13 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    
+    <>
+    <Button variant="outline">Button</Button>
     <div>Oláhfghjfgshd</div>
+    </>
   );
 }
