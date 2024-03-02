@@ -17,6 +17,13 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        "custom-green": "#61C8A4",
+        "custom-lilac": "#CFC2FC",
+        "custom-yellow": "#F6E174",
+        "custom-background-grey": "#F4F5EF",
+        "custom-grey": "#D9D9D9"
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
