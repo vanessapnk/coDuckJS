@@ -34,4 +34,4 @@ async function getGroupByName(groupName) {
 }
 
 
-module.exports = { getGroups, getGroupsByCity };
+module.exports = { getGroups, getGroupsByCity, getGroupsByStack, getGroupsByStacks, getGroupByName };
