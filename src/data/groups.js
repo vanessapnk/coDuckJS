@@ -1,4 +1,6 @@
 const { connectToCollection } = require("./mongodb");
+import { ObjectId } from 'mongodb'; // Import ObjectId from mongodb
+
 
 const collectionName = "groupData";
 
@@ -6,6 +8,12 @@ async function getGroups() {
     const collection = await connectToCollection(collectionName)
     const result = collection.find().toArray()
     return result
+}
+
+async function getGroupById(groupId) {
+    const collection = await connectToCollection(collectionName);
+    const result = await collection.findOne({ _id: ObjectId(groupId) });
+    return result;
 }
 
 async function getGroupsByCity(city) {
@@ -34,4 +42,4 @@ async function getGroupByName(groupName) {
 }
 
 
-module.exports = { getGroups, getGroupsByCity, getGroupsByStack, getGroupsByStacks, getGroupByName };
+module.exports = { getGroups, getGroupById, getGroupsByCity, getGroupsByStack, getGroupsByStacks, getGroupByName };
