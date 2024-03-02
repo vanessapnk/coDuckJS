@@ -1,3 +1,7 @@
+//import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
+
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -17,6 +21,19 @@ module.exports = {
       },
     },
     extend: {
+<<<<<<< Updated upstream
+=======
+      colors: {
+        "custom-green": "#61C8A4",
+        "custom-lilac": "#CFC2FC",
+        "custom-yellow": "#F6E174",
+        "custom-background-grey": "#F4F5EF",
+        "custom-grey": "#D9D9D9"
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
+>>>>>>> Stashed changes
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -34,4 +51,8 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+<<<<<<< Updated upstream
 }
+=======
+};
+>>>>>>> Stashed changes
