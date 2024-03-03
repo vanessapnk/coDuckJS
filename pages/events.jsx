@@ -33,9 +33,9 @@ export default function Events() {
                 category="Event"
                 profileCheck={true}
                 profileImage="https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                title={event.title}
-                location={event.location}
+                title={event.name}
                 description={event.description}
+                likes={event.likes}
               />
             ))}
           </div>
