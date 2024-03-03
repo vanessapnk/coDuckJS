@@ -18,7 +18,7 @@ export function CardProfile({ category, profileCheck, profileImage, title, locat
                     <Badge variant="outline" className="rounded-md">{category}</Badge>
                     <ArrowUpRight className="cursor-pointer" size={24} strokeWidth={2} />
                 </div>
-                {profileCheck ? <AspectRatio ratio={16 / 9} className="bg-muted">
+                {profileCheck ? <AspectRatio ratio={16 / 9} >
                     <Image
                         src={`${profileImage}`}
                         alt="Photo by Drew Beamer"

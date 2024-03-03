@@ -8,6 +8,7 @@ module.exports = {
     './src/**/*.{js,jsx}',
   ],
   prefix: "",
+
   theme: {
     container: {
       center: true,
@@ -17,6 +18,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        clash: ['var(--font-clash)'],
+        freigeist: ['Freigeist', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

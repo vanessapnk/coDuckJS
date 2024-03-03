@@ -8,6 +8,7 @@ import { CheckList } from "@/components/register/checklist"
 import Link from "next/link";
 import { FormEntry } from "@/components/forms/formEntry"
 import { FormEntryBox } from "@/components/forms/formEntryBox"
+import Image from "next/image"
 
 export default function Register() {
     const [step, setStep] = useState(1);
@@ -42,7 +43,24 @@ export default function Register() {
     return (
         <div className="flex items-center justify-center flex-col h-dvh">
             <form className="container">
-                {step === 1 && (
+                {step == 1 && (
+                    <div className="w-full flex flex-col items-center justify-center gap-8">
+                        <Image
+                            className="pb-8"
+                            src="/images/Saly-38.png"
+                            alt="Descrição da imagem"
+                            width={500}
+                            height={500}
+                        />
+
+
+                        <h1 className="text-start text-[33px] font-bold leading-10">
+                            Be part of the <span className="text-yellow-400">community </span>of self-taught <span className="text-blue-400">programmers </span></h1>
+                        <p className="font-medium">Boost your programming skills or start from scratch! Study independently, vibing with others who share the same goals as you! </p>
+                        <Button className="w-full" onClick={nextStep}>Register</Button>
+                    </div>
+                )}
+                {step === 2 && (
                     <div className="flex flex-col gap-4">
                         <FormEntry
                             label="Email"
@@ -70,7 +88,7 @@ export default function Register() {
                     </div>
                 )}
 
-                {step === 2 && (
+                {step === 3 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
                             label="Name"
@@ -98,7 +116,7 @@ export default function Register() {
                 )}
 
 
-                {step === 3 && (
+                {step === 4 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
                             label="City"
@@ -119,7 +137,7 @@ export default function Register() {
                     </div>
                 )}
 
-                {step === 4 && (
+                {step === 5 && (
                     <div div className="flex flex-col gap-4">
                         <p>Hard Skils</p>
                         <Button onClick={nextStep}>Next</Button>
@@ -127,7 +145,7 @@ export default function Register() {
                     </div>
                 )}
 
-                {step === 5 && (
+                {step === 6 && (
                     <div div className="flex flex-col gap-4">
                         <p>Hobbies</p>
                         <Button type="submit">Finish</Button>
