@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <div className="h-screen flex items-end">
+    <div className="h-screen container flex flex-col items-end">
       <Navbar homeActive={true} groupsActive={false} eventsActive={false} />
     </div>
   );
