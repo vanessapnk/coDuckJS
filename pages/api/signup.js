@@ -7,20 +7,22 @@ export default async function handler(req, res) {
             const createdUser = await createNewUser(newUser);
             res.status(201).json({
                 "message": "User created with success!",
-                "_id": await createdUser._id
+                "_id": createdUser._id
             });
         } catch (err) {
             console.error(err);
-            let mensagem = "Invalid Data provided";
+            let message = "Invalid Data provided";
             let statusCode = 500;
 
             if (err.message === "Passwords don't match") {
-                mensagem = "Passwords don't match";
+                message = "Passwords don't match";
+                statusCode = 400; // Bad Request
             } else if (err.message === "The entered email is already registered.") {
-                mensagem = "The entered email is already registered.";
+                message = "The entered email is already registered.";
+                statusCode = 409; // Conflict
             }
 
-            res.status(statusCode).json({ mensagem, error: err.message });
+            res.status(statusCode).json({ message, error: err.message });
         }
     } else {
         res.status(405).json({ message: "Method Not Allowed" });

@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { connectToCollection } = require("./mongodb");
 
 const collectionName = "userData";
@@ -10,14 +11,20 @@ async function getUsers() {
 
 async function getUserByEmail(email) {
     const collection = await connectToCollection(collectionName);
-    const result = await collection.findOne({ email: {$eq: email} });
+    const result = await collection.findOne({ email: { $eq: email } });
     return result;
 }
 
-async function getUserById(userId) {
-    const collection = await connectToCollection(collectionName);
-    const user = await collection.findOne({ _id: {$eq: userId} });
-    return user;
+async function getUserById(id) {
+    try {
+        const collection = await connectToCollection(collectionName);
+        const result = collection.findOne({ _id: new ObjectId(id) });
+        return result;
+    }
+    catch (error) {
+        console.error('Error fetching user by ID:', error);
+        throw error;
+    }
 }
 
-module.exports = { getUserByEmail, getUserById, getUsers };
+module.exports = { getUserByEmail, getUserById, getUsers }
