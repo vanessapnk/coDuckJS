@@ -2,6 +2,7 @@
 import { NavInternal } from "@/components/custom/navInternal"
 import { UserBody } from "@/components/profile/userBody"
 import { UserTop } from "@/components/profile/userTop"
+import { Navbar } from "@/components/custom/navbar";
 
 export default function Profile() {
     const userBg = "https://github.com/shadcn.png"
@@ -10,6 +11,7 @@ export default function Profile() {
             <NavInternal backLink={"/"} editLink={"/"} />
             <UserTop />
             <UserBody />
+            <Navbar profileActive={true} />
         </div>
     )
 }
