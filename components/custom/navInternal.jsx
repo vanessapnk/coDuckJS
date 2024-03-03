@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/drawer"
 import { Button } from "../ui/button"
 import { UserEdit } from '../profile/userEdit'
+import { DarkModeSwitch } from './darkModeSwitch'
 
 export function NavInternal({ backLink, editLink }) {
     return (
@@ -25,7 +26,7 @@ export function NavInternal({ backLink, editLink }) {
                             <ArrowLeft2 size="18" className="dark:text-zinc-200" variant="Linear" />
                         </div>
                     </Link>
-
+                    <DarkModeSwitch />
                     <DrawerTrigger>
                         <div className='cursor-pointer'>
                             <Edit className="dark:text-zinc-200 " size="18" variant="Linear" />
