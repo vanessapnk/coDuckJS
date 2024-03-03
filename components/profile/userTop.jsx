@@ -1,14 +1,23 @@
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage, } from "@/components/ui/avatar"
 import { Calendar, MapPin } from "lucide-react"
+import { User } from 'iconsax-react'
+const userGithub = "ledevmacedod"
 
 export function UserTop() {
     return (
         <div>
             <div className="flex flex-row gap-4 py-6">
                 <Avatar className="rounded-2xl h-20 w-20">
-                    <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarImage src={`https://github.com/${userGithub}.png`} alt="@shadcn" />
+                    <AvatarFallback>
+                        <User
+                            className="opacity-60"
+                            size="42"
+                            variant="Bold"
+                        />
+                    </AvatarFallback>
+
                 </Avatar>
                 <div>
                     <h1 className="text-xl">Alizasmin Asbolla, 25</h1>

@@ -6,10 +6,11 @@ import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { CheckList } from "@/components/register/checklist"
 import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
+import { FormEntry } from "@/components/forms/formEntry"
+import { FormEntryBox } from "@/components/forms/formEntryBox"
 
 export default function Register() {
+    const [step, setStep] = useState(1);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("")
@@ -25,212 +26,116 @@ export default function Register() {
 
     const hobbiesList = ["Hiking", "Photography", "Reading", "Gardening", "Cooking", "Painting", "Dancing", "Music", "Traveling"];
 
-    // async function createEntry() {
-    //     await fetch("api/entry/register", {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             email, password, passwordConfirm, userName, age, about, city, job, stacks, hobbies
-    //         })
-    //     })
-    // }
+    const nextStep = () => {
+        setStep(step + 1);
+    };
+
+    const backStep = () => {
+        setStep(step - 1);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Lógica para enviar os dados do formulário, se necessário
+    };
+
     return (
         <div className="flex items-center justify-center flex-col h-dvh">
-            <div>
-                <Tabs defaultValue="account" className="w-[400px]">
-                    <TabsList className="flex gap-2 justify-center">
-                        <TabsTrigger value="01">
-                            <Button>
-                                01
-                            </Button>
-                        </TabsTrigger>
-                        <TabsTrigger value="02">
-                            <Button>
-                                02
-                            </Button>
-                        </TabsTrigger>
-                        <TabsTrigger value="03">
-                            <Button>
-                                03
-                            </Button>
-                        </TabsTrigger>
+            <form className="container">
+                {step === 1 && (
+                    <div className="flex flex-col gap-4">
+                        <FormEntry
+                            label="Email"
+                            id="email"
+                            type="email"
+                            placeholder="email@email.com"
+                            required="required"
+                        />
 
-                        <TabsTrigger value="04">
-                            <Button>
-                                04
-                            </Button>
-                        </TabsTrigger>
+                        <FormEntry
+                            label="Password"
+                            id="password"
+                            type="password"
+                            placeholder="**********"
+                            required="required"
+                        />
+                        <FormEntry
+                            label="Confirm Password"
+                            id="password"
+                            type="password"
+                            placeholder="**********"
+                            required="required"
+                        />
+                        <Button onClick={nextStep}>Next</Button>
+                    </div>
+                )}
 
-                    </TabsList>
-                    <TabsContent value="01" className="mt-6">
-                        <div className="container flex flex-col gap-4">
-                            <div>
-                                <Label htmlFor="email">Email</Label>
-                                <Input
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    type="email" id="email" placeholder="Email" />
-                            </div>
-                            <div>
-                                <Label htmlFor="password">Password</Label>
-                                <Input
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    type="password" id="password" placeholder="Password" />
-                            </div>
-                            <div>
-                                <Label htmlFor="password">Confirm Password</Label>
-                                <Input
-                                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                                    type="password" id="passwordConfirm" placeholder="Password" />
-                            </div>
-                            <div></div>
-                        </div>
-                        <div className="flex gap-2 justify-evenly content-center w-full items-center ">
-                            <TabsList >
-                                <div className="w-full">
-                                    <TabsTrigger value="01">
-                                        <Button>
-                                            Back
-                                        </Button>
-                                    </TabsTrigger>
-                                </div>
-                            </TabsList>
+                {step === 2 && (
+                    <div div className="flex flex-col gap-4">
+                        <FormEntry
+                            label="Name"
+                            id="name"
+                            type="text"
+                            placeholder="Your Name"
+                            required="required"
+                        />
 
-                            <TabsList>
-                                <TabsTrigger value="02">
-                                    <Button>
-                                        Next
-                                    </Button>
-                                </TabsTrigger>
-                            </TabsList>
-                        </div>
-                    </TabsContent>
-                    <TabsContent value="02" className="mt-6">
-                        <div className="container flex flex-col gap-4">
-                            <div>
-                                <Label htmlFor="text">Name</Label>
-                                <Input
-                                    onChange={(e) => setUserName(e.target.value)}
-                                    type="text" id="name" placeholder="Name" />
-                            </div>
-                            <div>
-                                <Label htmlFor="number">Age</Label>
-                                <Input
-                                    onChange={(e) => setAge(Number(e.target.value))}
-                                    type="number" id="age" placeholder="Age" />
-                            </div>
-                            <div>
-                                <Label htmlFor="text">About</Label>
-                                <Textarea
-                                    onChange={(e) => setAbout(e.target.value)}
-                                    maxLength={150} placeholder="Fale um cadinho sobre ti :)" id="about" />
-                            </div>
-                            <div></div>
-                        </div>
-                    </TabsContent>
-                    <TabsContent value="03" className="mt-6">
-                        <div className="container flex flex-col gap-4">
-                            <div>
-                                <Label htmlFor="text">Location</Label>
-                                <Input
-                                    onChange={(e) => setCity(e.target.value)}
-                                    type="text" id="city" placeholder="City" />
-                            </div>
-                            <div>
-                                <Label htmlFor="text">Professional occupation</Label>
-                                <Input
-                                    onChange={(e) => setJob(e.target.value)}
-                                    type="text" id="occupation" placeholder="Your Job" />
-                            </div>
-                            <div></div>
-                        </div>
-                    </TabsContent>
-
-                    <TabsContent value="04" className="flex pl-0 flex-col gap-4 mt-6">
-                        {stacksList.map((stack, index) => (
-                            <CheckList
-                                key={index}
-                                setStacks={setStacks}
-                                stackName={stack}
-                            />
-                        ))}
-                        <div></div>
-                    </TabsContent>
-                    <TabsContent value="03" className="mt-6"></TabsContent>
-                    <TabsContent value="03" className="mt-6"></TabsContent>
-                </Tabs>
+                        <FormEntry
+                            label="Age"
+                            id="age"
+                            type="number"
+                            placeholder="21"
+                        />
+                        <FormEntryBox
+                            label="About"
+                            id="about"
+                            type="text"
+                            placeholder="Little Things about you :)"
+                        />
+                        <Button onClick={nextStep}>Next</Button>
+                        <Button onClick={backStep}>Back * </Button>
+                    </div>
+                )}
 
 
-                {/* <TabsContent value="01" className="mt-6">
-                        <div className="bg-zinc-950 rounded-lg h-60 mb-6">
+                {step === 3 && (
+                    <div div className="flex flex-col gap-4">
+                        <FormEntry
+                            label="City"
+                            id="city"
+                            type="text"
+                            placeholder="City where you live"
+                            required="required"
+                        />
 
-                        </div>
-                        <div className="flex gap-2 justify-evenly content-center w-full items-center ">
-                            <TabsList >
-                                <div className="w-full">
-                                    <Button >
-                                        <TabsTrigger value="01">Back</TabsTrigger>
-                                    </Button>
-                                </div>
-                            </TabsList>
+                        <FormEntry
+                            label="Occupation"
+                            id="occupation"
+                            type="text"
+                            placeholder="FrontEnd Developer"
+                        />
+                        <Button onClick={nextStep}>Next</Button>
+                        <Button onClick={backStep}>Back * </Button>
+                    </div>
+                )}
 
-                            <TabsList>
-                                <Button>
-                                    <TabsTrigger value="02">Next</TabsTrigger>
-                                </Button>
-                            </TabsList>
-                        </div>
-                    </TabsContent> */}
+                {step === 4 && (
+                    <div div className="flex flex-col gap-4">
+                        <p>Hard Skils</p>
+                        <Button onClick={nextStep}>Next</Button>
+                        <Button onClick={backStep}>Back * </Button>
+                    </div>
+                )}
 
-                {/* <Carousel setApi={setApi} className="w-full pb-10 ">
-                    <CarouselContent >
+                {step === 5 && (
+                    <div div className="flex flex-col gap-4">
+                        <p>Hobbies</p>
+                        <Button type="submit">Finish</Button>
+                        <Button onClick={backStep}>Back * </Button>
+                    </div>
+                )}
+            </form >
 
-
-
-                        <CarouselItem className="flex pl-0 flex-col gap-4">
-                            {stacksList.map((stack, index) => (
-                                <CheckList
-                                    key={index}
-                                    stacks={stacks}
-                                    setStacks={setStacks}
-                                    stackName={stack}
-                                />
-                            ))}
-                            <div></div>
-                        </CarouselItem>
-
-                        <CarouselItem className="flex pl-0 flex-col gap-4">
-                            {hobbiesList.map((hobbie, index) => (
-                                <CheckList
-                                    key={index}
-                                    stacks={hobbies}
-                                    setStacks={setHobbies}
-                                    stackName={hobbie}
-                                />
-                            ))}
-                            <div></div>
-                        </CarouselItem>
-                        <CarouselItem >
-                            <div className="container flex flex-col gap-4">
-                                <div className="flex flex-col  items-center gap-2">
-                                    <p>Prontinho! </p>
-                                    <p className="pb-60">Agora vamos finalizar!</p>
-                                    <Link href="/">
-                                        <Button
-                                            onClick={() => createEntry()}
-                                            className="w-full">Finish</Button>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div></div>
-                        </CarouselItem>
-
-                    </CarouselContent>
-                </Carousel> */}
-                {/* <div className="py-2 text-center text-sm text-muted-foreground">
-                    {current + "0"} of {count + "0"}
-                </div> */}
-
-            </div>
         </div >
     )
 }
