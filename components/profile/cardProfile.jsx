@@ -23,6 +23,7 @@ export function CardProfile({
   location,
   description,
   likes,
+  stacks,
 }) {
   return (
     <Card className="p-3">
@@ -53,6 +54,20 @@ export function CardProfile({
           {likes && <h2 className="text-sm"> {likes} Likes</h2>}
         </div>
         <p className="text-sm">{description}</p>
+        {stacks && (
+          <div className="flex flex-col gap-2">
+            <h1 className="text-base">Stacks</h1>
+            <div>
+              <div className="flex flex-wrap gap-2">
+                {stacks.map((stack, index) => (
+                  <Badge key={index} variant="profile">
+                    {stack}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Card>
   );

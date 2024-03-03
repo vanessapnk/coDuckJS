@@ -32,6 +32,7 @@ export default function Groups() {
                 key={group.id}
                 category="Group"
                 profileCheck={true}
+                location={group.city}
                 profileImage={
                   group.photo_url ||
                   "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -39,6 +40,7 @@ export default function Groups() {
                 title={group.name}
                 description={group.description}
                 likes={group.likes}
+                stacks={group.stacks}
               />
             ))}
           </div>
