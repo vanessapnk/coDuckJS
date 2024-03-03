@@ -1,12 +1,10 @@
+import { GroupItem } from "@/components/custom/groupItem";
 import { Navbar } from "@/components/custom/navbar";
 
-export default function GroupsDetails() {
+export default function GroupsList() {
     return (
         <>
-            <h1>Group Details</h1>
-            <br />
-            <br />
-            <h1>Lista estilo whatsapp com os grupos em que a pessoa está.</h1>
+            <GroupItem />
             <Navbar homeActive={false} groupsActive={false} chatActive={true} eventsActive={false} />
         </>
     )

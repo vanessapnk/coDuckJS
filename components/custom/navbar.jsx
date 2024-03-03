@@ -15,7 +15,7 @@ export function Navbar({ profileActive, groupsActive, eventsActive, chatActive }
                             <p className={`${profileActive ? "text-blue-400" : "text-white-400"}`}>Profile</p>
                         </div>
                     </Link>
-                    <Link href={"/groups"}>
+                    <Link href={"/"}>
                         <div className="flex items-center flex-col justify-center cursor-pointer">
                             <People className={`${groupsActive ? "text-blue-400" : "text-white-400"}`} size="24"
                                 variant={groupsActive ? "Bulk" : "Outline"} />
@@ -23,7 +23,7 @@ export function Navbar({ profileActive, groupsActive, eventsActive, chatActive }
                         </div>
                     </Link>
 
-                    <Link href={"/groupsDetails"}>
+                    <Link href={"/groupsList"}>
                         <div className="flex items-center flex-col justify-center cursor-pointer">
                             <Message2 className={`${chatActive ? "text-blue-400" : "text-white-400"}`} size="24"
                                 variant={chatActive ? "Bulk" : "Outline"} />

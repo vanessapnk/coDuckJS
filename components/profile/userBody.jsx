@@ -42,36 +42,6 @@ export function UserBody() {
                     </div>
                 </div>
             </div>
-
-            <div className="flex flex-col gap-2">
-                <h1 className="text-base">
-                    Groups and Events
-                </h1>
-                <div>
-                    <div className="flex flex-col gap-2">
-                        <CardProfile
-                            category="Event"
-                            profileCheck={false}
-                            profileImage=""
-                            title="coisinhas "
-                            location="Parque de Devesa, Famalicão"
-                            description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit possimus, eius dolor"
-                        />
-
-                        <CardProfile
-                            category="Group"
-                            profileCheck={false}
-                            profileImage=""
-                            title="coisinhas "
-                            location="Parque de Devesa, Famalicão"
-                            description="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit possimus, eius dolor"
-                        />
-                    </div>
-
-                </div>
-            </div>
-
-
         </div>
     )
 }
