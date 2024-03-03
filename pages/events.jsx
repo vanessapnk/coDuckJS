@@ -32,7 +32,10 @@ export default function Events() {
                 key={event.id}
                 category="Event"
                 profileCheck={true}
-                profileImage="https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                profileImage={
+                  event.photo_url ||
+                  "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                }
                 title={event.name}
                 description={event.description}
                 likes={event.likes}
