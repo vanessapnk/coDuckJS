@@ -17,12 +17,12 @@ async function createNewUser(newUser) {
         email,
         password,
         Name,
-        Age: Age || null,
-        About: About || null,
-        City: City || null,
-        Job: Job || null,
-        Stacks: Stacks || null,
-        Hobbies: Hobbies || null
+        Age: Age ? Age : "",
+        About: About ? About: "",
+        City: City ? City : "",
+        Job: Job ? Job : "",
+        Stacks: Stacks ? Stacks : [],
+        Hobbies: Hobbies ? Hobbies : []
     }
 
     try {
