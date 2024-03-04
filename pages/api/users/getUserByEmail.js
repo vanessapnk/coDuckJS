@@ -1,4 +1,5 @@
 import { getUserByEmail } from "@/src/data/users";
+/*poop*/
 
 export default async function handler(req, res) {
     if (req.method === 'GET') {
