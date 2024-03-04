@@ -29,8 +29,9 @@ async function createNewUser(newUser) {
 
     try {
         const collection = await connectToCollection('userData');
-        const result = await collection.insertOne(user);
-        return result.ops[0]; 
+        await collection.insertOne(user);
+        return { success: true }; 
+        
     } catch (error) {
         throw new Error("Invalid Data provided");// ESTÁ-ME A DAR SEMPRE INVALIDO, MAS CRIAR
     }
