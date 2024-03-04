@@ -29,15 +29,11 @@ export default function Events() {
   };
 
   return (
-    <>
-
-
+    <div className="pb-16">
       <div className="flex flex-col gap-6 pb-6">
         <h1 className="text-2xl font-medium">Explore All Events</h1>
         <FilterTab />
       </div>
-
-
 
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
@@ -65,6 +61,6 @@ export default function Events() {
       </div>
 
       <Navbar homeActive={false} groupsActive={false} eventsActive={true} />
-    </>
+    </div>
   );
 }

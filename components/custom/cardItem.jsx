@@ -38,19 +38,19 @@ export function CardItem({
     <div className="relative blockrounded-3xl p-1 "    >
       <div
         style={backgroundImageStyle}
-        className="absolute inset-0 h-full w-full object-cover  transition-opacity rounded-3xl rounded-b-[1.8rem] pb-1 dark:bg-zinc-950"
+        className="absolute inset-0 h-full w-full object-cover  transition-opacity rounded-3xl rounded-b-[1.8rem] pb-1  dark:bg-zinc-950"
       />
 
       <div className="relative rounded-3xl pt-16">
         <div className="mt-32 sm:mt-48 lg:mt-64 ">
-          <div className="bg-zinc-950 rounded-3xl p-4 flex flex-col gap-4">
+          <div className="bg-zinc-200 dark:bg-zinc-950 rounded-3xl p-4 flex flex-col gap-4">
             <div>
               <div className="flex">
                 <div className="w-9/12">
                   <h1 className="text-2xl font-semibold">{title}</h1>
                 </div>
                 <div className="w-3/12 flex items-end justify-start content-center flex-col
-          text-white text-base font-semibold ">
+          dark:text-white  text-base font-semibold ">
                   <p>Vagas</p>
                   <p>01/10</p>
                 </div>
@@ -73,8 +73,8 @@ export function CardItem({
                   <p className="text-lg">English</p>
                 </div>
               </div>
-              <div className="self-start p-3 rounded-full bg-zinc-800">
-                <ArrowUpRight size={30} />
+              <div className="self-start p-3 rounded-full bg-zinc-900 dark:bg-zinc-900">
+                <ArrowUpRight className="text-white" size={30} />
               </div>
             </div>
             <div>
