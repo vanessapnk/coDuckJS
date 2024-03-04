@@ -16,7 +16,7 @@ async function getUserByEmail(email) {
 
     const collection = await connectToCollection(collectionName);
     try {
-        const result = await collection.findOne({ email: { $eq: email } }).toArray();
+        const result = await collection.findOne({ email: { $eq: email } })
         return result;
     } catch (error) {
         console.error("Error fetching user by email:", error);

@@ -1,15 +1,16 @@
 import { connectToCollection } from "@/src/data/mongodb";
 
-export async function createGroup(name, creatorId, description, stack, stackLevel, location, usersLimit) {
+export async function createGroup(name, creatorId, description, category, stacks, stackLevel, location, usersLimit) {
     try {
         const collection = await connectToCollection("groupData");
         await collection.insertOne({
             name,
             creator: creatorId,
             description: description || "", // Optional
-            stack: stack || [], // Optional
+            category: category || "", // Optional
+            stacks: stacks || [], // Optional
             stackLevel: stackLevel || "", // Optional
-            location: location || {}, // Optional - vai ter Presencial ou online e a cidade se presencial
+            location: location || [], // [online] ou [presencial, cidade]
             usersLimit: usersLimit || undefined, // Optional
             members: [creatorId] // Always start with the creator
         });

@@ -12,7 +12,7 @@ async function getGroups() {
 
 async function getGroupById(groupId) {
     const collection = await connectToCollection(collectionName);
-    const result = await collection.findOne({ _id: ObjectId(groupId) });
+    const result = await collection.findOne({ _id: new ObjectId(groupId) });
     return result;
 }
 

@@ -2,7 +2,7 @@ const { getUserByEmail } = require("../data/users");
 const { connectToCollection } = require("../data/mongodb");
 
 async function createNewUser(newUser) {
-    const { email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks, Hobbies } = newUser;
+    const { email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks, Hobbies, LanguagesSpoken } = newUser;
 
     if (password !== passwordConfirmation) {
         throw new Error(`Passwords don't match`);
@@ -23,7 +23,8 @@ async function createNewUser(newUser) {
         City: City ? City : "",
         Job: Job ? Job : "",
         Stacks: Stacks ? Stacks : [],
-        Hobbies: Hobbies ? Hobbies : []
+        Hobbies: Hobbies ? Hobbies : [],
+        LanguagesSpoken: LanguagesSpoken ? LanguagesSpoken : []
     }
 
     try {
