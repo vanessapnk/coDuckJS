@@ -3,12 +3,12 @@ import { ObjectId } from "mongodb";
 
 
 export default async function handler(req, res) {
-    const { groupId } = req.query;
+    const { eventId } = req.query;
 
     if (req.method === 'PATCH') {
         try {
-            const { name, description, category, modality, city, stackLevel } = req.body;
-            const collection = await connectToCollection("groupData");
+            const { name, description, category, modality, city, stackLevel, exact_location, date, duration_in_days } = req.body;
+            const collection = await connectToCollection("eventData");
 
             // Prepare update object with only provided fields
             const updateObject = {};
@@ -18,9 +18,12 @@ export default async function handler(req, res) {
             if (modality !== undefined) updateObject.modality = modality;
             if (city !== undefined) updateObject.city = city;
             if (stackLevel !== undefined) updateObject.stackLevel = stackLevel;
+            if (exact_location !== undefined) updateObject.exact_location = exact_location;
+            if (date !== undefined) updateObject.date = date;
+            if (duration_in_days !== undefined) updateObject.duration_in_days = duration_in_days;
 
             await collection.updateOne(
-                { _id: new ObjectId(groupId) },
+                { _id: new ObjectId(eventId) },
                 { $set: updateObject }
             );
 

@@ -2,15 +2,15 @@ import { connectToCollection } from "@/src/data/mongodb";
 import { ObjectId } from "mongodb";
 
 export default async function handler(req, res) {
-    const { groupId } = req.query;
+    const { eventId } = req.query;
 
     if (req.method === 'PATCH') {
         try {
             const { languagesSpoken } = req.body;
-            const collection = await connectToCollection("groupData");
+            const collection = await connectToCollection("eventData");
 
             await collection.updateOne(
-                { _id: new ObjectId(groupId) },
+                { _id: new ObjectId(eventId) },
                 { $set: { languagesSpoken } }
             );
 
