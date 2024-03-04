@@ -10,7 +10,7 @@ export default function Groups() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("/api/groups/groups");
+      const res = await fetch("/api/groups");
       const data = await res.json();
       setGroups(data);
     } catch (error) {

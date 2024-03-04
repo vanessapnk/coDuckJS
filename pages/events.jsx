@@ -10,7 +10,7 @@ export default function Events() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch("/api/events/getAllEvents");
+      const res = await fetch("/api/events");
       const data = await res.json();
       setEvents(data);
     } catch (error) {
@@ -58,7 +58,6 @@ export default function Events() {
             }
             title={event.name}
             description={event.description}
-            likes={event.likes}
             stacks={event.stacks}
           />
         ))}
