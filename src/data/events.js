@@ -1,4 +1,6 @@
 const { connectToCollection } = require("./mongodb");
+import { ObjectId } from 'mongodb'; // Import ObjectId from mongodb
+
 
 const collectionName = "eventData";
 
@@ -13,4 +15,10 @@ async function getEventsByName(eventName) {
     return result;
 }
 
-module.exports = { getEvents, getEventsByName };
+async function getEventById(eventId) {
+    const collection = await connectToCollection(collectionName);
+    const result = await collection.findOne({ _id: new ObjectId(eventId) });
+    return result;
+}
+
+module.exports = { getEvents, getEventsByName, getEventById };
