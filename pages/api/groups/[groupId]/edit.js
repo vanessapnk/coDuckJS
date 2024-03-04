@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'PATCH') {
         try {
-            const { name, description, category, location, stackLevel } = req.body;
+            const { name, description, category, modality, city, stackLevel } = req.body;
             const collection = await connectToCollection("groupData");
 
             // Prepare update object with only provided fields
@@ -15,7 +15,8 @@ export default async function handler(req, res) {
             if (name !== undefined) updateObject.name = name;
             if (description !== undefined) updateObject.description = description;
             if (category !== undefined) updateObject.category = category;
-            if (location !== undefined) updateObject.location = location;
+            if (modality !== undefined) updateObject.modality = modality;
+            if (city !== undefined) updateObject.city = city;
             if (stackLevel !== undefined) updateObject.stackLevel = stackLevel;
 
             await collection.updateOne(
