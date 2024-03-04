@@ -1,34 +1,27 @@
 import { connectToCollection } from "@/src/data/mongodb";
-import { getEventsByName } from "@/src/data/groups";
 
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
+    if (req.method === 'POST') {
+        try {
+            // Extract event data from the request body
+            const eventData = req.body;
 
-    const { name, description, stacks, date, usersLimit } = req.body;
+            // Connect to the MongoDB collection
+            const collection = await connectToCollection("eventData");
 
-    // Check if an event with the same name already exists
-    const existingEvent = await getEventsByName(name);
-    if (existingEvent) {
-        return res.status(400).json({ error: 'Event name already exists' });
-    }
+            // Insert the new event into the database
+            await collection.insertOne(eventData);
 
-    // Connect to MongoDB collection
-    const collection = await connectToCollection("eventData");
-
-    // Insert the new event into the collection
-    try {
-        await collection.insertOne({
-            name,
-            description,
-            stacks,
-            date: new Date(date),
-            usersLimit,
-        });
-        return res.status(201).json({ message: 'Event created successfully' });
-    } catch (error) {
-        console.error('Error creating event:', error);
-        return res.status(500).json({ error: 'Failed to create event' });
+            // Return a success message
+            res.status(201).json({ message: "Event created successfully" });
+        } catch (error) {
+            // If an error occurs during database operations, return an error response
+            console.error("Error:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    } else {
+        // If the request method is not POST, return a 405 Method Not Allowed response
+        res.setHeader('Allow', ['POST']);
+        res.status(405).json({ error: `Method ${req.method} Not Allowed` });
     }
 }

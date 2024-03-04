@@ -10,21 +10,25 @@ async function getUsers() {
 }
 
 async function getUserByEmail(email) {
+    if (!email) {
+        throw new Error("Email is required");
+    }
+
     const collection = await connectToCollection(collectionName);
-    const result = await collection.findOne({ email: { $eq: email } });
+    try {
+        const result = await collection.findOne({ email: { $eq: email } }).toArray();
+        return result;
+    } catch (error) {
+        console.error("Error fetching user by email:", error);
+        throw new Error("Failed to fetch user by email");
+    }
+}
+
+
+async function getUserById(id) {
+    const collection = await connectToCollection(collectionName);
+    const result = await collection.findOne({ "_id.$oid": id });
     return result;
 }
 
-async function getUserById(id) {
-    try {
-        const collection = await connectToCollection(collectionName);
-        const result = collection.findOne({ _id: new ObjectId(id) });
-        return result;
-    }
-    catch (error) {
-        console.error('Error fetching user by ID:', error);
-        throw error;
-    }
-}
-
-module.exports = { getUserByEmail, getUserById, getUsers }
+module.exports = { getUserByEmail, getUserById, getUsers };
