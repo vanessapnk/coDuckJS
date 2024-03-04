@@ -132,12 +132,26 @@ export default function Register() {
                             type="text"
                             placeholder="FrontEnd Developer"
                         />
+
+                        <FormEntry
+                            label="GitHub ID"
+                            id="github"
+                            type="text"
+                            placeholder="YourGithubId"
+                        />
                         <Button onClick={nextStep}>Next</Button>
                         <Button onClick={backStep}>Back * </Button>
                     </div>
                 )}
-
                 {step === 5 && (
+                    <div div className="flex flex-col gap-4">
+                        <p>Hobbies</p>
+                        <Button type="submit">Finish</Button>
+                        <Button onClick={backStep}>Back * </Button>
+                    </div>
+                )}
+
+                {step === 6 && (
                     <div div className="flex flex-col gap-4">
                         <p>Hard Skils</p>
                         <Button onClick={nextStep}>Next</Button>
@@ -145,9 +159,9 @@ export default function Register() {
                     </div>
                 )}
 
-                {step === 6 && (
+                {step === 7 && (
                     <div div className="flex flex-col gap-4">
-                        <p>Hobbies</p>
+                        <p>Langueges Spoken</p>
                         <Button type="submit">Finish</Button>
                         <Button onClick={backStep}>Back * </Button>
                     </div>

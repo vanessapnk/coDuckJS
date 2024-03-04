@@ -7,7 +7,7 @@ export function FormEntry({ label, id, type, placeholder, onChange, required }) 
         <div className="flex flex-col gap-2">
             <Label htmlFor={id}>{label}</Label>
             <Input
-                className="py-7 px-4 focus-visible:ring-1 active:outline-0 focus-visible:ring-offset-0"
+                className="py-7 px-4 focus-visible:ring-1 active:outline-0 focus-visible:ring-offset-0 rounded-2xl"
                 onChange={onChange}
                 type={type}
                 id={id}
