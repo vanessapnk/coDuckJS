@@ -38,3 +38,85 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+const TECH_PALLETE = [
+    "Angular",
+    "Babel",
+    "Chai",
+    "Electron",
+    "ESLint",
+    "Express.js",
+    "GraphQL",
+    "JavaScript",
+    "Jest",
+    "Mocha",
+    "MongoDB",
+    "MySQL",
+    "Next.js",
+    "Node.js",
+    "NestJS",
+    "npm",
+    "Prettier",
+    "PostgreSQL",
+    "React",
+    "Redis",
+    "TypeScript",
+    "Vue.js",
+    "Visual Studio Code",
+    "Webpack",
+    "yarn"
+]
+
+const PERSONAL_INTERESTS = [
+    "Cooking",
+    "Dancing",
+    "Drawing",
+    "Gardening",
+    "Hiking",
+    "Music",
+    "Painting",
+    "Photography",
+    "Reading",
+    "Running",
+    "Sculpting",
+    "Swimming",
+    "Traveling",
+    "Watching Movies",
+    "Yoga"
+]
+
+const LANGUAGES_SPOKEN = [
+    "Arabic",
+    "English",
+    "French",
+    "German",
+    "Hindi",
+    "Italian",
+    "Mandarin Chinese",
+    "Portuguese",
+    "Russian",
+    "Spanish",
+    "Other"
+]
+
+const CITY = [
+    "Aveiro",
+    "Beja",
+    "Braga",
+    "Bragança",
+    "Castelo Branco",
+    "Coimbra",
+    "Évora",
+    "Faro",
+    "Guarda",
+    "Leiria",
+    "Lisbon",
+    "Portalegre",
+    "Porto",
+    "Santarém",
+    "Setúbal",
+    "Viana do Castelo",
+    "Vila Real",
+    "Viseu",
+    "Other"
+]

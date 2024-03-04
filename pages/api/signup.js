@@ -6,12 +6,12 @@ export default async function handler(req, res) {
             const newUser = req.body;
             const createdUser = await createNewUser(newUser);
             res.status(201).json({
-                "message": "User created with success!",
+                "message": "User created successfully!",
                 "_id": createdUser._id
             });
         } catch (err) {
             console.error(err);
-            let message = "Invalid Data provided";
+            let message = "Internal Server Error";
             let statusCode = 500;
 
             if (err.message === "Passwords don't match") {

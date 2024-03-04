@@ -2,7 +2,7 @@ const { getUserByEmail } = require("../data/users");
 const { connectToCollection } = require("../data/mongodb");
 
 async function createNewUser(newUser) {
-    const { email, password, passwordConfirmation, Name, Age, About, City, Job, Stacks, Hobbies } = newUser;
+    const { email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks, Hobbies } = newUser;
 
     if (password !== passwordConfirmation) {
         throw new Error(`Passwords don't match`);
@@ -17,6 +17,7 @@ async function createNewUser(newUser) {
         email,
         password,
         Name,
+        GithubUsername: GithubUsername ? GithubUsername : "",
         Age: Age ? Age : "",
         About: About ? About: "",
         City: City ? City : "",
@@ -30,7 +31,7 @@ async function createNewUser(newUser) {
         const result = await collection.insertOne(user);
         return result.ops[0]; 
     } catch (error) {
-        throw new Error("Invalid Data provided");
+        throw new Error("Invalid Data provided");// ESTÁ-ME A DAR SEMPRE INVALIDO, MAS CRIAR
     }
 }
 
