@@ -16,15 +16,9 @@ async function getUserByEmail(email) {
 }
 
 async function getUserById(id) {
-    try {
-        const collection = await connectToCollection(collectionName);
-        const result = collection.findOne({ _id: new ObjectId(id) });
-        return result;
-    }
-    catch (error) {
-        console.error('Error fetching user by ID:', error);
-        throw error;
-    }
+    const collection = await connectToCollection(collectionName);
+    const result = await collection.findOne({ "_id.$oid": id });
+    return result;
 }
 
-module.exports = { getUserByEmail, getUserById, getUsers }
+module.exports = { getUserByEmail, getUserById, getUsers };
