@@ -31,7 +31,7 @@ async function createNewUser(newUser) {
         const result = await collection.insertOne(user);
         return result.ops[0]; 
     } catch (error) {
-        throw new Error("Invalid Data provided");// ESTÁ-ME A DAR SEMPRE INVALIDO, MAS CRIA MESMO
+        throw new Error("Invalid Data provided");// ESTÁ-ME A DAR SEMPRE INVALIDO, MAS CRIAR
     }
 }
 
