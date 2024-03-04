@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge"
-import { CardProfile } from "./cardProfile"
+import { CardItem } from "../custom/cardItem"
 
 export function UserBody() {
     return (

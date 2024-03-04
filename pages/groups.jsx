@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "@/components/custom/navbar";
-import { CardProfile } from "@/components/profile/cardProfile";
+import { CardItem } from "@/components/custom/cardItem";
 
 export default function Groups() {
   const [groups, setGroups] = useState([]);
@@ -27,7 +27,7 @@ export default function Groups() {
   };
 
   return (
-    <>
+    <div className="pb-16">
       <div className="flex flex-col gap-6 pb-6">
         <h1 className="text-2xl font-medium">Explore All Groups</h1>
         {/* <FilterTab /> */}
@@ -43,7 +43,7 @@ export default function Groups() {
 
       <div className="flex flex-col gap-4">
         {groups.map((group) => (
-          <CardProfile
+          <CardItem
             key={group.id}
             category="Group"
             profileCheck={true}
@@ -61,6 +61,6 @@ export default function Groups() {
       </div>
 
       <Navbar homeActive={false} groupsActive={true} eventsActive={false} />
-    </>
+    </div>
   );
 }

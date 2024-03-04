@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "@/components/custom/navbar";
-import { CardProfile } from "@/components/profile/cardProfile";
+import { CardItem } from "@/components/custom/cardItem";
 import { FilterTab } from "@/components/custom/filterTab";
 import { Location } from "iconsax-react";
 
@@ -29,15 +29,11 @@ export default function Events() {
   };
 
   return (
-    <>
-
-
+    <div className="pb-16">
       <div className="flex flex-col gap-6 pb-6">
         <h1 className="text-2xl font-medium">Explore All Events</h1>
         <FilterTab />
       </div>
-
-
 
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
@@ -49,7 +45,7 @@ export default function Events() {
 
       <div className="flex flex-col gap-4">
         {events.map((event) => (
-          <CardProfile
+          <CardItem
             key={event.id}
             category="Event"
             profileCheck={true}
@@ -65,6 +61,6 @@ export default function Events() {
       </div>
 
       <Navbar homeActive={false} groupsActive={false} eventsActive={true} />
-    </>
+    </div>
   );
 }
