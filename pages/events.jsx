@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "@/components/custom/navbar";
-import { CardProfile } from "@/components/profile/cardProfile";
+import { CardItem } from "@/components/custom/cardItem";
 import { FilterTab } from "@/components/custom/filterTab";
 import { Location } from "iconsax-react";
 
@@ -49,7 +49,7 @@ export default function Events() {
 
       <div className="flex flex-col gap-4">
         {events.map((event) => (
-          <CardProfile
+          <CardItem
             key={event.id}
             category="Event"
             profileCheck={true}

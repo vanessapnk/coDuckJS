@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "@/components/custom/navbar";
-import { CardProfile } from "@/components/profile/cardProfile";
+import { CardItem } from "@/components/custom/cardItem";
 
 export default function Groups() {
   const [groups, setGroups] = useState([]);
@@ -43,7 +43,7 @@ export default function Groups() {
 
       <div className="flex flex-col gap-4">
         {groups.map((group) => (
-          <CardProfile
+          <CardItem
             key={group.id}
             category="Group"
             profileCheck={true}
