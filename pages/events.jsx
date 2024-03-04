@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "@/components/custom/navbar";
 import { CardProfile } from "@/components/profile/cardProfile";
+import { FilterTab } from "@/components/custom/filterTab";
+import { Location } from "iconsax-react";
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -28,15 +30,14 @@ export default function Events() {
 
   return (
     <>
-      <div className="flex justify-between items-center gap-4 pb-12">
+
+
+      <div className="flex flex-col gap-6 pb-6">
         <h1 className="text-2xl font-medium">Explore All Events</h1>
-        <button
-          onClick={toggleFilters}
-          className="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-md shadow"
-        >
-          Filter
-        </button>
+        <FilterTab />
       </div>
+
+
 
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">

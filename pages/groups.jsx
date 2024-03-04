@@ -28,14 +28,9 @@ export default function Groups() {
 
   return (
     <>
-      <div className="flex justify-between items-center gap-4 pb-12">
+      <div className="flex flex-col gap-6 pb-6">
         <h1 className="text-2xl font-medium">Explore All Groups</h1>
-        <button
-          onClick={toggleFilters}
-          className="px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-md shadow"
-        >
-          Filter
-        </button>
+        {/* <FilterTab /> */}
       </div>
 
       {showFilters && (
