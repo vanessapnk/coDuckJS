@@ -27,7 +27,7 @@ async function getUserByEmail(email) {
 
 async function getUserById(id) {
     const collection = await connectToCollection(collectionName);
-    const result = await collection.findOne({ "_id.$oid": id });
+    const result = collection.findOne({ _id: new ObjectId(id) });
     return result;
 }
 
