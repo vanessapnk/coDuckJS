@@ -9,9 +9,9 @@ export default function GroupDetails() {
   useEffect(() => {
     const fetchGroupData = async () => {
       try {
-        const res = await fetch(`/api/events/${groupId}`); // Use the dynamic event ID from the URL
+        const res = await fetch(`/api/groups/${groupId}`); // Use the dynamic event ID from the URL
         const data = await res.json();
-        setEvent(data);
+        setGroup(data);
       } catch (error) {
         console.error("Error fetching event details:", error);
       }
