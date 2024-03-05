@@ -1,7 +1,7 @@
 import { GroupItem } from "@/components/custom/groupItem";
 import { Navbar } from "@/components/custom/navbar";
 
-export default function GroupsList() {
+export default function Explore() {
     return (
         <>
             <GroupItem />

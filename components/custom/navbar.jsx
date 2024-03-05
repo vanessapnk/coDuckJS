@@ -16,7 +16,7 @@ export function Navbar({ profileActive, groupsActive, eventsActive, chatActive, 
                         </div>
                     </Link>
 
-                    <Link href={"/groupsList"}>
+                    <Link href={"/explore"}>
                         <div className="flex items-center flex-col justify-center cursor-pointer">
                             <SearchNormal1 className={`${chatActive ? "text-blue-400" : "text-white-400"}`} size="24"
                                 variant={chatActive ? "Bulk" : "Outline"} />
