@@ -25,13 +25,26 @@ export default function CreateGroup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Send groupData to server or perform further actions
-    console.log("Group data:", groupData);
 
-    // Update state to indicate group is created
-    setGroupCreated(true);
+    try {
+      const response = await fetch("/api/groups/createGroup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(groupData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create group");
+      }
+
+      setGroupCreated(true);
+    } catch (error) {
+      console.error("Error creating group:", error);
+    }
   };
 
   return (
@@ -108,19 +121,14 @@ export default function CreateGroup() {
       </form>
       {groupCreated && (
         <div>
-          <p>{groupData}</p>
-          <div>
-            <h2>Group Details</h2>
-            <p>Name: {groupData.name}</p>
-            <p>Creator: {groupData.creator}</p>
-            <p>Description: {groupData.description}</p>
-            <p>Category: {groupData.category}</p>
-            <p>Modality: {groupData.modality}</p>
-            <p>City: {groupData.city}</p>
-            <p>Users Limit: {groupData.usersLimit}</p>
-          </div>
+          <p>Name: {groupData.name}</p>
+          <p>Creator: {groupData.creator}</p>
+          <p>Description: {groupData.description}</p>
+          <p>Category: {groupData.category}</p>
+          <p>Modality: {groupData.modality}</p>
+          <p>City: {groupData.city}</p>
+          <p>Users Limit: {groupData.usersLimit}</p>
           <p>Group created successfully!</p>
-          {/* Show icon here */}
         </div>
       )}
     </div>
