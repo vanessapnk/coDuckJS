@@ -1,16 +1,12 @@
 import * as React from "react"
-import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { useState } from "react"
-import { CheckList } from "@/components/register/checklist"
 import Link from "next/link";
 import { FormEntry } from "@/components/forms/formEntry"
 import { FormEntryBox } from "@/components/forms/formEntryBox"
 import Image from "next/image"
-import { RegisterChecklist } from "@/components/custom/registerChecklist"
 import { BadgeCheck } from "@/components/custom/badgeCheck"
+
 
 export default function Register() {
     const [step, setStep] = useState(1);
@@ -29,9 +25,7 @@ export default function Register() {
     const [Stacks, setStacks] = useState([]);
 
     const hobbiesList = ["Hiking", "Photography", "Reading", "Gardening", "Cooking", "Painting", "Dancing", "Music", "Traveling"];
-
     const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
-
     const languageList = ["Inglês", "Mandarim", "Espanhol", "Hindi", "Árabe", "Português", "Bengali", "Russo", "Francês"];
 
 
@@ -88,17 +82,18 @@ export default function Register() {
 
     const nextStep = () => {
         setStep(step + 1);
+
     };
 
     const backStep = () => {
         setStep(step - 1);
     };
+
     return (
         <div className="flex items-center justify-center flex-col h-dvh">
             <form className="container">
                 {step == 1 && (
                     <div className="w-full flex flex-col items-center justify-center gap-8">
-
                         <Image
                             className="pb-8"
                             src="/images/Saly-38.png"
@@ -106,8 +101,6 @@ export default function Register() {
                             width={500}
                             height={500}
                         />
-
-                        {/* <RegisterChecklist /> */}
                         <h1 className="text-start text-[33px] font-bold leading-10">
                             Be part of the <span className="text-yellow-400">community </span>of self-taught <span className="text-blue-400">programmers </span></h1>
                         <p className="font-medium">Boost your programming skills or start from scratch! Study independently, vibing with others who share the same goals as you! </p>
@@ -141,6 +134,7 @@ export default function Register() {
                             required="required"
                             onChange={(e) => setPasswordConfirmation(e.target.value)}
                         />
+                        {/* {statusCode} */}
                         <Button onClick={nextStep}>Next</Button>
                     </div>
                 )}
@@ -243,7 +237,9 @@ export default function Register() {
                                 />
                             )}
                         </div>
-                        <Button type="submit" onClick={() => createEntry()}>Finish</Button>
+                        <Link href={"/userProfile"}>
+                            <Button type="submit" onClick={() => createEntry()}>Finish</Button>
+                        </Link>
                         <Button onClick={backStep}>Back * </Button>
                     </div>
                 )}
