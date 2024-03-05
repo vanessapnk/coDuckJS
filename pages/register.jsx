@@ -26,16 +26,16 @@ export default function Register() {
 
     const [Hobbies, setHobbies] = useState([]);
     const [LanguagesSpoken, setLanguagesSpoken] = useState([]);
-
-
+    const [Stacks, setStacks] = useState([]);
 
     const hobbiesList = ["Hiking", "Photography", "Reading", "Gardening", "Cooking", "Painting", "Dancing", "Music", "Traveling"];
 
-
     const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
-    const [Stacks, setStacks] = useState([]);
 
-    const handleBadgeStateChange = (label, newState) => {
+    const languageList = ["Inglês", "Mandarim", "Espanhol", "Hindi", "Árabe", "Português", "Bengali", "Russo", "Francês"];
+
+
+    const handleSendStacks = (label, newState) => {
         setStacks((prevStacks) => {
             const updatedStacks = prevStacks.filter(stack => stack.label !== label);
             if (newState) {
@@ -45,20 +45,46 @@ export default function Register() {
         });
     };
 
+    const handleSendHobbies = (label, newState) => {
+        setHobbies((prevHobbies) => {
+            const updatedHobbies = prevHobbies.filter(hobbie => hobbie.label !== label);
+            if (newState) {
+                updatedHobbies.push({ label: label, state: newState });
+            }
+            return updatedHobbies;
+        });
+    };
+
+    const handleSendLanguagesSpoken = (label, newState) => {
+        setLanguagesSpoken((prevLanguagesSpoken) => {
+            const updatedLanguagesSpoken = prevLanguagesSpoken.filter(languagesSpoken => languagesSpoken.label !== label);
+            if (newState) {
+                updatedLanguagesSpoken.push({ label: label, state: newState });
+            }
+            return updatedLanguagesSpoken;
+        });
+    };
+
+
+
     async function createEntry() {
         const filteredStacks = Stacks.filter(stack => stack.state);
         const trueStacks = filteredStacks.map(stack => stack.label);
+
+        const filteredHobbies = Hobbies.filter(hobbie => hobbie.state);
+        const trueHobbies = filteredHobbies.map(hobbie => hobbie.label);
+
+        const filteredLanguages = LanguagesSpoken.filter(language => language.state);
+        const trueLanguages = filteredLanguages.map(language => language.label);
 
         await fetch("api/signup", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks: trueStacks, Hobbies, LanguagesSpoken
+                email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks: trueStacks, Hobbies: trueHobbies, LanguagesSpoken: trueLanguages
             })
         });
     }
-
-
 
     const nextStep = () => {
         setStep(step + 1);
@@ -183,7 +209,7 @@ export default function Register() {
                         <div className="flex items-center gap-2 flex-wrap justify-center">
                             {stacksList.map((item, index) =>
                                 <BadgeCheck key={index} label={item}
-                                    onStateChange={handleBadgeStateChange}
+                                    onStateChange={handleSendStacks}
                                 />
                             )}
                         </div>
@@ -193,9 +219,15 @@ export default function Register() {
                 )}
                 {step === 6 && (
                     <div div className="flex flex-col gap-4">
-                        <p>Hard Skils</p>
+                        <p>Hobbies</p>
                         <div className="flex items-center gap-2 flex-wrap justify-center">
-
+                            <div className="flex items-center gap-2 flex-wrap justify-center">
+                                {hobbiesList.map((item, index) =>
+                                    <BadgeCheck key={index} label={item}
+                                        onStateChange={handleSendHobbies}
+                                    />
+                                )}
+                            </div>
                         </div>
                         <Button onClick={nextStep}>Next</Button>
                         <Button onClick={backStep}>Back * </Button>
@@ -204,6 +236,13 @@ export default function Register() {
                 {step === 7 && (
                     <div div className="flex flex-col gap-4">
                         <p>Langueges Spoken / finish</p>
+                        <div className="flex items-center gap-2 flex-wrap justify-center">
+                            {languageList.map((item, index) =>
+                                <BadgeCheck key={index} label={item}
+                                    onStateChange={handleSendLanguagesSpoken}
+                                />
+                            )}
+                        </div>
                         <Button type="submit" onClick={() => createEntry()}>Finish</Button>
                         <Button onClick={backStep}>Back * </Button>
                     </div>
