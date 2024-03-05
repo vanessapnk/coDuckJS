@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import ChatCard from "@/components/chat/ChatCard";
+import ChatMessageBubble from "@/components/chat/ChatMessageBubble";
 
 export default function Chat_Test() {
   const [chat, setChat] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const router = useRouter();
 
   const fetchData = async () => {
     try {
-      const res = await fetch("/api/chat/23");
+      const res = await fetch("/api/chat");
       if (!res.ok) {
         throw new Error("Failed to fetch chat data");
       }
       const data = await res.json();
       setChat(data);
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching chat:", error);
-      setLoading(false); // Set loading to false on error
+      setError(error.message);
+      setLoading(false);
     }
   };
 
@@ -27,21 +31,26 @@ export default function Chat_Test() {
 
   return (
     <>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div>
         {loading ? (
           <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
         ) : (
           <div>
-            {Array.isArray(chat) && chat.length > 0 ? (
-              chat.map((message, index) => (
-                <div key={index}>
-                  <p>{message.senderId}</p>
-                  <p>{message.content}</p>
-                </div>
-              ))
-            ) : (
-              <p>No chat messages found</p>
-            )}
+            <ChatCard />
+            {/* Pass chat state as prop to ChatMessageBubble */}
+            <ChatMessageBubble chat={chat} />
           </div>
         )}
       </div>
