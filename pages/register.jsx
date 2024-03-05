@@ -9,23 +9,59 @@ import Link from "next/link";
 import { FormEntry } from "@/components/forms/formEntry"
 import { FormEntryBox } from "@/components/forms/formEntryBox"
 import Image from "next/image"
+import { RegisterChecklist } from "@/components/custom/registerChecklist"
+import { BadgeCheck } from "@/components/custom/badgeCheck"
 
 export default function Register() {
     const [step, setStep] = useState(1);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [passwordConfirm, setPasswordConfirm] = useState("")
-    const [userName, setUserName] = useState("")
-    const [age, setAge] = useState(0)
-    const [about, setAbout] = useState("")
-    const [city, setCity] = useState("")
-    const [job, setJob] = useState("")
-    const [stacks, setStacks] = useState([]);
-    const [hobbies, setHobbies] = useState([]);
+    const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [Name, setName] = useState("")
+    const [Age, setAge] = useState(0)
+    const [About, setAbout] = useState("")
+    const [City, setCity] = useState("")
+    const [Job, setJob] = useState("")
+    const [GithubUsername, setGithubUsername] = useState("")
 
-    const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
+    const [Hobbies, setHobbies] = useState([]);
+    const [LanguagesSpoken, setLanguagesSpoken] = useState([]);
+
+
 
     const hobbiesList = ["Hiking", "Photography", "Reading", "Gardening", "Cooking", "Painting", "Dancing", "Music", "Traveling"];
+
+
+    const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
+    const [Stacks, setStacks] = useState([]);
+    const handleBadgeStateChange = (label, newState) => {
+        const stackIndex = Stacks.findIndex((stack) => stack.label === label);
+
+        if (stackIndex !== -1) {
+            setStacks((prevStacks) => {
+                const updatedStacks = [...prevStacks];
+                updatedStacks[stackIndex].state = newState;
+                return updatedStacks;
+            });
+        } else {
+            setStacks((prevStacks) => [
+                ...prevStacks,
+                { label: label, state: newState },
+            ]);
+        }
+    };
+
+    async function createEntry() {
+        await fetch("api/signup", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks, Hobbies, LanguagesSpoken
+            })
+        })
+    }
+
+
 
     const nextStep = () => {
         setStep(step + 1);
@@ -34,17 +70,12 @@ export default function Register() {
     const backStep = () => {
         setStep(step - 1);
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Lógica para enviar os dados do formulário, se necessário
-    };
-
     return (
         <div className="flex items-center justify-center flex-col h-dvh">
             <form className="container">
                 {step == 1 && (
                     <div className="w-full flex flex-col items-center justify-center gap-8">
+
                         <Image
                             className="pb-8"
                             src="/images/Saly-38.png"
@@ -53,7 +84,7 @@ export default function Register() {
                             height={500}
                         />
 
-
+                        {/* <RegisterChecklist /> */}
                         <h1 className="text-start text-[33px] font-bold leading-10">
                             Be part of the <span className="text-yellow-400">community </span>of self-taught <span className="text-blue-400">programmers </span></h1>
                         <p className="font-medium">Boost your programming skills or start from scratch! Study independently, vibing with others who share the same goals as you! </p>
@@ -68,6 +99,7 @@ export default function Register() {
                             type="email"
                             placeholder="email@email.com"
                             required="required"
+                            onChange={(e) => setEmail(e.target.value)}
                         />
 
                         <FormEntry
@@ -76,18 +108,19 @@ export default function Register() {
                             type="password"
                             placeholder="**********"
                             required="required"
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <FormEntry
                             label="Confirm Password"
-                            id="password"
-                            type="password"
+                            id="passwordConfirmation"
+                            type="passwordConfirmation"
                             placeholder="**********"
                             required="required"
+                            onChange={(e) => setPasswordConfirmation(e.target.value)}
                         />
                         <Button onClick={nextStep}>Next</Button>
                     </div>
                 )}
-
                 {step === 3 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
@@ -96,6 +129,7 @@ export default function Register() {
                             type="text"
                             placeholder="Your Name"
                             required="required"
+                            onChange={(e) => setName(e.target.value)}
                         />
 
                         <FormEntry
@@ -103,19 +137,19 @@ export default function Register() {
                             id="age"
                             type="number"
                             placeholder="21"
+                            onChange={(e) => setAge(Number(e.target.value))}
                         />
                         <FormEntryBox
                             label="About"
                             id="about"
                             type="text"
                             placeholder="Little Things about you :)"
+                            onChange={(e) => setAbout(e.target.value)}
                         />
                         <Button onClick={nextStep}>Next</Button>
                         <Button onClick={backStep}>Back * </Button>
                     </div>
                 )}
-
-
                 {step === 4 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
@@ -124,6 +158,7 @@ export default function Register() {
                             type="text"
                             placeholder="City where you live"
                             required="required"
+                            onChange={(e) => setCity(e.target.value)}
                         />
 
                         <FormEntry
@@ -131,6 +166,7 @@ export default function Register() {
                             id="occupation"
                             type="text"
                             placeholder="FrontEnd Developer"
+                            onChange={(e) => setJob(e.target.value)}
                         />
 
                         <FormEntry
@@ -138,6 +174,7 @@ export default function Register() {
                             id="github"
                             type="text"
                             placeholder="YourGithubId"
+                            onChange={(e) => setGithubUsername(e.target.value)}
                         />
                         <Button onClick={nextStep}>Next</Button>
                         <Button onClick={backStep}>Back * </Button>
@@ -145,24 +182,32 @@ export default function Register() {
                 )}
                 {step === 5 && (
                     <div div className="flex flex-col gap-4">
-                        <p>Hobbies</p>
-                        <Button type="submit">Finish</Button>
-                        <Button onClick={backStep}>Back * </Button>
-                    </div>
-                )}
-
-                {step === 6 && (
-                    <div div className="flex flex-col gap-4">
-                        <p>Hard Skils</p>
+                        <p>Stacks</p>
+                        <div className="flex items-center gap-2 flex-wrap justify-center">
+                            {stacksList.map((item, index) =>
+                                <BadgeCheck key={index} label={item}
+                                    onStateChange={handleBadgeStateChange}
+                                />
+                            )}
+                        </div>
                         <Button onClick={nextStep}>Next</Button>
                         <Button onClick={backStep}>Back * </Button>
                     </div>
                 )}
+                {step === 6 && (
+                    <div div className="flex flex-col gap-4">
+                        <p>Hard Skils</p>
+                        <div className="flex items-center gap-2 flex-wrap justify-center">
 
+                        </div>
+                        <Button onClick={nextStep}>Next</Button>
+                        <Button onClick={backStep}>Back * </Button>
+                    </div>
+                )}
                 {step === 7 && (
                     <div div className="flex flex-col gap-4">
-                        <p>Langueges Spoken</p>
-                        <Button type="submit">Finish</Button>
+                        <p>Langueges Spoken / finish</p>
+                        <Button type="submit" onClick={() => createEntry()}>Finish</Button>
                         <Button onClick={backStep}>Back * </Button>
                     </div>
                 )}

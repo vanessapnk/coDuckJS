@@ -8,20 +8,6 @@ export default function Groups() {
   const [showFilters, setShowFilters] = useState(false); // State to manage filter options visibility
   const router = useRouter();
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch("/api/groups");
-      const data = await res.json();
-      setGroups(data);
-    } catch (error) {
-      console.error("Error fetching groups:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const toggleFilters = () => {
     setShowFilters(!showFilters); // Toggles the visibility of filter options
   };
