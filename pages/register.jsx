@@ -34,31 +34,28 @@ export default function Register() {
 
     const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
     const [Stacks, setStacks] = useState([]);
-    const handleBadgeStateChange = (label, newState) => {
-        const stackIndex = Stacks.findIndex((stack) => stack.label === label);
 
-        if (stackIndex !== -1) {
-            setStacks((prevStacks) => {
-                const updatedStacks = [...prevStacks];
-                updatedStacks[stackIndex].state = newState;
-                return updatedStacks;
-            });
-        } else {
-            setStacks((prevStacks) => [
-                ...prevStacks,
-                { label: label, state: newState },
-            ]);
-        }
+    const handleBadgeStateChange = (label, newState) => {
+        setStacks((prevStacks) => {
+            const updatedStacks = prevStacks.filter(stack => stack.label !== label);
+            if (newState) {
+                updatedStacks.push({ label: label, state: newState });
+            }
+            return updatedStacks;
+        });
     };
 
     async function createEntry() {
+        const filteredStacks = Stacks.filter(stack => stack.state);
+        const trueStacks = filteredStacks.map(stack => stack.label);
+
         await fetch("api/signup", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks, Hobbies, LanguagesSpoken
+                email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks: trueStacks, Hobbies, LanguagesSpoken
             })
-        })
+        });
     }
 
 
