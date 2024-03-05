@@ -5,18 +5,31 @@ import { CardItem } from "@/components/custom/cardItem";
 
 export default function Groups() {
   const [groups, setGroups] = useState([]);
-  const [showFilters, setShowFilters] = useState(false); // State to manage filter options visibility
+  const [showFilters, setShowFilters] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/groups"); // Assuming your API endpoint for groups is "/api/groups"
+        const data = await res.json();
+        setGroups(data);
+      } catch (error) {
+        console.error("Error fetching groups:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to fetch data only once on component mount
+
   const toggleFilters = () => {
-    setShowFilters(!showFilters); // Toggles the visibility of filter options
+    setShowFilters(!showFilters);
   };
 
   return (
     <div className="pb-16">
       <div className="flex flex-col gap-6 pb-6">
         <h1 className="text-2xl font-medium">Explore All Groups</h1>
-        {/* <FilterTab /> */}
       </div>
 
       {showFilters && (
@@ -30,7 +43,7 @@ export default function Groups() {
       <div className="flex flex-col gap-4">
         {groups.map((group) => (
           <CardItem
-            key={group.id}
+            key={group.id} // Assuming each group has a unique identifier named "id"
             category="Group"
             profileCheck={true}
             location={group.location}
@@ -40,7 +53,6 @@ export default function Groups() {
             }
             title={group.name}
             description={group.description}
-            likes={group.likes}
             stacks={group.stacks}
           />
         ))}
