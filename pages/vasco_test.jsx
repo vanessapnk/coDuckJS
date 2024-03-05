@@ -59,8 +59,23 @@ export default function Chat_Test() {
   };
 
   return (
-    <>
-      <div className="fixed bottom-0 w-full bg-gray-100 p-4 flex items-center">
+    <div className="flex flex-col h-screen">
+      <div className="flex-grow overflow-y-auto">
+        <div className="pt-20">
+          <div className="pl-4 pr-4">
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p>Error: {error}</p>
+            ) : (
+              <>
+                <ChatMessageBubble chat={chat} />
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="fixed bottom-0 w-full bg-gray-100 p-5 flex items-center">
         <Textarea id="messageTextarea" className="mr-2 flex-grow" />
         <button
           className="px-4 py-2 bg-blue-500 text-white rounded"
@@ -69,22 +84,6 @@ export default function Chat_Test() {
           Send
         </button>
       </div>
-      <div className="pt-20">
-        <div>
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error}</p>
-          ) : (
-            <>
-              <div className="mb-24">
-                <ChatCard />
-              </div>
-              <ChatMessageBubble chat={chat} />
-            </>
-          )}
-        </div>
-      </div>
-    </>
+    </div>
   );
 }
