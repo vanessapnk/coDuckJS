@@ -32,7 +32,7 @@ export default function Events() {
   return (
     <div className="pb-16">
       <div className="flex flex-col gap-6 pb-6">
-        <h1 className="text-2xl font-medium">Explore All Events</h1>
+        <h1 className="text-2xl font-medium">My Events</h1>
         <FilterTab />
       </div>
 

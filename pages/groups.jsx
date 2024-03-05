@@ -29,9 +29,14 @@ export default function Groups() {
 
   return (
     <div className="pb-16">
-      <div className="flex flex-col gap-6 pb-6">
-        <h1 className="text-2xl font-medium">Explore All Groups</h1>
-        {/* <FilterTab /> */}
+      <div className="flex justify-between items-center gap-6 pb-6">
+        <h1 className="text-2xl font-medium">My Groups</h1>
+        <button
+          onClick={() => router.push("/creategroup")}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Create Group
+        </button>
       </div>
 
       {showFilters && (
