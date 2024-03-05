@@ -27,7 +27,7 @@ export default function Profile() {
     };
 
     fetchUserData();
-  }, []); // Refetch data when profileId changes
+  }, []);
 
   const userBg = userData
     ? userData.backgroundImage
@@ -36,14 +36,28 @@ export default function Profile() {
   return (
     <div className="px-4 flex flex-col gap-2">
       <NavInternal backLink={"/"} editLink={"/"} />
-      <UserTop user={userData} />
+      {userData && ( // Check if userData is available before rendering UserTop and UserBody
+        <>
+          <UserTop
+            name={userData?.Name}
+            age={userData?.Age}
+            job={userData?.Job}
+            city={userData?.City}
+            avatar={`https://github.com/${userData.GithubUsername}.png`}
+          />
+          <UserBody
+            stacks={userData?.Stacks}
+            hobbies={userData?.Hobbies}
+            languagesSpoken={userData?.LanguagesSpoken}
+          />
+        </>
+      )}
 
-      <div>
+      {/* teste para ver se o user existe   <div>
         <h2>User Data:</h2>
         <pre>{JSON.stringify(userData, null, 2)}</pre>
-      </div>
+      </div> */}
 
-      <UserBody user={userData} />
       <Navbar profileActive={true} />
     </div>
   );

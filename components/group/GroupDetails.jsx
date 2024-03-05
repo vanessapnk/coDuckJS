@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function GroupDetails() {
+export default function GroupDetails(userData) {
   const router = useRouter();
   const { groupId } = router.query; // Get the group ID from the URL query params
   const [group, setGroup] = useState(null);
@@ -30,6 +30,7 @@ export default function GroupDetails() {
     <div>
       <h1>{group.name}</h1>
       <p>{group.description}</p>
+      <p>{group.category}</p>
     </div>
   );
 }
