@@ -13,16 +13,16 @@ export default function Register() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
-    const [Name, setName] = useState("")
-    const [Age, setAge] = useState(0)
-    const [About, setAbout] = useState("")
-    const [City, setCity] = useState("")
-    const [Job, setJob] = useState("")
-    const [GithubUsername, setGithubUsername] = useState("")
+    const [name, setName] = useState("")
+    const [age, setAge] = useState(0)
+    const [about, setAbout] = useState("")
+    const [city, setCity] = useState("")
+    const [job, setJob] = useState("")
+    const [githubUsername, setGithubUsername] = useState("")
 
-    const [Hobbies, setHobbies] = useState([]);
-    const [LanguagesSpoken, setLanguagesSpoken] = useState([]);
-    const [Stacks, setStacks] = useState([]);
+    const [hobbies, setHobbies] = useState([]);
+    const [languagesSpoken, setLanguagesSpoken] = useState([]);
+    const [stacks, setStacks] = useState([]);
 
     const hobbiesList = ["Hiking", "Photography", "Reading", "Gardening", "Cooking", "Painting", "Dancing", "Music", "Traveling"];
     const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
@@ -62,20 +62,20 @@ export default function Register() {
 
 
     async function createEntry() {
-        const filteredStacks = Stacks.filter(stack => stack.state);
+        const filteredStacks = stacks.filter(stack => stack.state);
         const trueStacks = filteredStacks.map(stack => stack.label);
 
-        const filteredHobbies = Hobbies.filter(hobbie => hobbie.state);
+        const filteredHobbies = hobbies.filter(hobbie => hobbie.state);
         const trueHobbies = filteredHobbies.map(hobbie => hobbie.label);
 
-        const filteredLanguages = LanguagesSpoken.filter(language => language.state);
+        const filteredLanguages = languagesSpoken.filter(language => language.state);
         const trueLanguages = filteredLanguages.map(language => language.label);
 
         await fetch("api/signup", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks: trueStacks, Hobbies: trueHobbies, LanguagesSpoken: trueLanguages
+                email, password, passwordConfirmation, name, githubUsername, age, about, city, job, stacks: trueStacks, hobbies: trueHobbies, languagesSpoken: trueLanguages
             })
         });
     }
@@ -110,7 +110,7 @@ export default function Register() {
                 {step === 2 && (
                     <div className="flex flex-col gap-4">
                         <FormEntry
-                            label="Email"
+                            label="email"
                             id="email"
                             type="email"
                             placeholder="email@email.com"
@@ -119,7 +119,7 @@ export default function Register() {
                         />
 
                         <FormEntry
-                            label="Password"
+                            label="password"
                             id="password"
                             type="password"
                             placeholder="**********"
@@ -127,7 +127,7 @@ export default function Register() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <FormEntry
-                            label="Confirm Password"
+                            label="confirm Password"
                             id="passwordConfirmation"
                             type="passwordConfirmation"
                             placeholder="**********"
@@ -141,7 +141,7 @@ export default function Register() {
                 {step === 3 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
-                            label="Name"
+                            label="name"
                             id="name"
                             type="text"
                             placeholder="Your Name"
@@ -150,14 +150,14 @@ export default function Register() {
                         />
 
                         <FormEntry
-                            label="Age"
+                            label="age"
                             id="age"
                             type="number"
                             placeholder="21"
                             onChange={(e) => setAge(Number(e.target.value))}
                         />
                         <FormEntryBox
-                            label="About"
+                            label="about"
                             id="about"
                             type="text"
                             placeholder="Little Things about you :)"
@@ -170,7 +170,7 @@ export default function Register() {
                 {step === 4 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
-                            label="City"
+                            label="city"
                             id="city"
                             type="text"
                             placeholder="City where you live"
@@ -179,7 +179,7 @@ export default function Register() {
                         />
 
                         <FormEntry
-                            label="Occupation"
+                            label="occupation"
                             id="occupation"
                             type="text"
                             placeholder="FrontEnd Developer"
@@ -187,7 +187,7 @@ export default function Register() {
                         />
 
                         <FormEntry
-                            label="GitHub ID"
+                            label="gitHub ID"
                             id="github"
                             type="text"
                             placeholder="YourGithubId"
@@ -237,7 +237,7 @@ export default function Register() {
                                 />
                             )}
                         </div>
-                        <Link href={"/userProfile"}>
+                        <Link href={"/explore"}>
                             <Button type="submit" onClick={() => createEntry()}>Finish</Button>
                         </Link>
                         <Button onClick={backStep}>Back * </Button>
