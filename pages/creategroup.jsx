@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function CreateGroup() {
   const [groupData, setGroupData] = useState({
@@ -16,6 +17,7 @@ export default function CreateGroup() {
   });
 
   const [groupCreated, setGroupCreated] = useState(false); // State to track group creation
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -131,6 +133,14 @@ export default function CreateGroup() {
           <p>Group created successfully!</p>
         </div>
       )}
+      <div>
+        <button
+          onClick={() => router.push("/events")}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Go Back
+        </button>
+      </div>
     </div>
   );
 }
