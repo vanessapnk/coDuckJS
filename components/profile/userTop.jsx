@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar, MapPin } from "lucide-react";
 import { User } from "iconsax-react";
 
-export function UserTop({ userId, github, location, name, age, job, about, }) {
+export function UserTop({ userId, github, city, name, age, job, about, }) {
   return (
     <div>
       <div className="flex flex-row gap-4 py-6">

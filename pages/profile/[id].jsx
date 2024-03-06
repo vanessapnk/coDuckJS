@@ -55,7 +55,7 @@ export default function Profile() {
                 />
             )}
             {/* {isLoading ? `${userData.id}` : "Loading"} */}
-            <UserBody />
+            {/* <UserBody /> */}
             <Navbar profileActive={true} />
         </div>
     );
