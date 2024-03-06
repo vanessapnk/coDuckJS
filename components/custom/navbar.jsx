@@ -9,9 +9,9 @@ import Link from "next/link";
 
 export function Navbar({
   profileActive,
+  exploreActive,
   groupsActive,
   eventsActive,
-  chatActive,
 }) {
   return (
     <div className="p-4">
@@ -39,12 +39,12 @@ export function Navbar({
           <Link href={"/explore"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <SearchNormal1
-                className={`${chatActive ? "text-blue-400" : "text-white-400"}`}
+                className={`${exploreActive ? "text-blue-400" : "text-white-400"}`}
                 size="24"
-                variant={chatActive ? "Bulk" : "Outline"}
+                variant={exploreActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${chatActive ? "text-blue-400" : "text-white-400"}`}
+                className={`${exploreActive ? "text-blue-400" : "text-white-400"}`}
               >
                 Explore
               </p>
