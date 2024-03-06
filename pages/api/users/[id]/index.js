@@ -1,4 +1,3 @@
-
 import { connectToCollection } from "@/src/data/mongodb";
 import { ObjectId } from "mongodb";
 

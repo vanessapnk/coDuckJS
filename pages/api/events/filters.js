@@ -60,9 +60,13 @@ export default async function handler(req, res) {
     
     pipeline.push({
         $match: {
-            $expr: { $lt: [{ $size: "$participants" }, "$usersLimit"] },
-            date: { $gte: currentDate }
+            $expr: { $lt: [{ $size: "$participants" }, "$usersLimit"] }, //only show available events
+            date: { $gte: currentDate } //only show next events
         }
+    })
+
+    pipeline.push({
+        $sort: { date: 1 } // Sort by date in ascending order
     })
     
     try {
