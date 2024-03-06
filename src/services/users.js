@@ -2,7 +2,7 @@ const { getUserByEmail } = require("../data/users");
 const { connectToCollection } = require("../data/mongodb");
 
 async function createNewUser(newUser) {
-    const { email, password, passwordConfirmation, Name, GithubUsername, Age, About, City, Job, Stacks, Hobbies, LanguagesSpoken } = newUser;
+    const { email, password, passwordConfirmation, name, githubUsername, age, about, city, job, stacks, hobbies, languagesSpoken } = newUser;
 
     if (password !== passwordConfirmation) {
         throw new Error(`Passwords don't match`);
@@ -16,32 +16,32 @@ async function createNewUser(newUser) {
     const user = {
         email,
         password,
-        Name,
-        GithubUsername: GithubUsername ? GithubUsername : "",
-        Age: Age ? Age : "",
-        About: About ? About: "",
-        City: City ? City : "",
-        Job: Job ? Job : "",
-        Stacks: Stacks ? Stacks : [],
-        Hobbies: Hobbies ? Hobbies : [],
-        LanguagesSpoken: LanguagesSpoken ? LanguagesSpoken : []
+        name,
+        githubUsername: githubUsername ? githubUsername : "",
+        age: age ? age : "",
+        about: about ? about : "",
+        city: city ? city : "",
+        job: job ? job : "",
+        stacks: stacks ? stacks : [],
+        hobbies: hobbies ? hobbies : [],
+        languagesSpoken: languagesSpoken ? languagesSpoken : []
     }
 
     try {
         const collection = await connectToCollection('userData');
         await collection.insertOne(user);
-        return { success: true }; 
-        
+        return { success: true };
+
     } catch (error) {
         throw new Error("Invalid Data provided");
     }
 }
 
-async function loginHandler(req, res){
-    const { email , password } = req.body
+async function loginHandler(req, res) {
+    const { email, password } = req.body
 
     const existingUser = await getUserByEmail(email);
-    
+
     try {
         //encontrar o user
         if (!existingUser) {
@@ -52,7 +52,12 @@ async function loginHandler(req, res){
             return res.status(401).json({ message: 'Invalid password' });
         }
         // Authentication successful
-        return res.status(200).json({ message: 'Authentication successful' });
+        return res.status(200).json(
+            {
+                message: 'Authentication successful',
+                id: existingUser._id
+            });
+
     } catch (error) {
         console.error('Error authenticating user:', error);
         return res.status(500).json({ message: 'Internal Server Error' });

@@ -1,11 +1,18 @@
-import { getUserById } from "@/src/data/users";
 
-//NÃO ESTOU A CONSEGUIR USAR http://localhost:3000/api/users?id=ETC, SÓ http://localhost:3000/api/users/ETC
+import { connectToCollection } from "@/src/data/mongodb";
+import { ObjectId } from "mongodb";
+
 export default async function handler(req, res) {
-    const { query: { id } } = req;
+  const { query: { id } } = req;
 
   try {
-    const user = await getUserById(id);
+    // Verifique se o ID é uma string hexadecimal válida
+    if (!/^[0-9a-fA-F]{24}$/.test(id)) {
+      return res.status(400).json({ message: 'Invalid user ID' });
+    }
+
+    const collection = await connectToCollection('userData');
+    const user = await collection.findOne({ _id: new ObjectId(id) });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

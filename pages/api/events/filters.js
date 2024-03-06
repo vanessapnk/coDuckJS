@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     const { category, stacks, stackLevel, languagesSpoken, modality, city, date, search } = req.query;
 
     const currentDate = new Date();
-    // Construct the aggregation pipeline based on the request body parameters
+    // Construct the aggregation
     const pipeline = [];
 
     const processQueryParameter = (param, field) => {
@@ -41,12 +41,14 @@ export default async function handler(req, res) {
         const searchRegex = new RegExp(search.trim(), 'i');
         orConditions.push(
             { name: { $regex: searchRegex } },
+            { description: { $regex: searchRegex } },
             { category: { $regex: searchRegex } },
             { stackLevel: { $regex: searchRegex } },
             { modality: { $regex: searchRegex } },
             { city: { $regex: searchRegex } },
             { stacks: { $regex: searchRegex } },
             { languagesSpoken: { $regex: searchRegex } },
+            { exactLocation: { $regex: searchRegex } },
             { date: { $regex: searchRegex } }
         );
     }
@@ -59,7 +61,7 @@ export default async function handler(req, res) {
     pipeline.push({
         $match: {
             $expr: { $lt: [{ $size: "$participants" }, "$usersLimit"] },
-            "date.$date": { $gte: currentDate }
+            date: { $gte: currentDate }
         }
     })
     
