@@ -54,8 +54,12 @@ export default function Events() {
           events.map((event) => (
             <Link key={event._id} href={`/events/${event._id}`}>
               <CardItem
-                category="Event"
+                members={event.members}
+                usersLimit={event.usersLimit}
+                category={event.category}
                 profileCheck={true}
+                location={event.city}
+                modality={event.modality}
                 profileImage={
                   event.photo_url ||
                   "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
