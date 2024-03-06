@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { DarkModeSwitch } from "@/components/custom/darkModeSwitch";
 
 
 
@@ -45,7 +46,7 @@ export default function Groups() {
   }, []);
 
   const toggleFilters = () => {
-    setShowFilters(!showFilters); // Toggles the visibility of filter options
+    setShowFilters(!showFilters);
   };
 
   return (
@@ -58,23 +59,25 @@ export default function Groups() {
         >
           Create Group
         </button>
+        <DarkModeSwitch />
       </div>
 
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
-          {/* Implement your filter options component here */}
-          {/* Example: */}
           <p>Filter options go here...</p>
+
         </div>
       )}
-
       <div className="flex flex-col gap-4">
         {groups.map((group) => (
           <Link key={group._id} href={`/groups/${group._id}`}>
             <CardItem
-              category="Group"
+              members={group.members}
+              usersLimit={group.usersLimit}
+              category={group.category}
               profileCheck={true}
-              location={group.location}
+              location={group.city}
+              modality={group.modality}
               profileImage={
                 group.photo_url ||
                 "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
