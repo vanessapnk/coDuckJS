@@ -48,6 +48,8 @@ export default function GroupDetails(userData) {
       <p>{group.description}</p>
       <p>{group.modality}</p>
       <p>{group.category}</p>
+      <p>{group.usersLimit}</p>
+      <p>{group.members.length}</p>
       <Link href={`/chat/${groupId}`}>
         <button>Group Chat</button>
       </Link>

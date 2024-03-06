@@ -1,5 +1,3 @@
-// NavEditGroup.js
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -24,9 +22,9 @@ const category = ["Frontend", "Backend", "Design", "Data Analysis", "Other"];
 const levels = ["Beginner", "Junior", "Intermediate", "Senior"];
 const modality = ["presential", "hybrid", "online"];
 
-export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
+export function NavEditEvent({ backLink, editLink }) {
   const router = useRouter();
-  const { groupId } = router.query; // Get the group ID from the URL query params
+  const { eventId } = router.query; // Get the event ID from the URL query params
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -35,6 +33,9 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
     city: "",
     stackLevel: "",
     usersLimit: 0,
+    exactLocation: "",
+    date: "",
+    endDate: "",
   });
 
   useEffect(() => {
@@ -42,19 +43,13 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    return () => {
-      onNavBarHide(); // Call onNavBarHide when component unmounts
-    };
-  }, []);
-
   const fetchData = async () => {
     try {
-      const res = await fetch(`/api/groups/${groupId}`);
+      const res = await fetch(`/api/events/${eventId}`);
       const data = await res.json();
       setFormData(data);
     } catch (error) {
-      console.error("Error fetching group data:", error);
+      console.error("Error fetching event data:", error);
     }
   };
 
@@ -68,7 +63,7 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch(`/api/groups/${groupId}/edit`, {
+      const res = await fetch(`/api/events/${eventId}/edit`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +75,7 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
       // Refresh the data after update
       fetchData();
     } catch (error) {
-      console.error("Error editing group:", error);
+      console.error("Error editing event:", error);
     }
   };
 
@@ -111,11 +106,11 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
 
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Edit Your Group</DrawerTitle>
+            <DrawerTitle>Edit Your Event</DrawerTitle>
             <DrawerDescription>
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="name">New Group Name</Label>
+                  <Label htmlFor="name">New Event Name</Label>
                   <input
                     name="name"
                     value={formData.name}
@@ -126,7 +121,7 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
                   />
                 </div>
                 <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="description">New Group Description</Label>
+                  <Label htmlFor="description">New Event Description</Label>
                   <Textarea
                     name="description"
                     value={formData.description}
@@ -200,6 +195,38 @@ export function NavEditGroup({ backLink, editLink, onNavBarHide }) {
                     className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
                     type="number"
                     placeholder="Enter the new limit"
+                  />
+                </div>
+                {/* New Inputs for exactLocation, date, and endDate */}
+                <div className="flex flex-col items-start gap-2">
+                  <Label htmlFor="exactLocation">New Exact Location</Label>
+                  <input
+                    name="exactLocation"
+                    value={formData.exactLocation}
+                    onChange={handleChange}
+                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
+                    type="text"
+                    placeholder="Enter the new exact location"
+                  />
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <Label htmlFor="date">New Date</Label>
+                  <input
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
+                    type="date"
+                  />
+                </div>
+                <div className="flex flex-col items-start gap-2">
+                  <Label htmlFor="endDate">New End Date</Label>
+                  <input
+                    name="endDate"
+                    value={formData.endDate}
+                    onChange={handleChange}
+                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
+                    type="date"
                   />
                 </div>
               </div>

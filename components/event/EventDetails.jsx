@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "../custom/navbar";
+import { NavEditEvent } from "./NavEditEvent";
 
 export default function EventDetails() {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function EventDetails() {
 
   return (
     <div>
+      <NavEditEvent backLink={`/events/`} editLink={`/event/edit/${eventId}`} />
       <h1>{event.name}</h1>
       <p>{event.description}</p>
       <Navbar />
