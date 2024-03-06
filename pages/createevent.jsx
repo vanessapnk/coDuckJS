@@ -65,7 +65,7 @@ export default function CreateEvent() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Create Event</h1>
+      <h1 className="text-2xl font-bold mb-4">Create Event 🐤</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Event Name:</span>
@@ -77,7 +77,6 @@ export default function CreateEvent() {
             className="border rounded p-2"
           />
         </label>
-
         {/*         <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Creator:</span>
           <input
@@ -88,47 +87,48 @@ export default function CreateEvent() {
             className="border rounded p-2"
           />
         </label> */}
-
         <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Description:</span>
-          <input
-            type="text"
+          <textarea
             name="description"
             value={eventData.description}
             onChange={handleChange}
-            className="border rounded p-2"
+            className="border rounded p-2 h-10" // Set the height here
           />
         </label>
-
-        <label className="text-sm font-semibold mr-3">Category</label>
+        {/*         <label className="text-sm font-semibold mr-1">Category</label>
+         */}{" "}
         <select
           name="category"
           value={eventData.category}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 w-34"
         >
-          <option value="">Select Category</option>
+          <option value="" disabled hidden>
+            Select Category
+          </option>{" "}
           <option value="Frontend">Frontend</option>
           <option value="Backend">Backend</option>
           <option value="Design">Design</option>
           <option value="Data Analysis">Data Analysis</option>
           <option value="Other">Other</option>
         </select>
-
-        <label className="text-sm font-semibold mr-3">Modality</label>
+        {/*         <label className="text-sm font-semibold mr-1">Modality</label>
+         */}{" "}
         <select
           name="modality"
           value={eventData.modality}
           onChange={handleChange}
-          className="border rounded p-2"
+          className="border rounded p-2 w-50"
         >
-          <option value="">Select Modality</option>
+          <option value="" disabled hidden>
+            Select Modality
+          </option>
           <option value="presential">Presential</option>
           <option value="hybrid">Hybrid</option>
           <option value="online">Online</option>
           <option value="Other">Other</option>
         </select>
-
         {/* <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Modality:</span>
           <input
@@ -139,23 +139,12 @@ export default function CreateEvent() {
             className="border rounded p-2"
           />
         </label> */}
-
         <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">City:</span>
           <input
             type="text"
             name="city"
             value={eventData.city}
-            onChange={handleChange}
-            className="border rounded p-2"
-          />
-        </label>
-        <label className="flex flex-col space-y-2">
-          <span className="text-sm font-semibold">Users Limit:</span>
-          <input
-            type="number"
-            name="usersLimit"
-            value={eventData.usersLimit}
             onChange={handleChange}
             className="border rounded p-2"
           />
@@ -172,13 +161,13 @@ export default function CreateEvent() {
         </label>
         <div className="flex flex-row space-x-4">
           <label className="flex flex-col space-y-2">
-            <span className="text-sm font-semibold">Date:</span>
+            <span className="text-sm font-semibold">Start Date:</span>
             <input
               type="date"
               name="date"
               value={eventData.date}
               onChange={handleChange}
-              className="border rounded p-2 w-32" // Adjust the width here
+              className="border rounded p-2 w-24" // Adjust the width here
             />
           </label>
           <label className="flex flex-col space-y-2">
@@ -188,11 +177,20 @@ export default function CreateEvent() {
               name="endDate"
               value={eventData.endDate}
               onChange={handleChange}
-              className="border rounded p-2 w-32" // Adjust the width here
+              className="border rounded p-2 w-24" // Adjust the width here
+            />
+          </label>
+          <label className="flex flex-col space-y-2">
+            <span className="text-sm font-semibold">Users Limit:</span>
+            <input
+              type="number"
+              name="usersLimit"
+              value={eventData.usersLimit}
+              onChange={handleChange}
+              className="border rounded p-2 w-24"
             />
           </label>
         </div>
-
         <div className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Stacks:</span>
           <div className="grid grid-cols-3 gap-2">
@@ -211,7 +209,6 @@ export default function CreateEvent() {
             ))}
           </div>
         </div>
-
         <div className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Languages Spoken:</span>
           <div className="grid grid-cols-3 gap-2">
@@ -230,10 +227,9 @@ export default function CreateEvent() {
             ))}
           </div>
         </div>
-
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-10 px-4 py-2 rounded-xl"
         >
           Create Event
         </button>
@@ -247,7 +243,7 @@ export default function CreateEvent() {
       <div className="mt-4">
         <button
           onClick={() => router.push("/events")}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 border border-zinc-200 bg-white hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-10 px-4 py-2 rounded-xl"
         >
           Go Back
         </button>
@@ -274,7 +270,7 @@ const languageList = [
   "Hindi",
   "Arabic",
   "Portuguese",
-  "Bengali",
-  "Russian",
   "French",
+  "German",
+  "Other",
 ];
