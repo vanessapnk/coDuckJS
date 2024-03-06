@@ -33,7 +33,7 @@ async function createNewUser(newUser) {
         return { success: true };
 
     } catch (error) {
-        throw new Error("Invalid Data provided");// ESTÁ-ME A DAR SEMPRE INVALIDO, MAS CRIAR
+        throw new Error("Invalid Data provided");
     }
 }
 

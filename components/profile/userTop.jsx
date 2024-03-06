@@ -21,7 +21,7 @@ export function UserTop({ userId, github, location, name, age, job, about, }) {
           <p className="text-sm opacity-70">{job}</p>
           <div className="flex gap-2 items-center opacity-70">
             <MapPin size={12} strokeWidth={2} />
-            <h2 className="text-sm">{location}</h2>
+            <h2 className="text-sm">{city}</h2>
           </div>
         </div>
       </div>

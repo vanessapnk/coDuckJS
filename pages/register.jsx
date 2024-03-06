@@ -1,12 +1,11 @@
-import * as React from "react"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
+import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import Link from "next/link";
-import { FormEntry } from "@/components/forms/formEntry"
-import { FormEntryBox } from "@/components/forms/formEntryBox"
-import Image from "next/image"
-import { BadgeCheck } from "@/components/custom/badgeCheck"
-
+import { FormEntry } from "@/components/forms/formEntry";
+import { FormEntryBox } from "@/components/forms/formEntryBox";
+import Image from "next/image";
+import { BadgeCheck } from "@/components/custom/badgeCheck";
 
 export default function Register() {
     const [step, setStep] = useState(1);
@@ -24,42 +23,73 @@ export default function Register() {
     const [languagesSpoken, setLanguagesSpoken] = useState([]);
     const [stacks, setStacks] = useState([]);
 
-    const hobbiesList = ["Hiking", "Photography", "Reading", "Gardening", "Cooking", "Painting", "Dancing", "Music", "Traveling"];
-    const stacksList = ["HTML & CSS", "CSS", "JavaScript", "TypeScript", "Tailwind", "React", "NextJs", "MongoDB", "UI/UX Design",];
-    const languageList = ["Inglês", "Mandarim", "Espanhol", "Hindi", "Árabe", "Português", "Bengali", "Russo", "Francês"];
+  const hobbiesList = [
+    "Hiking",
+    "Photography",
+    "Reading",
+    "Gardening",
+    "Cooking",
+    "Painting",
+    "Dancing",
+    "Music",
+    "Traveling",
+  ];
+  const stacksList = [
+    "HTML & CSS",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "Tailwind",
+    "React",
+    "NextJs",
+    "MongoDB",
+    "UI/UX Design",
+  ];
+  const languageList = [
+    "English",
+    "Mandarin",
+    "Spanish",
+    "Hindi",
+    "Arabic",
+    "Portuguese",
+    "Bengali",
+    "Russian",
+    "French",
+  ];
 
+  const handleSendStacks = (label, newState) => {
+    setStacks((prevStacks) => {
+      const updatedStacks = prevStacks.filter((stack) => stack.label !== label);
+      if (newState) {
+        updatedStacks.push({ label: label, state: newState });
+      }
+      return updatedStacks;
+    });
+  };
 
-    const handleSendStacks = (label, newState) => {
-        setStacks((prevStacks) => {
-            const updatedStacks = prevStacks.filter(stack => stack.label !== label);
-            if (newState) {
-                updatedStacks.push({ label: label, state: newState });
-            }
-            return updatedStacks;
-        });
-    };
+  const handleSendHobbies = (label, newState) => {
+    setHobbies((prevHobbies) => {
+      const updatedHobbies = prevHobbies.filter(
+        (hobbie) => hobbie.label !== label
+      );
+      if (newState) {
+        updatedHobbies.push({ label: label, state: newState });
+      }
+      return updatedHobbies;
+    });
+  };
 
-    const handleSendHobbies = (label, newState) => {
-        setHobbies((prevHobbies) => {
-            const updatedHobbies = prevHobbies.filter(hobbie => hobbie.label !== label);
-            if (newState) {
-                updatedHobbies.push({ label: label, state: newState });
-            }
-            return updatedHobbies;
-        });
-    };
-
-    const handleSendLanguagesSpoken = (label, newState) => {
-        setLanguagesSpoken((prevLanguagesSpoken) => {
-            const updatedLanguagesSpoken = prevLanguagesSpoken.filter(languagesSpoken => languagesSpoken.label !== label);
-            if (newState) {
-                updatedLanguagesSpoken.push({ label: label, state: newState });
-            }
-            return updatedLanguagesSpoken;
-        });
-    };
-
-
+  const handleSendLanguagesSpoken = (label, newState) => {
+    setLanguagesSpoken((prevLanguagesSpoken) => {
+      const updatedLanguagesSpoken = prevLanguagesSpoken.filter(
+        (languagesSpoken) => languagesSpoken.label !== label
+      );
+      if (newState) {
+        updatedLanguagesSpoken.push({ label: label, state: newState });
+      }
+      return updatedLanguagesSpoken;
+    });
+  };
 
     async function createEntry() {
         const filteredStacks = stacks.filter(stack => stack.state);
@@ -80,14 +110,13 @@ export default function Register() {
         });
     }
 
-    const nextStep = () => {
-        setStep(step + 1);
+  const nextStep = () => {
+    setStep(step + 1);
+  };
 
-    };
-
-    const backStep = () => {
-        setStep(step - 1);
-    };
+  const backStep = () => {
+    setStep(step - 1);
+  };
 
     return (
         <div className="flex items-center justify-center flex-col h-dvh">
