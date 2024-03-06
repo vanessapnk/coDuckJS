@@ -4,7 +4,7 @@ import Link from "next/link"; // Import Link from Next.js
 import { Navbar } from "@/components/custom/navbar";
 import { CardItem } from "@/components/custom/cardItem";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,18 +12,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-
-
+} from "@/components/ui/select";
 
 export default function Groups() {
   const [groups, setGroups] = useState([]);
@@ -54,7 +52,7 @@ export default function Groups() {
         <h1 className="text-2xl font-medium">My Groups</h1>
         <button
           onClick={() => router.push("/creategroup")}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-10 px-4 py-2 rounded-xl"
         >
           Create Group
         </button>
@@ -90,7 +88,9 @@ export default function Groups() {
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Create project</CardTitle>
-          <CardDescription>Deploy your new project in one-click.</CardDescription>
+          <CardDescription>
+            Deploy your new project in one-click.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
@@ -121,9 +121,7 @@ export default function Groups() {
           <Button>Deploy</Button>
         </CardFooter>
       </Card>
-      <div>
-
-      </div>
+      <div></div>
       <Navbar homeActive={false} groupsActive={true} eventsActive={false} />
     </div>
   );
