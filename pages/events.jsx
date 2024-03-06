@@ -39,9 +39,8 @@ export default function Events() {
         >
           Create Event
         </button>
-        <FilterTab />
       </div>
-
+      <FilterTab />
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
           {/* Implement your filter options component here */}

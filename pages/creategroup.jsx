@@ -60,14 +60,14 @@ export default function CreateGroup() {
   };
 
   const stacksList = [
-    "HTML & CSS",
+    "HTML",
     "CSS",
     "JavaScript",
     "Tailwind",
     "React",
     "NextJs",
     "MongoDB",
-    "UI/UX Design",
+    "Design",
     "Other",
   ];
   const languageList = [
