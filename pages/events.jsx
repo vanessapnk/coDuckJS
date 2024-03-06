@@ -31,8 +31,14 @@ export default function Events() {
 
   return (
     <div className="pb-16">
-      <div className="flex flex-col gap-6 pb-6">
+      <div className="flex justify-between items-center gap-6 pb-6">
         <h1 className="text-2xl font-medium">My Events</h1>
+        <button
+          onClick={() => router.push("/createevent")}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Create Event
+        </button>
         <FilterTab />
       </div>
 

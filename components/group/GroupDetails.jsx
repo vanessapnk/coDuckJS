@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { Navbar } from "../custom/navbar";
 
 export default function GroupDetails(userData) {
   const router = useRouter();
@@ -31,6 +33,10 @@ export default function GroupDetails(userData) {
       <h1>{group.name}</h1>
       <p>{group.description}</p>
       <p>{group.category}</p>
+      <Link href={`/chat/${groupId}`}>
+        <button>Group Chat</button>
+      </Link>
+      <Navbar />
     </div>
   );
 }

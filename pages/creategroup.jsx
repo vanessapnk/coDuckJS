@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function CreateGroup() {
   const [groupData, setGroupData] = useState({
@@ -16,12 +17,23 @@ export default function CreateGroup() {
   });
 
   const [groupCreated, setGroupCreated] = useState(false); // State to track group creation
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setGroupData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, value } = e.target;
+    setGroupData((prevData) => ({
+      ...prevData,
+      [name]: prevData[name].includes(value)
+        ? prevData[name].filter((item) => item !== value)
+        : [...prevData[name], value],
     }));
   };
 
@@ -46,6 +58,29 @@ export default function CreateGroup() {
       console.error("Error creating group:", error);
     }
   };
+
+  const stacksList = [
+    "HTML & CSS",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "Tailwind",
+    "React",
+    "NextJs",
+    "MongoDB",
+    "UI/UX Design",
+  ];
+  const languageList = [
+    "English",
+    "Mandarin",
+    "Spanish",
+    "Hindi",
+    "Arabic",
+    "Portuguese",
+    "Bengali",
+    "Russian",
+    "French",
+  ];
 
   return (
     <div>
@@ -109,13 +144,43 @@ export default function CreateGroup() {
           />
         </label>
         <label>
-          Users Limit
+          Users Limit:
           <input
             type="number"
             name="usersLimit"
             value={groupData.usersLimit}
             onChange={handleChange}
           />
+        </label>
+        <label>
+          Stacks:
+          {stacksList.map((stack) => (
+            <div key={stack}>
+              <input
+                type="checkbox"
+                name="stacks"
+                value={stack}
+                checked={groupData.stacks.includes(stack)}
+                onChange={handleCheckboxChange}
+              />
+              {stack}
+            </div>
+          ))}
+        </label>
+        <label>
+          Languages Spoken:
+          {languageList.map((language) => (
+            <div key={language}>
+              <input
+                type="checkbox"
+                name="languagesSpoken"
+                value={language}
+                checked={groupData.languagesSpoken.includes(language)}
+                onChange={handleCheckboxChange}
+              />
+              {language}
+            </div>
+          ))}
         </label>
         <button type="submit">Create Group</button>
       </form>
@@ -131,6 +196,14 @@ export default function CreateGroup() {
           <p>Group created successfully!</p>
         </div>
       )}
+      <div>
+        <button
+          onClick={() => router.push("/events")}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Go Back
+        </button>
+      </div>
     </div>
   );
 }
