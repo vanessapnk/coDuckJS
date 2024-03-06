@@ -1,12 +1,16 @@
+// GroupDetails.js
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
+import { NavEditGroup } from "./NavEditGroup";
 
 export default function GroupDetails(userData) {
   const router = useRouter();
   const { groupId } = router.query; // Get the group ID from the URL query params
   const [group, setGroup] = useState(null);
+  const [navBarVisible, setNavBarVisible] = useState(true);
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -22,7 +26,11 @@ export default function GroupDetails(userData) {
     if (groupId) {
       fetchGroupData();
     }
-  }, [groupId]);
+  }, [groupId, navBarVisible]);
+
+  const handleNavBarHide = () => {
+    setNavBarVisible(false); // When NavBar is hidden, setNavBarVisible to false
+  };
 
   if (!group) {
     return <div>Loading...</div>;
@@ -30,13 +38,18 @@ export default function GroupDetails(userData) {
 
   return (
     <div>
+      <NavEditGroup
+        backLink={"/"}
+        editLink={`/group/edit/${groupId}`}
+        onNavBarHide={handleNavBarHide}
+      />
+      {navBarVisible && <Navbar />} {/* Render NavBar only if it's visible */}
       <h1>{group.name}</h1>
       <p>{group.description}</p>
       <p>{group.category}</p>
       <Link href={`/chat/${groupId}`}>
         <button>Group Chat</button>
       </Link>
-      <Navbar />
     </div>
   );
 }
