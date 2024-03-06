@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ 
 
 @layer base {
   :root {
@@ -50,51 +50,12 @@
   }
 }
 
-
-@font-face {
-  font-family: "clash";
-  src: url("/public/fonts/ClashDisplay-Extralight.ttf");
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "clash";
-  src: url("/public/fonts/ClashDisplay-Light.ttf");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "clash";
-  src: url("/public/fonts/ClashDisplay-Regular.ttf");
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: "clash";
-  src: url("/public/fonts/ClashDisplay-Medium.ttf");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "clash";
-  src: url("/public/fonts/ClashDisplay-Semibold.ttf");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "clash";
-  src: url("/public/fonts/ClashDisplay-Bold.ttf");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "freigeist";
-  src: url("/public/fonts/Freigeist-bold.otf");
-  font-weight: bold;
-  font-style: normal;
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

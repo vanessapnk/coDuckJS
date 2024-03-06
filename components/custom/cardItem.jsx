@@ -25,7 +25,6 @@ export function CardItem({
   title,
   location,
   description,
-  stacks,
 }) {
 
   const backgroundImageStyle = {
@@ -35,55 +34,18 @@ export function CardItem({
   };
 
   return (
-    <div className="relative blockrounded-3xl p-1 "    >
-      <div
-        style={backgroundImageStyle}
-        className="absolute inset-0 h-full w-full object-cover  transition-opacity rounded-3xl rounded-b-[1.8rem] pb-1  dark:bg-zinc-950"
-      />
-
-      <div className="relative rounded-3xl pt-16">
-        <div className="mt-32 sm:mt-48 lg:mt-64 ">
-          <div className="bg-zinc-200 dark:bg-zinc-950 rounded-3xl p-4 flex flex-col gap-4">
-            <div>
-              <div className="flex">
-                <div className="w-9/12">
-                  <h1 className="text-2xl font-semibold">{title}</h1>
-                </div>
-                <div className="w-3/12 flex items-end justify-start content-center flex-col
-          dark:text-white  text-base font-semibold ">
-                  <p>Vagas</p>
-                  <p>01/10</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex justify-start gap-8">
-                <div>
-                  <p className="text-base opacity-70">Category</p>
-                  <p className="text-lg">FrontEnd</p>
-                </div>
-
-                <div>
-                  <p className="text-base opacity-70">Location</p>
-                  <p className="text-lg">{location}</p>
-                </div>
-
-                <div>
-                  <p className="text-base opacity-70">Languege</p>
-                  <p className="text-lg">English</p>
-                </div>
-              </div>
-              <div className="self-start p-3 rounded-full bg-zinc-900 dark:bg-zinc-900">
-                <ArrowUpRight className="text-white" size={30} />
-              </div>
-            </div>
-            <div>
-              <p className="text-lg pb-1">Description</p>
-              <p className="text-base opacity-70">{description}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Card className="w-[350px]">
+      <CardHeader>
+        <CardTitle>Create project</CardTitle>
+        <CardDescription>Deploy your new project in one-click.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        dsds
+      </CardContent>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Deploy</Button>
+      </CardFooter>
+    </Card>
   );
 }
