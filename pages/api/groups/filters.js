@@ -39,6 +39,7 @@ export default async function handler(req, res) {
         const searchRegex = new RegExp(search.trim(), 'i');
         orConditions.push(
             { name: { $regex: searchRegex } },
+            { description: { $regex: searchRegex } },
             { category: { $regex: searchRegex } },
             { stackLevel: { $regex: searchRegex } },
             { modality: { $regex: searchRegex } },
