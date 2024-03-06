@@ -35,13 +35,12 @@ export default function Events() {
         <h1 className="text-2xl font-medium">My Events</h1>
         <button
           onClick={() => router.push("/createevent")}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-10 px-4 py-2 rounded-xl"
         >
           Create Event
         </button>
-        <FilterTab />
       </div>
-
+      <FilterTab />
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
           {/* Implement your filter options component here */}
@@ -55,8 +54,12 @@ export default function Events() {
           events.map((event) => (
             <Link key={event._id} href={`/events/${event._id}`}>
               <CardItem
-                category="Event"
+                members={event.members}
+                usersLimit={event.usersLimit}
+                category={event.category}
                 profileCheck={true}
+                location={event.city}
+                modality={event.modality}
                 profileImage={
                   event.photo_url ||
                   "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
