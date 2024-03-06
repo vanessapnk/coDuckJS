@@ -39,13 +39,14 @@ export default function GroupDetails(userData) {
   return (
     <div>
       <NavEditGroup
-        backLink={"/"}
+        backLink={`/groups/`}
         editLink={`/group/edit/${groupId}`}
         onNavBarHide={handleNavBarHide}
       />
       {navBarVisible && <Navbar />} {/* Render NavBar only if it's visible */}
       <h1>{group.name}</h1>
       <p>{group.description}</p>
+      <p>{group.modality}</p>
       <p>{group.category}</p>
       <Link href={`/chat/${groupId}`}>
         <button>Group Chat</button>
