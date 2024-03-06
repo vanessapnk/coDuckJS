@@ -22,6 +22,10 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        warning: "hsl(var(--warning))",
+        "warning-foreground": "hsl(var(--warning-foreground))",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
