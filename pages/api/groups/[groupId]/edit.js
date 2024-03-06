@@ -29,8 +29,6 @@ export default async function handler(req, res) {
                 return res.status(400).json({ success: false, error: 'New usersLimit is smaller than the current number of members' });
             }
 
-
-
             await collection.updateOne(
                 { _id: new ObjectId(groupId) },
                 { $set: updateObject }

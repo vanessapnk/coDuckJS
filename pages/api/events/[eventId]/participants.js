@@ -11,10 +11,10 @@ export default async function handler(req, res) {
             const collection = await connectToCollection("eventData");
             const event = await getEventById(eventId);
 
-            // Check if the participant already exists in the group
+            // Check if the participant already exists in the event
             const isParticipant = event.participants.includes(participant);
 
-            // If the participant exists, remove it; otherwise, add it if the group size allows
+            // If the participant exists, remove it; otherwise, add it if the event size allows
             let updatedParticipants;
             if (isParticipant) {
                 updatedParticipants = event.participants.filter(existingParticipant => existingParticipant !== participant);
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                 if (event.participants.length < event.usersLimit) {
                     updatedParticipants = [...event.participants, participant];
                 } else {
-                    return res.status(400).json({ success: false, error: 'Group maximum size exceeded' });
+                    return res.status(400).json({ success: false, error: 'Event maximum size exceeded' });
                 }
             }
 

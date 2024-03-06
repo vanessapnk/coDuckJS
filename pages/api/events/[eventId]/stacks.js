@@ -9,7 +9,7 @@ export default async function handler(req, res) {
             const { stacks } = req.body;
             const collection = await connectToCollection("eventData");
 
-            // Update the "stacks" field of the group directly in the database
+            // Update the "stacks" field of the event directly in the database
             await collection.updateOne(
                 { _id: new ObjectId(eventId) },
                 { $set: { stacks } }
