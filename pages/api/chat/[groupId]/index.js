@@ -1,19 +1,16 @@
-import { getChatByGroupId } from "@/src/data/chat";
+import { getChatsByGroupId } from "@/src/data/chat";
 
 export default async function handler(req, res) {
     const { groupId } = req.query;
 
-    // Check if groupId is not provided or if it's not a number
-    if (!groupId || isNaN(groupId)) {
+    // Check if groupId is not provided or if it's not a string
+    if (!groupId || typeof groupId !== 'string') {
         return res.status(400).json({ message: 'Invalid groupId' });
     }
 
     try {
-        // Convert groupId to number
-        const groupIdNumber = parseInt(groupId);
-
-        // Query the database with the correct data type
-        const chat = await getChatByGroupId(groupIdNumber);
+        // Query the database with the groupId
+        const chat = await getChatsByGroupId(groupId);
 
         if (!chat) {
             return res.status(404).json({ message: 'Chat not found' });

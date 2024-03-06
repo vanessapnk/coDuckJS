@@ -23,11 +23,22 @@ export default function CreateEvent() {
   const router = useRouter();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEventData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      // For checkboxes, handle multiple selections
+      setEventData((prevData) => ({
+        ...prevData,
+        [name]: checked
+          ? [...prevData[name], value]
+          : prevData[name].filter((item) => item !== value),
+      }));
+    } else {
+      // For other inputs, update state normally
+      setEventData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -114,7 +125,7 @@ export default function CreateEvent() {
           />
         </label>
         <label>
-          Users Limit
+          Users Limit:
           <input
             type="number"
             name="usersLimit"
@@ -149,6 +160,38 @@ export default function CreateEvent() {
             onChange={handleChange}
           />
         </label>
+        {/* Add label and checkboxes for stacks */}
+        <label>
+          Stacks:
+          {stacksList.map((stack) => (
+            <div key={stack}>
+              <input
+                type="checkbox"
+                name="stacks"
+                value={stack}
+                checked={eventData.stacks.includes(stack)}
+                onChange={handleChange}
+              />
+              {stack}
+            </div>
+          ))}
+        </label>
+        {/* Add label and checkboxes for languagesSpoken */}
+        <label>
+          Languages Spoken:
+          {languageList.map((language) => (
+            <div key={language}>
+              <input
+                type="checkbox"
+                name="languagesSpoken"
+                value={language}
+                checked={eventData.languagesSpoken.includes(language)}
+                onChange={handleChange}
+              />
+              {language}
+            </div>
+          ))}
+        </label>
         <button type="submit">Create Event</button>
       </form>
       {eventCreated && (
@@ -177,3 +220,26 @@ export default function CreateEvent() {
     </div>
   );
 }
+
+const stacksList = [
+  "HTML & CSS",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "Tailwind",
+  "React",
+  "NextJs",
+  "MongoDB",
+  "UI/UX Design",
+];
+const languageList = [
+  "English",
+  "Mandarin",
+  "Spanish",
+  "Hindi",
+  "Arabic",
+  "Portuguese",
+  "Bengali",
+  "Russian",
+  "French",
+];

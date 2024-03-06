@@ -9,10 +9,15 @@ async function getChats() {
     return result
 }
 
-async function getChatByGroupId(groupId) {
-    const collection = await connectToCollection(collectionName);
-    const result = await collection.findOne({ group_id: groupId });
-    return result;
+async function getChatsByGroupId(groupId) {
+    try {
+        const collection = await connectToCollection(collectionName);
+        const result = await collection.find({ group_id: groupId }).toArray();
+        return result;
+    } catch (error) {
+        console.error("Error fetching chats:", error);
+        throw new Error("Failed to fetch chats. Please try again later.");
+    }
 }
 
-module.exports = { getChats, getChatByGroupId };
+module.exports = { getChats, getChatsByGroupId };
