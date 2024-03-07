@@ -126,7 +126,7 @@ export function NavEditEvent({ backLink, editLink }) {
                     name="description"
                     value={formData.description}
                     onChange={handleChange}
-                    className="py-2 h-32 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
+                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
                     placeholder="Write your new description"
                   />
                 </div>
@@ -186,17 +186,7 @@ export function NavEditEvent({ backLink, editLink }) {
                     ))}
                   </select>
                 </div>
-                <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="usersLimit">New Users Limit</Label>
-                  <input
-                    name="usersLimit"
-                    value={formData.usersLimit}
-                    onChange={handleChange}
-                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
-                    type="number"
-                    placeholder="Enter the new limit"
-                  />
-                </div>
+
                 {/* New Inputs for exactLocation, date, and endDate */}
                 <div className="flex flex-col items-start gap-2">
                   <Label htmlFor="exactLocation">New Exact Location</Label>
@@ -209,25 +199,37 @@ export function NavEditEvent({ backLink, editLink }) {
                     placeholder="Enter the new exact location"
                   />
                 </div>
-                <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="date">New Date</Label>
-                  <input
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
-                    type="date"
-                  />
-                </div>
-                <div className="flex flex-col items-start gap-2">
-                  <Label htmlFor="endDate">New End Date</Label>
-                  <input
-                    name="endDate"
-                    value={formData.endDate}
-                    onChange={handleChange}
-                    className="py-2 h-10 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm placeholder-text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:bg-zinc-950 dark:ring-offset-zinc-950 dark:placeholder-text-zinc-400 dark:focus-visible:ring-zinc-300"
-                    type="date"
-                  />
+                <div className="flex flex-row space-x-4">
+                  <label className="flex flex-col space-y-2">
+                    <span className="text-sm font-semibold">Start Date:</span>
+                    <input
+                      type="date"
+                      name="date"
+                      value={formData.date}
+                      onChange={handleChange}
+                      className="border rounded p-2 w-24" // Adjust the width here
+                    />
+                  </label>
+                  <label className="flex flex-col space-y-2">
+                    <span className="text-sm font-semibold">End Date:</span>
+                    <input
+                      type="date"
+                      name="endDate"
+                      value={formData.endDate}
+                      onChange={handleChange}
+                      className="border rounded p-2 w-24" // Adjust the width here
+                    />
+                  </label>
+                  <label className="flex flex-col space-y-2">
+                    <span className="text-sm font-semibold">Users Limit:</span>
+                    <input
+                      type="number"
+                      name="usersLimit"
+                      value={formData.usersLimit}
+                      onChange={handleChange}
+                      className="border rounded p-2 w-24"
+                    />
+                  </label>
                 </div>
               </div>
             </DrawerDescription>

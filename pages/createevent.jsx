@@ -77,16 +77,6 @@ export default function CreateEvent() {
             className="border rounded p-2"
           />
         </label>
-        {/*         <label className="flex flex-col space-y-2">
-          <span className="text-sm font-semibold">Creator:</span>
-          <input
-            type="text"
-            name="creator"
-            value={eventData.creator}
-            onChange={handleChange}
-            className="border rounded p-2"
-          />
-        </label> */}
         <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">Description:</span>
           <textarea
@@ -96,49 +86,37 @@ export default function CreateEvent() {
             className="border rounded p-2 h-10" // Set the height here
           />
         </label>
-        {/*         <label className="text-sm font-semibold mr-1">Category</label>
-         */}{" "}
-        <select
-          name="category"
-          value={eventData.category}
-          onChange={handleChange}
-          className="border rounded p-2 w-34"
-        >
-          <option value="" disabled hidden>
-            Select Category
-          </option>{" "}
-          <option value="Frontend">Frontend</option>
-          <option value="Backend">Backend</option>
-          <option value="Design">Design</option>
-          <option value="Data Analysis">Data Analysis</option>
-          <option value="Other">Other</option>
-        </select>
-        {/*         <label className="text-sm font-semibold mr-1">Modality</label>
-         */}{" "}
-        <select
-          name="modality"
-          value={eventData.modality}
-          onChange={handleChange}
-          className="border rounded p-2 w-50"
-        >
-          <option value="" disabled hidden>
-            Select Modality
-          </option>
-          <option value="presential">Presential</option>
-          <option value="hybrid">Hybrid</option>
-          <option value="online">Online</option>
-          <option value="Other">Other</option>
-        </select>
-        {/* <label className="flex flex-col space-y-2">
-          <span className="text-sm font-semibold">Modality:</span>
-          <input
-            type="text"
+        <div className="flex flex-row">
+          <select
+            name="category"
+            value={eventData.category}
+            onChange={handleChange}
+            className="border rounded p-2 w-30  "
+          >
+            <option value="" disabled hidden>
+              Select Category
+            </option>{" "}
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="Design">Design</option>
+            <option value="Data Analysis">Data Analysis</option>
+            <option value="Other">Other</option>
+          </select>
+          <select
             name="modality"
             value={eventData.modality}
             onChange={handleChange}
-            className="border rounded p-2"
-          />
-        </label> */}
+            className="border rounded p-2 w-60"
+          >
+            <option value="" disabled hidden>
+              Select Modality
+            </option>
+            <option value="presential">Presential</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="online">Online</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
         <label className="flex flex-col space-y-2">
           <span className="text-sm font-semibold">City:</span>
           <input
@@ -227,12 +205,20 @@ export default function CreateEvent() {
             ))}
           </div>
         </div>
-        <button
-          type="submit"
-          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-10 px-4 py-2 rounded-xl"
-        >
-          Create Event
-        </button>
+        <div className="flex justify-between">
+          <button
+            onClick={() => router.push("/events")}
+            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 border border-zinc-200 bg-white hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-10 px-4 py-2 rounded-xl"
+          >
+            Go Back
+          </button>
+          <button
+            type="submit"
+            className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-10 px-4 py-2 rounded-xl"
+          >
+            Create Event
+          </button>
+        </div>
       </form>
       {eventCreated && (
         <div className="mt-4">
@@ -240,14 +226,6 @@ export default function CreateEvent() {
           {/* Display event data */}
         </div>
       )}
-      <div className="mt-4">
-        <button
-          onClick={() => router.push("/events")}
-          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 border border-zinc-200 bg-white hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-10 px-4 py-2 rounded-xl"
-        >
-          Go Back
-        </button>
-      </div>
     </div>
   );
 }

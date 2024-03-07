@@ -1,16 +1,17 @@
 import { connectToCollection } from "@/src/data/mongodb";
+import { getUserById } from "../data/users";
+import { getEventById } from "@/src/data/events";
+
 
 export async function createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, dateString, endDateString) {
     try {
         const collection = await connectToCollection("eventData");
 
-        
-       
         function parseDateString(dateString) {
             const [day, month, year, hours, minutes] = dateString.split(',');
             return new Date(`${year}-${month}-${day}T${hours}:${minutes}`);
         }
-                                                        // NO JSON BODY
+        // NO JSON BODY
         const date = parseDateString(dateString);       // "date": "day,month,year,hour,minutes",
         const endDate = parseDateString(endDateString); // endDate": "day,month,year,hour,minutes",
 
@@ -27,8 +28,8 @@ export async function createEvent(name, creatorId, description, category, stacks
             usersLimit: usersLimit || undefined,
             participants: [creatorId],
             exactLocation: exactLocation || undefined,
-            date: date || undefined,
-            endDate: endDate || undefined
+            date: dateString || undefined,
+            endDate: endDateString || undefined
         });
         return { success: true };
     } catch (error) {
@@ -36,3 +37,24 @@ export async function createEvent(name, creatorId, description, category, stacks
         throw new Error('Failed to create event');
     }
 }
+
+export async function loadEventWithMembersById(eventId) {
+    const event = await getEventById(eventId)
+    if (!event) return
+    const participants = await loadEventMembers(event.participants)
+    return { ...event, participants: participants }
+
+}
+
+export async function loadEventMembers(mids) {
+    const members = await Promise.all(mids.map(async (id) => {
+        participants.log(`Searching for user ${id}`)
+        return await getUserById(id)
+    }))
+
+    console.log(mids)
+    console.log(members)
+
+    return participants
+}
+

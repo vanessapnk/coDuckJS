@@ -1,16 +1,23 @@
 // context/authContext.js
+import { useRouter } from "next/router";
 import React, { createContext, useState, useContext, useEffect } from "react";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [authenticatedUser, setAuthenticatedUser] = useState(null);
+    const router = useRouter()
 
     useEffect(() => {
+        console.log("OLA")
         // Check if user is already authenticated (e.g., from localStorage)
         const storedUser = localStorage.getItem("authenticatedUser");
+        console.log("O USER E")
+        console.log(storedUser)
         if (storedUser) {
             setAuthenticatedUser(JSON.parse(storedUser));
+        } else {
+            router.push("/login")
         }
     }, []);
 
@@ -34,3 +41,6 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
+export const useAuth2 = () => {
+
+}
