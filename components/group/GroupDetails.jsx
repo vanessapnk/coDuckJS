@@ -143,24 +143,26 @@ export default function GroupDetails() {
             role="list"
             className="divide-y divide-gray-200 dark:divide-gray-700"
           >
-            {group.members.map((member, index) => (
-              <li key={index} className="py-3 sm:py-4">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
-                      alt={`${member} image`}
-                    />
+            {group.members
+              .filter((m) => m != null)
+              .map((member, index) => (
+                <li key={index} className="py-3 sm:py-4">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
+                        alt={`${member} image`}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0 ms-4">
+                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                        {member.name}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0 ms-4">
-                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                      {member}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))}
           </ul>
         </div>
       </div>

@@ -4,13 +4,11 @@ export async function createEvent(name, creatorId, description, category, stacks
     try {
         const collection = await connectToCollection("eventData");
 
-        
-       
         function parseDateString(dateString) {
             const [day, month, year, hours, minutes] = dateString.split(',');
             return new Date(`${year}-${month}-${day}T${hours}:${minutes}`);
         }
-                                                        // NO JSON BODY
+        // NO JSON BODY
         const date = parseDateString(dateString);       // "date": "day,month,year,hour,minutes",
         const endDate = parseDateString(endDateString); // endDate": "day,month,year,hour,minutes",
 
@@ -27,8 +25,8 @@ export async function createEvent(name, creatorId, description, category, stacks
             usersLimit: usersLimit || undefined,
             participants: [creatorId],
             exactLocation: exactLocation || undefined,
-            date: date || undefined,
-            endDate: endDate || undefined
+            date: dateString || undefined,
+            endDate: endDateString || undefined
         });
         return { success: true };
     } catch (error) {
