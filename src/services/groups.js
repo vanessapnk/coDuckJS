@@ -31,6 +31,7 @@ export async function loadGroupWithMembersById(groupId) {
     return { ...group, members: members }
 
 }
+
 export async function loadGroupMembers(mids) {
     const members = await Promise.all(mids.map(async (id) => {
         console.log(`Searching for user ${id}`)
