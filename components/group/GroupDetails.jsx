@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
+import { Message } from "iconsax-react";
 
 export default function GroupDetails() {
   const router = useRouter();
@@ -35,14 +36,14 @@ export default function GroupDetails() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div class="bg-gray-100 h-screen w-screen">
       <NavEditGroup
         backLink={`/groups/`}
         editLink={`/group/edit/${groupId}`}
         onNavBarHide={handleNavBarHide}
       />
       {navBarVisible && <Navbar />} {/* Render NavBar only if it's visible */}
-      <div className="bg-white rounded-lg shadow-md mx-auto max-w-md mt-8 p-8">
+      <div className="bg-white rounded-lg shadow-md  mt-8 p-8">
         <div className="relative mb-6">
           <div className="absolute inset-0 bg-gray-300 rounded-lg"></div>
           <img
@@ -77,10 +78,47 @@ export default function GroupDetails() {
       </div>
       <div className="mx-auto max-w-md mt-4">
         <Link href={`/chat/${groupId}`}>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded items-center justify-center">
-            Group Chat
-          </button>
+          <div className="flex items-center justify-center mt-4">
+            <Message size="32" color="#2CCCE4" />
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold ml-4 py-2 px-4 rounded items-center justify-center">
+              Group Chat
+            </button>
+          </div>
         </Link>
+      </div>
+      {/* Render members */}
+      <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-8">
+        <div className="flex items-center justify-between mb-4">
+          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Members
+          </h5>
+          {/* You can add a link to view all members if needed */}
+        </div>
+        <div className="flow-root">
+          <ul
+            role="list"
+            className="divide-y divide-gray-200 dark:divide-gray-700"
+          >
+            {group.members.map((member, index) => (
+              <li key={index} className="py-3 sm:py-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="w-8 h-8 rounded-full"
+                      src=/* {member.profilePicture} */ "https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
+                      alt={`${member.name} image`}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0 ms-4">
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                      {member}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

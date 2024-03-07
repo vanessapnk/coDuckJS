@@ -4,6 +4,8 @@ import ChatMessageBubble from "@/components/chat/ChatMessageBubble";
 import { Textarea } from "@/components/ui/textarea";
 import { Navbar } from "../custom/navbar";
 import Link from "next/link";
+import { Back, Send2 } from "iconsax-react";
+import { Card } from "../ui/card";
 
 export default function ChatDetails() {
   const [chat, setChat] = useState([]);
@@ -82,7 +84,10 @@ export default function ChatDetails() {
             ) : (
               <>
                 <Link href={`/groups/${groupId}`}>
-                  <button>Go back to Group</button>
+                  <div className="flex flex-row">
+                    <Back size="32" color="#2ccce4" />
+                    <button>Go back to Group</button>
+                  </div>
                 </Link>
                 <ChatMessageBubble chat={chat} />
               </>
@@ -97,11 +102,8 @@ export default function ChatDetails() {
           value={messageContent}
           onChange={(e) => setMessageContent(e.target.value)}
         />
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-          onClick={sendMessage}
-        >
-          Send
+        <button className="px-2 py-2 text-white rounded" onClick={sendMessage}>
+          <Send2 size="32" color="#2ccce4" variant="Bold" />
         </button>
       </div>
     </div>
