@@ -12,7 +12,7 @@ export default function GroupDetails() {
   const [group, setGroup] = useState(null);
   const [navBarVisible, setNavBarVisible] = useState(true);
 
-  const { authenticatedUser } = useAuth();
+  const { authenticatedUser } = useAuth() || {}; // Set default value as empty object
 
   useEffect(() => {
     const fetchGroupData = async () => {
