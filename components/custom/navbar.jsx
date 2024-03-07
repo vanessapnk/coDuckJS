@@ -20,16 +20,14 @@ export function Navbar({
           <Link href={"/profile"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <User
-                className={`${
-                  profileActive ? "text-blue-400" : "text-white-400"
-                }`}
+                className={`${profileActive ? "text-blue-400" : "text-white-400"
+                  }`}
                 size="24"
                 variant={profileActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${
-                  profileActive ? "text-blue-400" : "text-white-400"
-                }`}
+                className={`${profileActive ? "text-blue-400" : "text-white-400"
+                  }`}
               >
                 Profile
               </p>
@@ -54,16 +52,14 @@ export function Navbar({
           <Link href={"/groups"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <People
-                className={`${
-                  groupsActive ? "text-blue-400" : "text-white-400"
-                }`}
+                className={`${groupsActive ? "text-blue-400" : "text-white-400"
+                  }`}
                 size="24"
                 variant={groupsActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${
-                  groupsActive ? "text-blue-400" : "text-white-400"
-                }`}
+                className={`${groupsActive ? "text-blue-400" : "text-white-400"
+                  }`}
               >
                 Groups
               </p>
@@ -73,16 +69,14 @@ export function Navbar({
           <Link href={"/events"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <Calendar2
-                className={`${
-                  eventsActive ? "text-blue-400" : "text-white-400"
-                }`}
+                className={`${eventsActive ? "text-blue-400" : "text-white-400"
+                  }`}
                 size="24"
                 variant={eventsActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${
-                  eventsActive ? "text-blue-400" : "text-white-400"
-                }`}
+                className={`${eventsActive ? "text-blue-400" : "text-white-400"
+                  }`}
               >
                 Events
               </p>

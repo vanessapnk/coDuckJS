@@ -6,7 +6,6 @@ import { AuthProvider } from "./context/authContext";
 import { useAuth } from "@/context/authContext";
 import { useEffect } from "react";
 
-
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",

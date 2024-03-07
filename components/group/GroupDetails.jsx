@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message, ProfileAdd } from "iconsax-react";
+import { Message, ProfileAdd, FilterSearch } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 
 export default function GroupDetails() {

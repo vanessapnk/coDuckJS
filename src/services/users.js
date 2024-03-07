@@ -64,6 +64,8 @@ async function loginHandler(req, res) {
     }
 }
 
-
+async function loadMyGroups(req, res){
+    const myGroups = await getMyGroups
+}
 
 module.exports = { createNewUser, loginHandler };

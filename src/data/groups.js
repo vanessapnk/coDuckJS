@@ -16,7 +16,21 @@ async function getGroupById(groupId) {
     return result;
 }
 
-async function getGroupsByCity(city) {
+
+async function getGroupByName(groupName) {
+    const collection = await connectToCollection(collectionName);
+    const regex = new RegExp(groupName, "i"); // "i" flag for case-insensitive
+    const result = await collection.findOne({ name: { $regex: regex } });
+    return result;
+}
+
+async function getMyGroups(id){
+    const collection = await connectToCollection(collectionName)
+    const myGroups = await collection.find({ members: id }).toArray()
+    return myGroups
+}
+
+/* async function getGroupsByCity(city) {
     const collection = await connectToCollection(collectionName);
     const result = await collection.find({ city: city }).toArray();
     return result;
@@ -32,14 +46,6 @@ async function getGroupsByStacks(stacks) {
     const collection = await connectToCollection(collectionName);
     const result = await collection.find({ stacks: { $all: stacks } }).toArray();
     return result;
-}
+} */
 
-async function getGroupByName(groupName) {
-    const collection = await connectToCollection(collectionName);
-    const regex = new RegExp(groupName, "i"); // "i" flag for case-insensitive
-    const result = await collection.findOne({ name: { $regex: regex } });
-    return result;
-}
-
-
-module.exports = { getGroups, getGroupById, getGroupsByCity, getGroupsByStack, getGroupsByStacks, getGroupByName };
+module.exports = { getGroups, getGroupById, getMyGroups,/* , getGroupsByCity, getGroupsByStack, getGroupsByStacks, */ getGroupByName };

@@ -6,6 +6,8 @@ import { Navbar } from '@/components/custom/navbar';
 import Link from "next/link";
 import { CardItem } from '@/components/custom/cardItem';
 import SheetFilters from '@/components/custom/sheetFilters';
+import { Button } from '@/components/ui/button';
+import { FilterSearch } from 'iconsax-react';
 
 export default function Explore() {
     const [selectedTab, setSelectedTab] = useState('groups');
@@ -74,19 +76,29 @@ export default function Explore() {
     };
 
     return (
-        <>
-            <h1 className='text-3xl mb-6'>Explore</h1>
+        <div className='pb-12'>
+            <div className='flex gap-2 justify-start items-center'>
+                <h1 className='text-xl mb-6'>Explore</h1>
+            </div>
+
 
             <Tabs defaultValue="groups" >
                 <TabsList className="w-full">
                     <TabsTrigger value="groups"
-                        className={` w-full ${selectedTab === 'groups' ? ' ' : ''}`} onClick={() => handleTabChange('groups')}>Groups</TabsTrigger>
-                    <TabsTrigger value="events" className={` w-full ${selectedTab === 'events' ? '' : ''}`} onClick={() => handleTabChange('events')}>Events</TabsTrigger>
+                        className={` w-full ${selectedTab === 'groups' ? ' dark:bg-yellow-400 dark:text-slate-800 ' : ''}`} onClick={() => handleTabChange('groups')}>Groups</TabsTrigger>
+                    <TabsTrigger
+                        value="events"
+                        className={`w-full ${selectedTab === 'events' ? 'dark:bg-yellow-400 dark:text-slate-800' : ''}`}
+                        onClick={() => handleTabChange('events')}>Events</TabsTrigger>
                 </TabsList>
                 <TabsContent value="groups">
                     <div className='flex gap-4 py-4'>
-                        <Input type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
-                        <SheetFilters onApplyFilters={handleApplyFilters} />
+                        <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
+                            <SheetFilters onApplyFilters={handleApplyFilters} />
+                        </div>
+                        <div className='w-full'>
+                            <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
+                        </div>
                     </div>
                     <div className="flex flex-col gap-4">
                         {filterGroups.map((group) => (
@@ -114,9 +126,13 @@ export default function Explore() {
                     </div>
                 </TabsContent>
                 <TabsContent value="events">
-                    <div className='flex gap-4 py-4'>
-                        <Input type="search" placeholder="Search events here" onChange={handleSearchInputChange} />
-                        <SheetFilters onApplyFilters={handleApplyFilters} />
+                <div className='flex gap-4 py-4'>
+                        <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
+                            <SheetFilters onApplyFilters={handleApplyFilters} />
+                        </div>
+                        <div className='w-full'>
+                            <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
+                        </div>
                     </div>
                     <div className="flex flex-col gap-4">
                         {filterEvents.length > 0 &&
@@ -146,7 +162,7 @@ export default function Explore() {
             </Tabs>
 
             <Navbar homeActive={false} groupsActive={false} exploreActive={true} eventsActive={false} />
-        </>
+        </div>
     );
 }
 

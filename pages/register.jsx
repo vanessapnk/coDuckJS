@@ -23,73 +23,73 @@ export default function Register() {
     const [languagesSpoken, setLanguagesSpoken] = useState([]);
     const [stacks, setStacks] = useState([]);
 
-  const hobbiesList = [
-    "Hiking",
-    "Photography",
-    "Reading",
-    "Gardening",
-    "Cooking",
-    "Painting",
-    "Dancing",
-    "Music",
-    "Traveling",
-  ];
-  const stacksList = [
-    "HTML & CSS",
-    "CSS",
-    "JavaScript",
-    "TypeScript",
-    "Tailwind",
-    "React",
-    "NextJs",
-    "MongoDB",
-    "UI/UX Design",
-  ];
-  const languageList = [
-    "English",
-    "Mandarin",
-    "Spanish",
-    "Hindi",
-    "Arabic",
-    "Portuguese",
-    "Bengali",
-    "Russian",
-    "French",
-  ];
+    const hobbiesList = [
+        "Hiking",
+        "Photography",
+        "Reading",
+        "Gardening",
+        "Cooking",
+        "Painting",
+        "Dancing",
+        "Music",
+        "Traveling",
+    ];
+    const stacksList = [
+        "HTML & CSS",
+        "CSS",
+        "JavaScript",
+        "TypeScript",
+        "Tailwind",
+        "React",
+        "NextJs",
+        "MongoDB",
+        "UI/UX Design",
+    ];
+    const languageList = [
+        "English",
+        "Mandarin",
+        "Spanish",
+        "Hindi",
+        "Arabic",
+        "Portuguese",
+        "Bengali",
+        "Russian",
+        "French",
+    ];
 
-  const handleSendStacks = (label, newState) => {
-    setStacks((prevStacks) => {
-      const updatedStacks = prevStacks.filter((stack) => stack.label !== label);
-      if (newState) {
-        updatedStacks.push({ label: label, state: newState });
-      }
-      return updatedStacks;
-    });
-  };
+    const handleSendStacks = (label, newState) => {
+        setStacks((prevStacks) => {
+            const updatedStacks = prevStacks.filter((stack) => stack.label !== label);
+            if (newState) {
+                updatedStacks.push({ label: label, state: newState });
+            }
+            return updatedStacks;
+        });
+    };
 
-  const handleSendHobbies = (label, newState) => {
-    setHobbies((prevHobbies) => {
-      const updatedHobbies = prevHobbies.filter(
-        (hobbie) => hobbie.label !== label
-      );
-      if (newState) {
-        updatedHobbies.push({ label: label, state: newState });
-      }
-      return updatedHobbies;
-    });
-  };
+    const handleSendHobbies = (label, newState) => {
+        setHobbies((prevHobbies) => {
+            const updatedHobbies = prevHobbies.filter(
+                (hobbie) => hobbie.label !== label
+            );
+            if (newState) {
+                updatedHobbies.push({ label: label, state: newState });
+            }
+            return updatedHobbies;
+        });
+    };
 
-  const handleSendLanguagesSpoken = (label, newState) => {
-    setLanguagesSpoken((prevLanguagesSpoken) => {
-      const updatedLanguagesSpoken = prevLanguagesSpoken.filter(
-        (languagesSpoken) => languagesSpoken.label !== label
-      );
-      if (newState) {
-        updatedLanguagesSpoken.push({ label: label, state: newState });
-      }
-      return updatedLanguagesSpoken;
-    });
-  };
+    const handleSendLanguagesSpoken = (label, newState) => {
+        setLanguagesSpoken((prevLanguagesSpoken) => {
+            const updatedLanguagesSpoken = prevLanguagesSpoken.filter(
+                (languagesSpoken) => languagesSpoken.label !== label
+            );
+            if (newState) {
+                updatedLanguagesSpoken.push({ label: label, state: newState });
+            }
+            return updatedLanguagesSpoken;
+        });
+    };
 
     async function createEntry() {
         const filteredStacks = stacks.filter(stack => stack.state);
@@ -110,18 +110,18 @@ export default function Register() {
         });
     }
 
-  const nextStep = () => {
-    setStep(step + 1);
-  };
+    const nextStep = () => {
+        setStep(step + 1);
+    };
 
-  const backStep = () => {
-    setStep(step - 1);
-  };
+    const backStep = () => {
+        setStep(step - 1);
+    };
 
     return (
         <div className="flex items-center justify-center flex-col h-dvh">
             <form className="container">
-                {step == 1 && (
+                {/* {step == 1 && (
                     <div className="w-full flex flex-col items-center justify-center gap-8">
                         <Image
                             className="pb-8"
@@ -135,8 +135,8 @@ export default function Register() {
                         <p className="font-medium">Boost your programming skills or start from scratch! Study independently, vibing with others who share the same goals as you! </p>
                         <Button className="w-full" onClick={nextStep}>Register</Button>
                     </div>
-                )}
-                {step === 2 && (
+                )} */}
+                {step === 1 && (
                     <div className="flex flex-col gap-4">
                         <FormEntry
                             label="email"
@@ -158,16 +158,19 @@ export default function Register() {
                         <FormEntry
                             label="confirm Password"
                             id="passwordConfirmation"
-                            type="passwordConfirmation"
+                            type="password"
                             placeholder="**********"
                             required="required"
                             onChange={(e) => setPasswordConfirmation(e.target.value)}
                         />
                         {/* {statusCode} */}
-                        <Button onClick={nextStep}>Next</Button>
+                        <div className="w-full flex-col flex gap-2">
+                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back to Login</Button>
+                        </div>
                     </div>
                 )}
-                {step === 3 && (
+                {step === 2 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
                             label="name"
@@ -192,11 +195,13 @@ export default function Register() {
                             placeholder="Little Things about you :)"
                             onChange={(e) => setAbout(e.target.value)}
                         />
-                        <Button onClick={nextStep}>Next</Button>
-                        <Button onClick={backStep}>Back * </Button>
+                        <div className="w-full flex-col flex gap-2">
+                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                        </div>
                     </div>
                 )}
-                {step === 4 && (
+                {step === 3 && (
                     <div div className="flex flex-col gap-4">
                         <FormEntry
                             label="city"
@@ -222,27 +227,43 @@ export default function Register() {
                             placeholder="YourGithubId"
                             onChange={(e) => setGithubUsername(e.target.value)}
                         />
-                        <Button onClick={nextStep}>Next</Button>
-                        <Button onClick={backStep}>Back * </Button>
+                        <div className="w-full flex-col flex gap-2">
+                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                        </div>
                     </div>
+                )}
+                {step === 4 && (
+                    <>
+                        <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                            <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+                                Select the
+                                <span className="text-yellow-400"> technologies </span>
+                                you have already<span className="text-blue-400"> learned</span>
+                            </h1>
+                            <div className="flex items-center gap-2 flex-wrap justify-center">
+                                {stacksList.map((item, index) =>
+                                    <BadgeCheck key={index} label={item}
+                                        onStateChange={handleSendStacks}
+                                    />
+                                )}
+                            </div>
+
+                            <div className="w-full flex-col flex gap-2">
+                                <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                                <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                            </div>
+
+                        </div>
+                    </>
                 )}
                 {step === 5 && (
-                    <div div className="flex flex-col gap-4">
-                        <p>Stacks</p>
-                        <div className="flex items-center gap-2 flex-wrap justify-center">
-                            {stacksList.map((item, index) =>
-                                <BadgeCheck key={index} label={item}
-                                    onStateChange={handleSendStacks}
-                                />
-                            )}
-                        </div>
-                        <Button onClick={nextStep}>Next</Button>
-                        <Button onClick={backStep}>Back * </Button>
-                    </div>
-                )}
-                {step === 6 && (
-                    <div div className="flex flex-col gap-4">
-                        <p>Hobbies</p>
+                    <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                        <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+                            In addition to learning,
+                            <span className="text-yellow-400"> find friends </span>
+                            who have<span className="text-blue-400"> common tastes</span>
+                        </h1>
                         <div className="flex items-center gap-2 flex-wrap justify-center">
                             <div className="flex items-center gap-2 flex-wrap justify-center">
                                 {hobbiesList.map((item, index) =>
@@ -252,13 +273,26 @@ export default function Register() {
                                 )}
                             </div>
                         </div>
-                        <Button onClick={nextStep}>Next</Button>
-                        <Button onClick={backStep}>Back * </Button>
+                        <div className="w-full flex-col flex gap-2">
+                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                        </div>
                     </div>
                 )}
-                {step === 7 && (
-                    <div div className="flex flex-col gap-4">
-                        <p>Langueges Spoken / finish</p>
+                {step === 6 && (
+                    <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                        {/* <Image
+                            className="p-2 rounded-2xl"
+                            src="/gifs/duck-load.gif"
+                            alt="Descrição da imagem"
+                            width={200}
+                            height={200}
+                        /> */}
+                        <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+                            What
+                            <span className="text-yellow-400"> languages </span>
+                            do you<span className="text-blue-400"> speak? </span>
+                        </h1>
                         <div className="flex items-center gap-2 flex-wrap justify-center">
                             {languageList.map((item, index) =>
                                 <BadgeCheck key={index} label={item}
@@ -266,12 +300,44 @@ export default function Register() {
                                 />
                             )}
                         </div>
-                        <Link href={"/explore"}>
-                            <Button type="submit" onClick={() => createEntry()}>Finish</Button>
-                        </Link>
-                        <Button onClick={backStep}>Back * </Button>
+
+                        <div className="w-full flex-col flex gap-2 ">
+                            {/* <Link href={"/explore"}> */}
+                            <Button className="dark:text-slate-900 w-full" onClick={nextStep} >
+                                Finish
+                            </Button>
+                            {/* </Link> */}
+                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                        </div>
                     </div>
-                )}
+                )
+                }
+                {step === 7 && (
+                    <>
+                        <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                            <Image
+                                className="p-2 rounded-2xl"
+                                src="/gifs/duck-flowers.gif"
+                                alt="Descrição da imagem"
+                                width={200}
+                                height={200}
+                            />
+                            <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+                                Is all the data
+                                <span className="text-yellow-400"> correct? </span>
+                                If so<span className="text-blue-400"> Let's Go! </span>
+                            </h1>
+                            <div className="w-full flex-col flex gap-2">
+                                <Link href={"/explore"}>
+                                    <Button className="dark:text-slate-900 w-full" type="submit" onClick={() => createEntry()}>Finish
+                                    </Button>
+                                </Link>
+                                <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                            </div>
+                        </div>
+                    </>
+                )
+                }
             </form >
         </div >
     )

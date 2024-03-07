@@ -1,5 +1,6 @@
 import { connectToCollection } from "@/src/data/mongodb";
 import { getGroupById } from "@/src/data/groups";
+import { getMyGroups } from "@/src/data/groups";
 import { getUserById } from "../data/users";
 
 export async function createGroup(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit) {
@@ -23,6 +24,11 @@ export async function createGroup(name, creatorId, description, category, stacks
         console.error('Error creating group:', error);
         throw new Error('Failed to create group');
     }
+}
+
+export async function loadMyGroups(id){
+    const myGroups = await getMyGroups(id);
+    return myGroups;
 }
 export async function loadGroupWithMembersById(groupId) {
     const group = await getGroupById(groupId)

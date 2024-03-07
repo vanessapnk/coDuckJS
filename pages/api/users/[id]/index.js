@@ -13,6 +13,7 @@ export default async function handler(req, res) {
     const collection = await connectToCollection('userData');
     const user = await collection.findOne({ _id: new ObjectId(id) });
 
+    
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
