@@ -73,6 +73,7 @@ export default function Groups() {
           <Link key={group._id} href={`/groups/${group._id}`}>
             <CardItem
               members={group.members}
+              languege={group.languagesSpoken[0]}
               usersMin={group.members.length}
               usersLimit={group.usersLimit}
               category={group.category}

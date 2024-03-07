@@ -20,11 +20,10 @@ const profileCheck = false;
 
 export function CardItem({
   usersMin,
+  usersLimit,
   modality,
   members,
-  usersLimit,
   category,
-  profileCheck,
   profileImage,
   title,
   location,
@@ -69,7 +68,7 @@ export function CardItem({
         </div>
 
         <div className="flex items-center gap-2">
-          <Location size="16" variant="Bold" />
+          <Location size="16" variant="Bulk" />
           <p className="text-lg normal-case">{location}</p>
         </div>
         <div>
@@ -85,7 +84,6 @@ export function CardItem({
           {description}
         </p>
       </div>
-      {/* </div> */}
     </Card>
   );
 }
