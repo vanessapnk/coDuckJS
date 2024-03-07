@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { CardItem } from "../custom/cardItem";
 
 // UserBody.jsx
 export function UserBody({ stacks, hobbies, languagesSpoken }) {
@@ -9,9 +8,9 @@ export function UserBody({ stacks, hobbies, languagesSpoken }) {
         <h1 className="text-base">Stacks</h1>
         <div>
           <div className="flex flex-wrap gap-2">
-            {stacks.map((stack, index) => (
-              <Badge key={index} variant="profile">
-                {stack}
+            {stacks.map((index, item) => (
+              <Badge key={item} variant="profile">
+                {index}
               </Badge>
             ))}
           </div>
