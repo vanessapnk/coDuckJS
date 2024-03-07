@@ -9,59 +9,60 @@ import { Navbar } from "@/components/custom/navbar";
 import { useAuth } from "./context/authContext";
 
 export default function UserProfile() {
-    const router = useRouter();
-    const { authenticatedUser } = useAuth();
-    const [userData, setUserData] = useState(null);
+  const router = useRouter();
+  const { authenticatedUser } = useAuth();
+  const [userData, setUserData] = useState(null);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                // Verifique se há um usuário autenticado
-                if (authenticatedUser && authenticatedUser.id) {
-                    console.log(authenticatedUser)
-                    const response = await fetch(`/api/users/${encodeURIComponent(authenticatedUser.id)}`, {
-                        headers: {
-                            'Authorization': `Bearer ${authenticatedUser.token}`
-                        }
-                    });
-
-                    if (response.ok) {
-                        const userData = await response.json();
-                        setUserData(userData);
-                    } else {
-                        const errorData = await response.json();
-                        console.error("Error fetching user data:", errorData.message);
-                        // Trate o erro na interface do usuário conforme necessário
-                    }
-                } else {
-                    // Se não houver um usuário autenticado, redirecione para a página de login
-                    router.push("/login");
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Verifique se há um usuário autenticado
+        if (authenticatedUser && authenticatedUser.id) {
+          const response = await fetch(
+            `/api/users/${encodeURIComponent(authenticatedUser.id)}`,
+            {
+              headers: {
+                Authorization: `Bearer ${authenticatedUser.token}`,
+              },
             }
-        };
+          );
 
-        fetchUserData();
-    }, [authenticatedUser, router]);
+          if (response.ok) {
+            const userData = await response.json();
+            setUserData(userData);
+          } else {
+            const errorData = await response.json();
+            console.error("Error fetching user data:", errorData.message);
+            // Trate o erro na interface do usuário conforme necessário
+          }
+        } else {
+          // Se não houver um usuário autenticado, redirecione para a página de login
+          router.push("/login");
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
-    return (
-        <div className="px-4 flex flex-col gap-2">
-            <NavInternal backLink={"/"} editLink={"/"} />
-            {userData && (
-                <UserTop
-                    github={userData.github}
-                    location={userData.location}
-                    name={userData.name}
-                    age={userData.age}
-                    job={userData.job}
-                    about={userData.about}
-                />
-            )}
+    fetchUserData();
+  }, [authenticatedUser, router]);
 
+  return (
+    <div className="px-4 flex flex-col gap-2">
+      <NavInternal backLink={"/"} editLink={"/"} />
+      {userData && (
+        <UserTop
+          github={userData.github}
+          location={userData.location}
+          name={userData.name}
+          age={userData.age}
+          job={userData.job}
+          about={userData.about}
+        />
+      )}
 
-            <UserBody />
-            <Navbar profileActive={true} />
-        </div>
-    );
+      <UserBody />
+      <Navbar profileActive={true} />
+    </div>
+  );
 }

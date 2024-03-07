@@ -33,4 +33,12 @@ async function getUserById(id) {
     return result;
 }
 
-module.exports = { getUserByEmail, getUserById, getUsers };
+async function getUsersNamesByIds(ids) {
+    const collection = await connectToCollection(collectionName);
+    const objectIds = ids.map(id => new ObjectId(id));
+    const result = await collection.find({ _id: { $in: objectIds } }).project({ name: 1 }).toArray();
+    return result.map(user => user.name);
+}
+
+
+module.exports = { getUserByEmail, getUserById, getUsers, getUsersNamesByIds };
