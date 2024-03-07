@@ -127,6 +127,7 @@ export default function Explore() {
                                         profileCheck={true}
                                         location={event.city}
                                         modality={event.modality}
+                                        languege={event.languagesSpoken[0]}
                                         profileImage={
                                             event.photo_url ||
                                             "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

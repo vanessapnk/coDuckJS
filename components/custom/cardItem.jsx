@@ -29,6 +29,7 @@ export function CardItem({
   location,
   description,
   stacks,
+  languege,
 }) {
 
   const backgroundImageStyle = {
@@ -75,11 +76,13 @@ export function CardItem({
         </div>
 
         <div>
-          <p className="text-lg normal-case">English</p>
+          <p className="text-lg normal-case"> {languege} </p>
         </div>
       </div>
       <div>
-        <p className="text-base opacity-70 normal-case">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum accusantium aperiam deserunt! Nostrum esse magni reiciendis, consequuntur voluptatem consequatur minima neque nisi repellat dolor debitis maxime eos optio quasi repellendus?</p>
+        <p className="text-base opacity-70 normal-case">
+          {description}
+        </p>
       </div>
       {/* </div> */}
     </Card>
