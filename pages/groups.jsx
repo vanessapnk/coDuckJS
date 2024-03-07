@@ -50,7 +50,7 @@ export default function Groups() {
   };
 
   return (
-    <div className="pb-16">
+    <div className="pb-12">
       <div className="flex justify-between items-center gap-6 pb-6">
         <h1 className="text-2xl font-medium">My Groups</h1>
         <button
