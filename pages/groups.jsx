@@ -51,15 +51,11 @@ export default function Groups() {
 
   return (
     <div className="pb-12">
-      <div className="flex justify-between items-center gap-6 pb-6">
-        <h1 className="text-2xl font-medium">My Groups</h1>
-        <button
-          onClick={() => router.push("/creategroup")}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
+      <div className='flex gap-2 justify-between  items-center pb-6'>
+        <h1 className='text-xl '>Explore</h1>
+        <Button onClick={() => router.push("/creategroup")}>
           Create Group
-        </button>
-        <DarkModeSwitch />
+        </Button>
       </div>
 
       {showFilters && (
