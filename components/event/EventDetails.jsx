@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "../custom/navbar";
 import { NavEditEvent } from "./NavEditEvent";
+import { ProfileAdd } from "iconsax-react";
 
 export default function EventDetails() {
   const router = useRouter();
@@ -23,6 +24,31 @@ export default function EventDetails() {
       fetchEventData();
     }
   }, [eventId]);
+
+  const handleEnterEvent = async () => {
+    try {
+      if (true) {
+        const response = await fetch(`/api/events/${eventId}/participants`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ participant: "api" }),
+        });
+
+        if (response.ok) {
+          console.log("User entered the event successfully");
+          // You may want to update the UI to reflect the user joining the group
+        } else {
+          console.error("Failed to enter the event");
+        }
+      } else {
+        console.error("Authenticated user or group id is missing");
+      }
+    } catch (error) {
+      console.error("Error entering group:", error);
+    }
+  };
 
   if (!event) {
     return <div>Loading...</div>;
@@ -82,7 +108,7 @@ export default function EventDetails() {
       <div>
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold ml-4 py-2 px-3 rounded items-center justify-center"
-          /*   onClick={handleEnterGroup} */
+          onClick={handleEnterEvent}
         >
           <div className="flex flex-row  items-center justify-center m-2">
             <div className="mr-2">
