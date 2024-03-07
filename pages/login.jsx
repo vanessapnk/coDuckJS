@@ -45,14 +45,19 @@ export default function Login() {
   return (
     <>
       <div className="flex items-center flex-col gap-4 justify-center h-dvh">
-        <Image
-          className="pb-8 rounded-3xl "
-          src="/images/Saly-38.png"
-          alt="Descrição da imagem"
-          width={300}
-          height={300}
-        />
         <div className="container flex flex-col gap-6">
+          <div className="flex items-center justify-center">
+            {/* <Image
+              className="p-2 bg-zinc-700 rounded-2xl"
+              src="/images/Saly-38.png"
+              alt="Descrição da imagem"
+              width={200}
+              height={200}
+            /> */}
+          </div>
+          <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+            Be part of the <span className="text-yellow-400">community </span>of self-taught <span className="text-blue-400">programmers </span></h1>
+          {/* <p className="font-medium">Boost your programming skills or start from scratch! Study independently, vibing with others who share the same goals as you! </p> */}
           <div className="flex flex-col gap-2">
             <FormEntry
               label="Email"
@@ -80,12 +85,15 @@ export default function Login() {
             </Button>
             <Link href="/register">
               <p className="text-base cursor-pointer">
-                Or Create a new Account
+                Or
+              </p>
+              <p className="text-base pt-2 text-opacity-70 cursor-pointer font-semibold">
+                Create a new Account
               </p>
             </Link>
           </div>
         </div>
-      </div>
+      </div >
     </>
   );
 }
