@@ -99,24 +99,52 @@ const LANGUAGES_SPOKEN = [
     "Other"
 ]
 
-const CITY = [
-    "Aveiro",
-    "Beja",
-    "Braga",
-    "Bragança",
-    "Castelo Branco",
-    "Coimbra",
-    "Évora",
-    "Faro",
-    "Guarda",
-    "Leiria",
+const city = [
     "Lisbon",
-    "Portalegre",
     "Porto",
-    "Santarém",
-    "Setúbal",
-    "Viana do Castelo",
-    "Vila Real",
-    "Viseu",
+    "Sintra",
+    "Braga",
+    "Aveiro",
+    "Coimbra",
+    "Maputo",
+    "Funchal",
+    "Damascus",
+    "Chelas"
+]
+
+const categoryList = [
+    "Frontend",
+    "Backend",
+    "Data Analysis",
+    "Design",
     "Other"
 ]
+
+  const stacksList = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Tailwind",
+    "React",
+    "NextJs",
+    "MongoDB",
+    "Design",
+    "Other",
+  ];
+  const languageList = [
+    "English",
+    "Mandarin",
+    "Spanish",
+    "Arabic",
+    "Portuguese",
+    "German",
+    "Russian",
+    "French",
+    "Other",
+  ];
+
+  const hobbiesList = ["Hiking","Photography","Reading","Gardening","Cooking","Painting","Dancing","Music","Traveling", “Other]
+
+  const modality = ["Online", "Flexible", "Presential"]
+
+  const stackLevel = ["Beginner", "Junior", "Intermediate", "Senior"]
