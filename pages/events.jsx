@@ -40,7 +40,8 @@ export default function Events() {
           Create Event
         </button>
       </div>
-      <FilterTab />
+      {/*       <FilterTab />
+       */}{" "}
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
           {/* Implement your filter options component here */}
@@ -48,7 +49,6 @@ export default function Events() {
           <p>Filter options go here...</p>
         </div>
       )}
-
       <div className="flex flex-col gap-4">
         {events.length > 0 &&
           events.map((event) => (
@@ -73,7 +73,6 @@ export default function Events() {
             </Link>
           ))}
       </div>
-
       <Navbar homeActive={false} groupsActive={false} eventsActive={true} />
     </div>
   );
