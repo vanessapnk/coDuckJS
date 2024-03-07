@@ -12,13 +12,17 @@ export default function GroupDetails() {
   const [group, setGroup] = useState(null);
   const [navBarVisible, setNavBarVisible] = useState(true);
 
-  const { authenticatedUser } = useAuth() || {}; // Set default value as empty object
+  const { authenticatedUser } = useAuth() || {};
+  const userId2 = authenticatedUser ? authenticatedUser.userId : "teste";
   const { userId } = "teste";
 
   useEffect(() => {
     const fetchGroupData = async () => {
       try {
         const res = await fetch(`/api/groups/${groupId}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch group details");
+        }
         const data = await res.json();
         setGroup(data);
       } catch (error) {
@@ -37,9 +41,8 @@ export default function GroupDetails() {
 
   const handleEnterGroup = async () => {
     try {
-      if (true) {
-        // Check if authenticatedUser and its id property exist
-        const response = await fetch(`/api/${groupId}/entergroup`, {
+      if (userId && groupId) {
+        const response = await fetch(`/api/groups/${groupId}/entergroup`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +57,7 @@ export default function GroupDetails() {
           console.error("Failed to enter the group");
         }
       } else {
-        console.error("Authenticated user or user id is missing");
+        console.error("Authenticated user or group id is missing");
       }
     } catch (error) {
       console.error("Error entering group:", error);
