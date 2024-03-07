@@ -64,7 +64,14 @@ export default function GroupDetails() {
   };
 
   if (!group) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen ">
+        <img
+          src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/f9aea342094811.57c019c4f089a.gif"
+          alt="Loading"
+        />
+      </div>
+    );
   }
 
   return (
