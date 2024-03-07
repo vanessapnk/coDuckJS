@@ -40,7 +40,7 @@ export function CardItem({
   };
 
   return (
-    <Card className="p-3 flex flex-col gap-2">
+    <Card className="p-3 flex flex-col gap-2 bg-zinc-100 dark:bg-background">
       <div style={backgroundImageStyle} className="rounded-2xl mb-4 h-60">
         <div className="flex justify-end p-2">
           <div className="self-start p-3 rounded-full bg-background ">
@@ -55,7 +55,7 @@ export function CardItem({
           </div>
           <div className="w-3/12 flex items-center gap-2 justify-end content-center flex-row
           dark:text-white  text-base font-semibold ">
-            <MapPin size="16" />
+            <User size="16" variant="Bulk" />
             <p>{usersMin} / {usersLimit}  </p>
           </div>
         </div>
