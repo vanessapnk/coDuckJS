@@ -148,3 +148,5 @@ const categoryList = [
   const modality = ["Online", "Flexible", "Presential"]
 
   const stackLevel = ["Beginner", "Junior", "Intermediate", "Senior"]
+
+  job
