@@ -74,14 +74,20 @@ export default function Explore() {
     };
 
     return (
-        <>
-            <h1 className='text-3xl mb-6'>Explore</h1>
+        <div className='pb-12'>
+            <div className='flex gap-2 justify-start items-center'>
+                <h1 className='text-xl mb-6'>Explore</h1>
+            </div>
+
 
             <Tabs defaultValue="groups" >
                 <TabsList className="w-full">
                     <TabsTrigger value="groups"
-                        className={` w-full ${selectedTab === 'groups' ? ' ' : ''}`} onClick={() => handleTabChange('groups')}>Groups</TabsTrigger>
-                    <TabsTrigger value="events" className={` w-full ${selectedTab === 'events' ? '' : ''}`} onClick={() => handleTabChange('events')}>Events</TabsTrigger>
+                        className={` w-full ${selectedTab === 'groups' ? ' dark:bg-yellow-400 dark:text-slate-800 ' : ''}`} onClick={() => handleTabChange('groups')}>Groups</TabsTrigger>
+                    <TabsTrigger
+                        value="events"
+                        className={`w-full ${selectedTab === 'events' ? 'dark:bg-yellow-400 dark:text-slate-800' : ''}`}
+                        onClick={() => handleTabChange('events')}>Events</TabsTrigger>
                 </TabsList>
                 <TabsContent value="groups">
                     <div className='flex gap-4 py-4'>
@@ -146,7 +152,7 @@ export default function Explore() {
             </Tabs>
 
             <Navbar homeActive={false} groupsActive={false} exploreActive={true} eventsActive={false} />
-        </>
+        </div>
     );
 }
 
