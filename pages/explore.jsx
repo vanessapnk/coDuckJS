@@ -75,17 +75,17 @@ export default function Explore() {
 
     return (
         <>
-            <h1>Explore</h1>
-            <Tabs defaultValue="groups" className="w-[full]">
-                <TabsList>
-                    <TabsTrigger value="groups" className={`focus:bg-white ${selectedTab === 'groups' ? 'bg-slate-100' : ''}`} onClick={() => handleTabChange('groups')}>Groups</TabsTrigger>
-                    <TabsTrigger value="events" className={`focus:bg-white ${selectedTab === 'events' ? 'bg-slate-100' : ''}`} onClick={() => handleTabChange('events')}>Events</TabsTrigger>
+            <h1 className='text-3xl mb-6'>Explore</h1>
+
+            <Tabs defaultValue="groups" >
+                <TabsList className="w-full">
+                    <TabsTrigger value="groups"
+                        className={` w-full ${selectedTab === 'groups' ? ' ' : ''}`} onClick={() => handleTabChange('groups')}>Groups</TabsTrigger>
+                    <TabsTrigger value="events" className={` w-full ${selectedTab === 'events' ? '' : ''}`} onClick={() => handleTabChange('events')}>Events</TabsTrigger>
                 </TabsList>
                 <TabsContent value="groups">
-                    <div>
+                    <div className='flex gap-4 py-4'>
                         <Input type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
-                    </div>
-                    <div>
                         <SheetFilters onApplyFilters={handleApplyFilters} />
                     </div>
                     <div className="flex flex-col gap-4">
@@ -112,10 +112,8 @@ export default function Explore() {
                     </div>
                 </TabsContent>
                 <TabsContent value="events">
-                    <div>
+                    <div className='flex gap-4 py-4'>
                         <Input type="search" placeholder="Search events here" onChange={handleSearchInputChange} />
-                    </div>
-                    <div>
                         <SheetFilters onApplyFilters={handleApplyFilters} />
                     </div>
                     <div className="flex flex-col gap-4">
@@ -142,6 +140,7 @@ export default function Explore() {
                     </div>
                 </TabsContent>
             </Tabs>
+
             <Navbar homeActive={false} groupsActive={false} exploreActive={true} eventsActive={false} />
         </>
     );

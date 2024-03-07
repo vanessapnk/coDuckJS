@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowDownAZ } from 'lucide-react';
 import {
     Sheet,
     SheetContent,
@@ -85,7 +86,9 @@ export default function SheetFilters({ onApplyFilters }) {
 
     return (
         <Sheet>
-            <SheetTrigger onClick={() => setIsOpen(true)}>icone de filtro</SheetTrigger>
+            <SheetTrigger onClick={() => setIsOpen(true)}>
+                <ArrowDownAZ />
+            </SheetTrigger>
             {isOpen && ( // Render the sheet content only when isOpen is true
                 <SheetContent>
                     <SheetHeader>
