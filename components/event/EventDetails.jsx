@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "../custom/navbar";
 import { NavEditEvent } from "./NavEditEvent";
+import { ProfileAdd } from "iconsax-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function EventDetails() {
   const router = useRouter();
@@ -24,24 +26,51 @@ export default function EventDetails() {
     }
   }, [eventId]);
 
+  const handleEnterEvent = async () => {
+    try {
+      if (true) {
+        const response = await fetch(`/api/events/${eventId}/participants`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ participant: "api" }),
+        });
+
+        if (response.ok) {
+          console.log("User entered the event successfully");
+          // You may want to update the UI to reflect the user joining the group
+        } else {
+          console.error("Failed to enter the event");
+        }
+      } else {
+        console.error("Authenticated user or group id is missing");
+      }
+    } catch (error) {
+      console.error("Error entering group:", error);
+    }
+  };
+
   if (!event) {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
       <NavEditEvent backLink={`/events/`} editLink={`/event/edit/${eventId}`} />
-      <div className="bg-white rounded-lg shadow-md mx-auto max-w-md mt-8 p-8">
-        <div className="relative mb-6">
+      <div className="bg-white rounded-lg shadow-md mx-auto max-w-md p-4 ">
+        <div className="relative mb-4 lg:mb-6">
           <div className="absolute inset-0 bg-gray-300 rounded-lg"></div>
           <img
             src="https://via.placeholder.com/800x400"
             alt="Event Cover"
-            className="w-full h-64 object-cover rounded-lg"
+            className="w-full h-48 lg:h-64 object-cover rounded-lg"
           />
         </div>
-        <h1 className="text-3xl font-semibold mb-4">{event.name}</h1>
-        <p className="text-gray-600 mb-4">{event.description}</p>
+        <h1 className="text-2xl lg:text-3xl font-semibold mb-2 lg:mb-4">
+          {event.name}
+        </h1>
+        <p className="text-gray-600 mb-2 lg:mb-4">{event.description}</p>
         <div className="flex flex-wrap items-center mb-4">
           <div className="mr-4">
             <span className="font-semibold">Category:</span> {event.category}
@@ -78,6 +107,17 @@ export default function EventDetails() {
           <span className="font-semibold">Exact Location:</span>{" "}
           {event.exactLocation}
         </div>
+      </div>
+      <div className="flex justify-center">
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded flex items-center"
+          onClick={handleEnterEvent}
+        >
+          <div className="mr-2">
+            <ProfileAdd size="32" color="#d9e3f0" />
+          </div>
+          Enter Group
+        </button>
       </div>
       <Navbar />
     </div>
