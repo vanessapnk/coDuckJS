@@ -5,13 +5,13 @@ export default async function handler(req, res) {
   const { query: { id } } = req;
 
   try {
-    // Verifique se o ID é uma string hexadecimal válida
     if (!/^[0-9a-fA-F]{24}$/.test(id)) {
       return res.status(400).json({ message: 'Invalid user ID' });
     }
 
-    const collection = await connectToCollection('userData');
+    // const collection = await connectToCollection('userData');
     const user = await collection.findOne({ _id: new ObjectId(id) });
+
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
