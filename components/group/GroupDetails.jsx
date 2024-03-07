@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message } from "iconsax-react";
+import { Message, ProfileAdd } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 
 export default function GroupDetails() {
@@ -14,7 +14,6 @@ export default function GroupDetails() {
 
   const { authenticatedUser } = useAuth() || {};
   const userId2 = authenticatedUser ? authenticatedUser.userId : "teste";
-  const { member } = "teste";
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -127,7 +126,7 @@ export default function GroupDetails() {
         >
           <div className="flex flex-row  items-center justify-center m-2">
             <div className="mr-2">
-              <Message size="32" color="#D9E3F0" variant="Bold" />
+              <ProfileAdd size="32" color="#d9e3f0" />
             </div>
             Enter Group
           </div>
