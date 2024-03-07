@@ -16,6 +16,7 @@ export default function EventDetails() {
         const res = await fetch(`/api/events/${eventId}`); // Use the dynamic event ID from the URL
         const data = await res.json();
         setEvent(data);
+        await loadEventMembers(data.participants); // Load participant details
       } catch (error) {
         console.error("Error fetching event details:", error);
       }
@@ -25,6 +26,26 @@ export default function EventDetails() {
       fetchEventData();
     }
   }, [eventId]);
+
+  const loadEventMembers = async (participantIds) => {
+    try {
+      const participantsData = await Promise.all(
+        participantIds.map(async (id) => {
+          const res = await fetch(`/api/users/${id}`); // Assuming the API endpoint to fetch user details
+          if (!res.ok) {
+            throw new Error("Failed to fetch user details");
+          }
+          return await res.json();
+        })
+      );
+      setEvent((prevState) => ({
+        ...prevState,
+        participants: participantsData,
+      }));
+    } catch (error) {
+      console.error("Error loading event members:", error);
+    }
+  };
 
   const handleEnterEvent = async () => {
     try {
@@ -132,19 +153,19 @@ export default function EventDetails() {
           >
             {event.participants
               .filter((m) => m != null)
-              .map((member, index) => (
+              .map((participant, index) => (
                 <li key={index} className="py-3 sm:py-4">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <img
                         className="w-8 h-8 rounded-full"
                         src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
-                        alt={`${member} image`}
+                        alt={`${participant.name} image`}
                       />
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
                       <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {member.name}
+                        {participant.name}
                       </p>
                     </div>
                   </div>
