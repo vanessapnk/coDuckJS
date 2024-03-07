@@ -10,15 +10,10 @@ import { useAuth } from "../context/authContext";
 export default function Profile() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true)
-
     const { id } = router.query
-    // console.log(id)
     const { authenticatedUser } = useAuth();
     console.log("authenticatedUser: " + authenticatedUser)
-
     const [userData, setUserData] = useState(null);
-    console.log("userData: " + userData)
-
     const fetchUserData = async () => {
         try {
             const response = await fetch(`/api/users/${id}`);
@@ -52,10 +47,18 @@ export default function Profile() {
                     age={userData.age}
                     job={userData.job}
                     about={userData.about}
+                    groups={"5"}
+                    events={"3"}
+                    langueges={"3"}
                 />
             )}
-            {/* {isLoading ? `${userData.id}` : "Loading"} */}
-            {/* <UserBody /> */}
+            {userData && (
+                <UserBody
+                    stacks={userData.stacks}
+                    hobbies={userData.hobbies}
+                    languagesSpoken={userData.languagesSpoken} />
+            )}
+
             <Navbar profileActive={true} />
         </div>
     );
