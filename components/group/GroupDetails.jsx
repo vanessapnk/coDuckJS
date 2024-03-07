@@ -13,6 +13,7 @@ export default function GroupDetails() {
   const [navBarVisible, setNavBarVisible] = useState(true);
 
   const { authenticatedUser } = useAuth() || {}; // Set default value as empty object
+  const { userId } = "teste";
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -36,14 +37,14 @@ export default function GroupDetails() {
 
   const handleEnterGroup = async () => {
     try {
-      if (authenticatedUser && authenticatedUser.id) {
+      if (true) {
         // Check if authenticatedUser and its id property exist
         const response = await fetch(`/api/${groupId}/entergroup`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId: authenticatedUser.id }),
+          body: JSON.stringify({ userId }),
         });
 
         if (response.ok) {
@@ -147,7 +148,7 @@ export default function GroupDetails() {
                     <img
                       className="w-8 h-8 rounded-full"
                       src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
-                      alt={`${member.name} image`}
+                      alt={`${member} image`}
                     />
                   </div>
                   <div className="flex-1 min-w-0 ms-4">
