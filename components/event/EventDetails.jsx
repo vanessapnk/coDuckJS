@@ -79,6 +79,19 @@ export default function EventDetails() {
           {event.exactLocation}
         </div>
       </div>
+      <div>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold ml-4 py-2 px-3 rounded items-center justify-center"
+          /*   onClick={handleEnterGroup} */
+        >
+          <div className="flex flex-row  items-center justify-center m-2">
+            <div className="mr-2">
+              <ProfileAdd size="32" color="#d9e3f0" />
+            </div>
+            Enter Group
+          </div>
+        </button>
+      </div>
       <Navbar />
     </div>
   );
