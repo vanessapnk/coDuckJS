@@ -93,11 +93,13 @@ export default function Explore() {
                             <Link key={group._id} href={`/groups/${group._id}`}>
                                 <CardItem
                                     members={group.members}
+                                    usersMin={group.members.length}
                                     usersLimit={group.usersLimit}
                                     category={group.category}
                                     profileCheck={true}
                                     location={group.city}
                                     modality={group.modality}
+                                    languege={group.languagesSpoken[0]}
                                     profileImage={
                                         group.photo_url ||
                                         "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -121,7 +123,8 @@ export default function Explore() {
                             filterEvents.map((event) => (
                                 <Link key={event._id} href={`/events/${event._id}`}>
                                     <CardItem
-                                        members={event.members}
+                                        members={event.participants}
+                                        usersMin={event.participants.length}
                                         usersLimit={event.usersLimit}
                                         category={event.category}
                                         profileCheck={true}

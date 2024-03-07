@@ -19,6 +19,7 @@ const profileCheck = false;
 
 
 export function CardItem({
+  usersMin,
   modality,
   members,
   usersLimit,
@@ -55,7 +56,7 @@ export function CardItem({
           <div className="w-3/12 flex items-center gap-2 justify-end content-center flex-row
           dark:text-white  text-base font-semibold ">
             <User size="16" variant="Bold" />
-            {/* <p>{members.length} / {usersLimit}  </p> */}
+            <p>{usersMin} / {usersLimit}  </p>
           </div>
         </div>
       </div>
