@@ -16,7 +16,6 @@ export default function EventDetails() {
         const res = await fetch(`/api/events/${eventId}`); // Use the dynamic event ID from the URL
         const data = await res.json();
         setEvent(data);
-        await loadEventMembers(data.participants); // Load participant details
       } catch (error) {
         console.error("Error fetching event details:", error);
       }
@@ -26,26 +25,6 @@ export default function EventDetails() {
       fetchEventData();
     }
   }, [eventId]);
-
-  const loadEventMembers = async (participantIds) => {
-    try {
-      const participantsData = await Promise.all(
-        participantIds.map(async (id) => {
-          const res = await fetch(`/api/users/${id}`); // Assuming the API endpoint to fetch user details
-          if (!res.ok) {
-            throw new Error("Failed to fetch user details");
-          }
-          return await res.json();
-        })
-      );
-      setEvent((prevState) => ({
-        ...prevState,
-        participants: participantsData,
-      }));
-    } catch (error) {
-      console.error("Error loading event members:", error);
-    }
-  };
 
   const handleEnterEvent = async () => {
     try {
@@ -73,11 +52,20 @@ export default function EventDetails() {
   };
 
   if (!event) {
-    return <div></div>;
+    return (
+      <div>
+        <div className="flex justify-center items-center h-screen ">
+          <img
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/f9aea342094811.57c019c4f089a.gif"
+            alt="Loading"
+          />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between">
       <NavEditEvent backLink={`/events/`} editLink={`/event/edit/${eventId}`} />
       <div className="bg-white rounded-lg shadow-md mx-auto max-w-md p-4 ">
         <div className="relative mb-4 lg:mb-6">
@@ -113,13 +101,13 @@ export default function EventDetails() {
         </div>
         <div className="flex items-center">
           <span className="font-semibold mr-2">Languages Spoken:</span>
-          <ul className="flex">
+          {/* <ul className="flex">
             {event.languagesSpoken.map((language, index) => (
               <li key={index} className="mr-2">
                 {language}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
         <div className="mt-4">
           <span className="font-semibold">Users Limit:</span> {event.usersLimit}
@@ -129,23 +117,24 @@ export default function EventDetails() {
           {event.exactLocation}
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-4">
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded flex items-center"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-7 rounded-lg flex items-center"
           onClick={handleEnterEvent}
         >
-          <div className="mr-2">
+          <div className="mr-2 mt-2">
             <ProfileAdd size="32" color="#d9e3f0" />
           </div>
-          Enter Group
+          Enter Event
         </button>
       </div>
-      <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-8">
+      <div className="w-full max-w-md pl-4 pt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-8">
         <div className="flex items-center justify-between mb-4">
           <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
-            Members
+            Participants
           </h5>
         </div>
+        <div>{event.participants.name}</div>
         <div className="flow-root">
           <ul
             role="list"
@@ -160,12 +149,12 @@ export default function EventDetails() {
                       <img
                         className="w-8 h-8 rounded-full"
                         src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
-                        alt={`${participant.name} image`}
+                        alt={`${participant} image`}
                       />
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
                       <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {participant.name}
+                        {participant}
                       </p>
                     </div>
                   </div>

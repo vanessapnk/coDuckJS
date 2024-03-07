@@ -43,17 +43,16 @@ export async function loadEventWithMembersById(eventId) {
     if (!event) return
     const participants = await loadEventMembers(event.participants)
     return { ...event, participants: participants }
-
 }
 
 export async function loadEventMembers(mids) {
-    const members = await Promise.all(mids.map(async (id) => {
+    const participants = await Promise.all(mids.map(async (id) => {
         participants.log(`Searching for user ${id}`)
         return await getUserById(id)
     }))
 
     console.log(mids)
-    console.log(members)
+    console.log("Participants Data:", participants); // Add this console log
 
     return participants
 }
