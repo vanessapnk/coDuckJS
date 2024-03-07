@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                 { _id: new ObjectId(groupId) },
                 { $set: { members: updatedMembers } }
             );
-                
+
             res.json({ success: true });
         } catch (error) {
             console.error('Error updating members:', error);

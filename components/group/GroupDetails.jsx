@@ -14,7 +14,7 @@ export default function GroupDetails() {
 
   const { authenticatedUser } = useAuth() || {};
   const userId2 = authenticatedUser ? authenticatedUser.userId : "teste";
-  const { userId } = "teste";
+  const { member } = "teste";
 
   useEffect(() => {
     const fetchGroupData = async () => {
@@ -41,13 +41,13 @@ export default function GroupDetails() {
 
   const handleEnterGroup = async () => {
     try {
-      if (userId && groupId) {
-        const response = await fetch(`/api/groups/${groupId}/entergroup`, {
+      if (true) {
+        const response = await fetch(`/api/groups/${groupId}/members`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId }),
+          body: JSON.stringify({ member: "api" }),
         });
 
         if (response.ok) {
