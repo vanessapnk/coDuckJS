@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { User } from "iconsax-react";
+import { User, Location } from "iconsax-react";
 const profileCheck = false;
 
 
@@ -55,7 +55,7 @@ export function CardItem({
           </div>
           <div className="w-3/12 flex items-center gap-2 justify-end content-center flex-row
           dark:text-white  text-base font-semibold ">
-            <User size="16" variant="Bold" />
+            <MapPin size="16" />
             <p>{usersMin} / {usersLimit}  </p>
           </div>
         </div>
@@ -69,7 +69,7 @@ export function CardItem({
         </div>
 
         <div className="flex items-center gap-2">
-          <User size="16" variant="Bold" />
+          <Location size="16" variant="Bold" />
           <p className="text-lg normal-case">{location}</p>
         </div>
         <div>
