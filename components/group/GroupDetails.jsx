@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message } from "iconsax-react";
+import { Message, ProfileAdd } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 
 export default function GroupDetails() {
@@ -12,12 +12,16 @@ export default function GroupDetails() {
   const [group, setGroup] = useState(null);
   const [navBarVisible, setNavBarVisible] = useState(true);
 
-  const { authenticatedUser } = useAuth() || {}; // Set default value as empty object
+  const { authenticatedUser } = useAuth() || {};
+  const userId2 = authenticatedUser ? authenticatedUser.userId : "teste";
 
   useEffect(() => {
     const fetchGroupData = async () => {
       try {
         const res = await fetch(`/api/groups/${groupId}`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch group details");
+        }
         const data = await res.json();
         setGroup(data);
       } catch (error) {
@@ -36,14 +40,13 @@ export default function GroupDetails() {
 
   const handleEnterGroup = async () => {
     try {
-      if (authenticatedUser && authenticatedUser.id) {
-        // Check if authenticatedUser and its id property exist
-        const response = await fetch(`/api/${groupId}/entergroup`, {
+      if (true) {
+        const response = await fetch(`/api/groups/${groupId}/members`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ userId: authenticatedUser.id }),
+          body: JSON.stringify({ member: "api" }),
         });
 
         if (response.ok) {
@@ -53,7 +56,7 @@ export default function GroupDetails() {
           console.error("Failed to enter the group");
         }
       } else {
-        console.error("Authenticated user or user id is missing");
+        console.error("Authenticated user or group id is missing");
       }
     } catch (error) {
       console.error("Error entering group:", error);
@@ -123,7 +126,7 @@ export default function GroupDetails() {
         >
           <div className="flex flex-row  items-center justify-center m-2">
             <div className="mr-2">
-              <Message size="32" color="#D9E3F0" variant="Bold" />
+              <ProfileAdd size="32" color="#d9e3f0" />
             </div>
             Enter Group
           </div>
@@ -147,7 +150,7 @@ export default function GroupDetails() {
                     <img
                       className="w-8 h-8 rounded-full"
                       src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
-                      alt={`${member.name} image`}
+                      alt={`${member} image`}
                     />
                   </div>
                   <div className="flex-1 min-w-0 ms-4">
