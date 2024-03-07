@@ -6,6 +6,8 @@ import { Navbar } from '@/components/custom/navbar';
 import Link from "next/link";
 import { CardItem } from '@/components/custom/cardItem';
 import SheetFilters from '@/components/custom/sheetFilters';
+import { Button } from '@/components/ui/button';
+import { FilterSearch } from 'iconsax-react';
 
 export default function Explore() {
     const [selectedTab, setSelectedTab] = useState('groups');
@@ -91,8 +93,12 @@ export default function Explore() {
                 </TabsList>
                 <TabsContent value="groups">
                     <div className='flex gap-4 py-4'>
-                        <Input type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
-                        <SheetFilters onApplyFilters={handleApplyFilters} />
+                        <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
+                            <SheetFilters onApplyFilters={handleApplyFilters} />
+                        </div>
+                        <div className='w-full'>
+                            <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
+                        </div>
                     </div>
                     <div className="flex flex-col gap-4">
                         {filterGroups.map((group) => (
@@ -120,9 +126,13 @@ export default function Explore() {
                     </div>
                 </TabsContent>
                 <TabsContent value="events">
-                    <div className='flex gap-4 py-4'>
-                        <Input type="search" placeholder="Search events here" onChange={handleSearchInputChange} />
-                        <SheetFilters onApplyFilters={handleApplyFilters} />
+                <div className='flex gap-4 py-4'>
+                        <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
+                            <SheetFilters onApplyFilters={handleApplyFilters} />
+                        </div>
+                        <div className='w-full'>
+                            <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
+                        </div>
                     </div>
                     <div className="flex flex-col gap-4">
                         {filterEvents.length > 0 &&

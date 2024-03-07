@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowDownAZ } from 'lucide-react';
+import { FilterSearch } from 'iconsax-react';
 import {
     Sheet,
     SheetContent,
@@ -87,7 +88,7 @@ export default function SheetFilters({ onApplyFilters }) {
     return (
         <Sheet>
             <SheetTrigger onClick={() => setIsOpen(true)}>
-                <ArrowDownAZ />
+                <FilterSearch variant="Bold" size="18" />
             </SheetTrigger>
             {isOpen && ( // Render the sheet content only when isOpen is true
                 <SheetContent>
