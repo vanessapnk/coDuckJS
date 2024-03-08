@@ -6,7 +6,6 @@ import { NavEditGroup } from "./NavEditGroup";
 import { Message, ProfileAdd, FilterSearch } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 
-
 export default function GroupDetails() {
   const router = useRouter();
   const { groupId } = router.query;
@@ -156,22 +155,24 @@ export default function GroupDetails() {
             {group.members
               .filter((m) => m != null)
               .map((member, index) => (
-                <li key={index} className="py-3 sm:py-4">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src={`https://github.com/${member.githubUsername}.png`}
-                        alt={`${member} image`}
-                      />
+                <Link key={member._id} href={`/profile/${member._id}`}>
+                  <li key={index} className="py-3 sm:py-4">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="w-8 h-8 rounded-full"
+                          src={`https://github.com/${member.githubUsername}.png`}
+                          alt={`${member} image`}
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0 ms-4">
+                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                          {member.name}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0 ms-4">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {member.name}
-                      </p>
-                    </div>
-                  </div>
-                </li>
+                  </li>
+                </Link>
               ))}
           </ul>
         </div>
