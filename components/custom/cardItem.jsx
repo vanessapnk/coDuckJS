@@ -38,6 +38,14 @@ export function CardItem({
     backgroundSize: 'cover',       // Preenchimento total
   };
 
+  const categoryColors = {
+    'Frontend': 'bg-custom-blue',
+    'Backend': 'bg-custom-green',
+    'Data Analysis': 'bg-custom-lilac',
+    'Other': 'bg-custom-green',
+    // Add more categories and colors as needed
+  }
+
   return (
     <Card className="p-3 flex flex-col gap-2 bg-zinc-100 dark:bg-background">
       <div style={backgroundImageStyle} className="rounded-2xl mb-4 h-60">
@@ -62,7 +70,7 @@ export function CardItem({
 
       <div className="flex items-center justify-between">
         <div >
-          <Badge variant="default" className="border-none bg-red-500 dark:bg-red-500">
+        <Badge variant="default" className={`border-none ${categoryColors[category]}`}>
             {category}
           </Badge>
         </div>
