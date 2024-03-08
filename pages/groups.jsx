@@ -52,7 +52,7 @@ export default function Groups() {
   return (
     <div className="pb-12">
       <div className='flex gap-2 justify-between  items-center pb-6'>
-        <h1 className='text-xl '>Explore</h1>
+        <h1 className='text-xl font-medium'>My Groups</h1>
         <Button onClick={() => router.push("/creategroup")}>
           Create Group
         </Button>

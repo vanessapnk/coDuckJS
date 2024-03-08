@@ -9,9 +9,6 @@ export default async function handler(req, res) {
 
     const numberOfGroups = userGroups.length;
 
-    //const responseMessage = `User ${id} has ${numberOfGroups} group(s).`;
-
-    // Return the response
     return res.status(200).json({ userGroups, numberOfGroups });
   } catch (error) {
     console.error('Error fetching user groups:', error);

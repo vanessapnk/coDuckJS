@@ -5,6 +5,7 @@ import { Navbar } from "@/components/custom/navbar";
 import { CardItem } from "@/components/custom/cardItem";
 import { FilterTab } from "@/components/custom/filterTab";
 import { Location } from "iconsax-react";
+import { Button } from "@/components/ui/button";
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -14,9 +15,9 @@ export default function Events() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/events");
+        const res = await fetch("/api/users/65e9aaea7743cf134d7e5a06/myevents");
         const data = await res.json();
-        setEvents(data);
+        setEvents(data.userEvents);
       } catch (error) {
         console.error("Error fetching events:", error);
       }
@@ -33,12 +34,9 @@ export default function Events() {
     <div className="pb-16">
       <div className="flex justify-between items-center gap-6 pb-6">
         <h1 className="text-xl font-medium">My Events</h1>
-        <button
-          onClick={() => router.push("/createevent")}
-          className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-zinc-950 dark:focus-visible:ring-zinc-300 bg-zinc-900 text-zinc-50 hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-10 px-4 py-2 rounded-xl"
-        >
+        <Button onClick={() => router.push("/createevent")}>
           Create Event
-        </button>
+        </Button>
       </div>
       {/*       <FilterTab />
        */}{" "}

@@ -23,7 +23,7 @@ async function getEventById(eventId) {
 
 async function getMyEvents(id){
     const collection = await connectToCollection(collectionName)
-    const myGroups = await collection.find({ members: id }).toArray()
+    const myGroups = await collection.find({ participants: id }).toArray()
     return myGroups
 }
 module.exports = { getEvents, getEventsByName, getEventById, getMyEvents };
