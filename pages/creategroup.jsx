@@ -14,7 +14,7 @@ export default function CreateGroup() {
     modality: "",
     city: "",
     usersLimit: 0,
-    members: [],
+    members: []
   });
 
   const [groupCreated, setGroupCreated] = useState(false); // State to track group creation

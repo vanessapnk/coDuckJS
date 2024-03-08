@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     
     if (req.method === 'PATCH') {
         try {
-            const { name, description, category, modality, city, stackLevel, usersLimit } = req.body;
+            const { name, description, category, modality, city, stackLevel, usersLimit, photo_url } = req.body;
             const collection = await connectToCollection("groupData");
             
             const group = await collection.findOne({ _id: new ObjectId(groupId) });
@@ -22,6 +22,7 @@ export default async function handler(req, res) {
             if (modality !== undefined) updateObject.modality = modality;
             if (city !== undefined) updateObject.city = city;
             if (stackLevel !== undefined) updateObject.stackLevel = stackLevel;
+            if (photo_url !== undefined) updateObject.photo_url = photo_url;
 
             if (usersLimit !== undefined && usersLimit >= currentMembers) {
                 updateObject.usersLimit = usersLimit;
