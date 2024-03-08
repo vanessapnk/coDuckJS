@@ -15,17 +15,20 @@ export default function Profile() {
     console.log("authenticatedUser: " + authenticatedUser)
     const [userData, setUserData] = useState(null);
     const [groupsData, setGroupsData] = useState(null);
+    const [eventsData, setEventsData] = useState(null);
     const fetchUserData = async () => {
         try {
             const userResponse = await fetch(`/api/users/${id}`);
             const groupResponse = await fetch(`/api/users/${id}/mygroups`);
+            const eventResponse = await fetch(`/api/users/${id}/myevents`);
             
-            if (userResponse.ok /*&& groupResponse.ok */) {
+            if (userResponse.ok && groupResponse.ok && eventResponse.ok) {
                 const udata = await userResponse.json();
                 setUserData(udata);
                 const gdata = await groupResponse.json();
                 setGroupsData(gdata.numberOfGroups);
-                console.log("gdata" + gdata.numberOfGroups)
+                const edata = await eventResponse.json();
+                setEventsData(edata.numberOfEvents);
             } else {
                 console.error("Error fetching user or group data:", userResponse.statusText);
             }
@@ -53,7 +56,7 @@ export default function Profile() {
                     job={userData.job}
                     about={userData.about}
                     groups={groupsData}
-                    events={"3"}
+                    events={eventsData}
                     langueges={"3"}
                 />
             )}

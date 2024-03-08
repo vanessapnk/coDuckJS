@@ -1,6 +1,7 @@
 import { connectToCollection } from "@/src/data/mongodb";
 import { getUserById } from "../data/users";
 import { getEventById } from "@/src/data/events";
+import { getMyEvents } from "@/src/data/events";
 
 
 export async function createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, dateString, endDateString) {
@@ -36,6 +37,11 @@ export async function createEvent(name, creatorId, description, category, stacks
         console.error('Error creating event:', error);
         throw new Error('Failed to create event');
     }
+}
+
+export async function loadMyEvents(id){
+    const myEvents = await getMyEvents(id);
+    return myEvents;
 }
 
 export async function loadEventWithMembersById(eventId) {
