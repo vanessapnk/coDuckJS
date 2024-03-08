@@ -131,7 +131,7 @@
     )}
     {step === 7 && (
         <div div className="flex flex-col gap-4">
-            <p>Langueges Spoken / finish</p>
+            <p>Languages Spoken / finish</p>
             <Button type="submit" onClick={() => createEntry()}>Finish</Button>
             <Button onClick={backStep}>Back * </Button>
         </div>

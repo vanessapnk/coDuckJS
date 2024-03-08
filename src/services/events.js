@@ -31,7 +31,7 @@ export async function createEvent(name, creatorId, description, category, stacks
             exactLocation: exactLocation || undefined,
             date: dateString || undefined,
             endDate: endDateString || undefined,
-            photo_url: photo_url || undefined
+            photo_url: photo_url || ""
         });
         return { success: true };
     } catch (error) {

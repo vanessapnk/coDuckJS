@@ -18,7 +18,7 @@ export async function createGroup(name, creatorId, description, category, stacks
             city: city || undefined, // so preenchido no caso de presencial ou flexible
             usersLimit: usersLimit || undefined, // Optional
             members: [creatorId], // Always start with the creator
-            photo_url: photo_url || undefined
+            photo_url: photo_url || ""
         });
         return { success: true };
     } catch (error) {
