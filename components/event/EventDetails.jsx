@@ -4,6 +4,7 @@ import { Navbar } from "../custom/navbar";
 import { NavEditEvent } from "./NavEditEvent";
 import { ProfileAdd } from "iconsax-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 export default function EventDetails() {
   const router = useRouter();
@@ -155,13 +156,18 @@ export default function EventDetails() {
             {participants.map((participant, index) => (
               <li key={index} className="py-3 sm:py-4">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="w-8 h-8 rounded-full"
-                      src={`https://github.com/${participant.githubUsername}.png`}
-                      alt={`${participant.name} image`}
-                    />
-                  </div>
+                  <Link
+                    key={participant._id}
+                    href={`/profile2/${participant._id}`}
+                  >
+                    <div className="flex-shrink-0">
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={`https://github.com/${participant.githubUsername}.png`}
+                        alt={`${participant.name} image`}
+                      />
+                    </div>
+                  </Link>
                   <div className="flex-1 min-w-0 ms-4">
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                       {participant.name}

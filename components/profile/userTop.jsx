@@ -4,13 +4,21 @@ import { Calendar, MapPin } from "lucide-react";
 import { User } from "iconsax-react";
 import { PorfileItemCard } from "../custom/profileItemCard";
 
-export function UserTop({ github, location, name, age, job, about, groups, events, langueges }) {
+export function UserTop({
+  github,
+  location,
+  name,
+  age,
+  job,
+  about,
+  groups,
+  events,
+  languages,
+}) {
   return (
     <div>
       <div className="flex flex-row gap-4 py-6">
         <div>
-
-
           <Avatar className="rounded-2xl h-20 w-20">
             <AvatarImage
               src={`https://github.com/${github}.png`}
@@ -21,29 +29,44 @@ export function UserTop({ github, location, name, age, job, about, groups, event
             </AvatarFallback>
           </Avatar>
         </div>
+        <div></div>
         <div>
-
-        </div>
-        <div>
-          <h1 className="text-xl">{name}, {age}</h1>
+          <h1 className="text-xl">
+            {name}, {age}
+          </h1>
           <p className="text-sm opacity-70">{job}</p>
           <div className="flex gap-2 items-center opacity-70">
             <MapPin size={12} strokeWidth={2} />
-            <h2 className="text-sm">{location}</h2>
+            <h2 className="text-sm">
+              {location}{" "}
+              {github && (
+                <a
+                  href={`https://github.com/${github}`}
+                  className="text-blue-500"
+                >
+                  @{github}
+                </a>
+              )}
+            </h2>
           </div>
-          <p className="text-sm opacity-70">{github ? `@${github}` : ""}</p>
         </div>
       </div>
       <div className="flex flex-col gap-1">
         <p className="text-base font-semibold">Bio</p>
-        <p className="text-sm pb-4">
-          {about}
-        </p>
+        <p className="text-sm pb-4">{about}</p>
       </div>
       <div className="flex gap-4 flex-col">
         <div className="flex gap-4">
-          <PorfileItemCard bg="bg-custom-yellow" value={groups} name={groups === 1 ? "Group" :"Groups"} />
-          <PorfileItemCard bg="bg-custom-lilac" value={events} name={"Events"} />
+          <PorfileItemCard
+            bg="bg-custom-yellow"
+            value={groups}
+            name={groups === 1 ? "Group" : "Groups"}
+          />
+          <PorfileItemCard
+            bg="bg-custom-lilac"
+            value={events}
+            name={"Events"}
+          />
         </div>
         <div className="flex gap-4">
           <PorfileItemCard bg="bg-custom-green" value={"10"} name={"Stacks"} />
