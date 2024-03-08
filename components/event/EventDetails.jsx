@@ -1,16 +1,27 @@
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Navbar } from "../custom/navbar";
 import { NavEditEvent } from "./NavEditEvent";
 import { ProfileAdd } from "iconsax-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
+import { ArrowLeft } from "iconsax-react";
+
+import Image from "next/image"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { Badge } from "../ui/badge";
+import { NavAction } from "../custom/navAction";
+import { NavEvent } from "../custom/navEvent";
+import { useUserAuth } from "@/pages/_app";
+import { Button } from "../ui/button";
 
 export default function EventDetails() {
   const router = useRouter();
   const { eventId } = router.query; // Get the event ID from the URL query params
   const [event, setEvent] = useState(null);
   const [participants, setParticipants] = useState([]);
+  const { user } = useUserAuth((state) => state);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -47,7 +58,7 @@ export default function EventDetails() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ participant: "api" }),
+          body: JSON.stringify({ participant: user.userData._id }),
         });
 
         if (response.ok) {
@@ -78,108 +89,112 @@ export default function EventDetails() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
-      <NavEditEvent backLink={`/events/`} editLink={`/event/edit/${eventId}`} />
-      <div className="bg-white rounded-lg shadow-md mx-auto max-w-md p-4 ">
-        <div className="relative mb-4 lg:mb-6">
-          <div className="absolute inset-0 bg-gray-300 rounded-lg"></div>
-          <img
-            src="https://via.placeholder.com/800x400"
-            alt="Event Cover"
-            className="w-full h-48 lg:h-64 object-cover rounded-lg"
+    <>
+      <div>
+        {/* <NavEditEvent backLink={`/events/`} editLink={`/event/edit/${eventId}`} /> */}
+        <AspectRatio ratio={16 / 12} className="bg-muted mb-7 relative">
+          <Image
+            src={event.photo_url}
+            alt="Photo by Drew Beamer"
+            fill
+            className="object-cover"
           />
-        </div>
-        <h1 className="text-2xl lg:text-3xl font-semibold mb-2 lg:mb-4">
-          {event.name}
-        </h1>
-        <p className="text-gray-600 mb-2 lg:mb-4">{event.description}</p>
-        <div className="flex flex-wrap items-center mb-4">
-          <div className="mr-4">
-            <span className="font-semibold">Category:</span> {event.category}
+          {/* <Link href={"/events"}> */}
+          <div className="absolute top-2 left-2 ">
+            <ArrowLeft
+              size="32"
+              className="dark:text-slate-950"
+              variant="Bold"
+            />
           </div>
-          <div className="mr-4">
-            <span className="font-semibold">Stack Level:</span>{" "}
-            {event.stackLevel}
+          {/* </Link> */}
+        </AspectRatio>
+        <div className="p-4 flex flex-col gap-4">
+          <div className="flex flex-col content-normal justify-between gap-5">
+            <div className="flex gap-2">
+              <Badge variant="outline">{event.category} </Badge>
+              <Badge variant="outline">{event.stackLevel} </Badge>
+              <Badge variant="outline">{event.modality} </Badge>
+              <Badge variant="outline">{event.city} </Badge>
+            </div>
+            <div className="flex items-center justify-between">
+              <h1 className="text-3xl"> {event.name} </h1>
+            </div>
+            <p> {event.description}</p>
+            <div className="flex items-center justify-between">
+              <p>{event.exactLocation}</p>
+              <p>{" "}{new Date(event.date).toLocaleDateString()}</p>
+            </div>
           </div>
-          <div className="mr-4">
-            <span className="font-semibold">Modality:</span> {event.modality}
+
+          <div className="flex flex-col gap-2 ">
+            <h1 className="text-xl">Covered stacks</h1>
+            <div className="flex gap-2">
+              {event.stacks.map((index, item) => (
+                <Badge key={item} variant="profile">
+                  {index}
+                </Badge>
+              ))}
+            </div>
           </div>
-          <div className="mr-4">
-            <span className="font-semibold">City:</span> {event.city}
+
+          {/* <p> {event.exactLocation}</p> */}
+          <div className="flex flex-col gap-2">
+            <h1 className="text-xl">Languages Spoken</h1>
+            <div className="flex gap-2">
+              {event.languagesSpoken.map((index, item) => (
+                <Badge key={item} variant="profile">
+                  {index}
+                </Badge>
+              ))}
+            </div>
           </div>
-          <div className="mr-4">
-            <span className="font-semibold">Date:</span>{" "}
-            {new Date(event.date).toLocaleDateString()}
+
+          <div className="flex items-center justify-between pt-4">
+            <div className="flex gap-2 items-center">
+              <p className="text-lg font-semibold">
+                {event.participants.length}/{event.usersLimit}
+              </p>
+              <p className="text-lg ">Participants</p>
+            </div>
+            {/* <Button>
+              {event.participants &&
+                event.participants.some((e) => e._id === user.userData._id)
+                ? "Leave Event"
+                : "Join Event"}
+            </Button> */}
           </div>
-        </div>
-        <div className="flex items-center">
-          <span className="font-semibold mr-2">Languages Spoken:</span>
-          {/* <ul className="flex">
-            {event.languagesSpoken.map((language, index) => (
-              <li key={index} className="mr-2">
-                {language}
-              </li>
-            ))}
-          </ul> */}
-        </div>
-        <div className="mt-4">
-          <span className="font-semibold">Users Limit:</span> {event.usersLimit}
-        </div>
-        <div className="mt-4">
-          <span className="font-semibold">Exact Location:</span>{" "}
-          {event.exactLocation}
+          <div className="w-full">
+            <div className="flex items-center justify-between flex-wrap mb-4">
+              <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+                Participants
+              </h5>
+            </div>
+
+
+            <div>{event.participants.name}</div>
+
+            <div className=" items-center pr-2 flex-wrap flex gap-2">
+              {participants.map((participant, index) => (
+                <Link href={`/profile/${participant._id}`}>
+                  <Avatar key={index} className="h-10 w-10 ">
+                    <AvatarImage
+                      src={`https://github.com/${participant.githubUsername}.png`}
+                    />
+                    <AvatarFallback>0</AvatarFallback>
+                  </Avatar>
+                </Link>
+              ))}
+            </div>
+
+
+          </div>
+          <NavEvent title={event.participants &&
+            event.participants.some((e) => e._id === user.userData._id)
+            ? "Leave Event"
+            : "Join Event"} />
         </div>
       </div>
-      <div className="flex justify-center mt-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-7 rounded-lg flex items-center"
-          onClick={handleEnterEvent}
-        >
-          <div className="mr-2 mt-2">
-            <ProfileAdd size="32" color="#d9e3f0" />
-          </div>
-          Enter Event
-        </button>
-      </div>
-      <div className="w-full max-w-md pl-4 pt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-8 pb-10">
-        <div className="flex items-center justify-between mb-4">
-          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
-            Participants
-          </h5>
-        </div>
-        <div>{event.participants.name}</div>
-        <div className="flow-root">
-          <ul
-            role="list"
-            className="divide-y divide-gray-200 dark:divide-gray-700"
-          >
-            {participants.map((participant, index) => (
-              <li key={index} className="py-3 sm:py-4">
-                <div className="flex items-center">
-                  <Link
-                    key={participant._id}
-                    href={`/profile2/${participant._id}`}
-                  >
-                    <div className="flex-shrink-0">
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src={`https://github.com/${participant.githubUsername}.png`}
-                        alt={`${participant.name} image`}
-                      />
-                    </div>
-                  </Link>
-                  <div className="flex-1 min-w-0 ms-4">
-                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                      {participant.name}
-                    </p>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <Navbar />
-    </div>
+    </>
   );
 }
