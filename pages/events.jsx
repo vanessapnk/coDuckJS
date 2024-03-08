@@ -9,15 +9,15 @@ import { Button } from "@/components/ui/button";
 import { useUserAuth } from "./_app";
 
 export default function Events() {
-  const { user, login } = useUserAuth((state) => state);
+  const { user } = useUserAuth((state) => state);
   const [events, setEvents] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // State to manage filter options visibility
   const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (id) => {
       try {
-        const res = await fetch(`/api/users/65e9aaea7743cf134d7e5a05/myevents`);
+        const res = await fetch(`/api/users/${id}/myevents`);
         const data = await res.json();
         setEvents(data.userEvents);
       } catch (error) {
@@ -25,7 +25,11 @@ export default function Events() {
       }
     };
 
-    fetchData();
+    if (user && user.userData && user.userData._id) {
+      fetchData(user.userData._id); // Pass the user ID
+    } else {
+      router.push("/login");
+    }
   }, []);
 
   const toggleFilters = () => {
