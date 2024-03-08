@@ -5,12 +5,14 @@ import { NavEditEvent } from "./NavEditEvent";
 import { ProfileAdd } from "iconsax-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
+import { useUserAuth } from "@/pages/_app";
 
 export default function EventDetails() {
   const router = useRouter();
   const { eventId } = router.query; // Get the event ID from the URL query params
   const [event, setEvent] = useState(null);
   const [participants, setParticipants] = useState([]);
+  const { user } = useUserAuth((state) => state);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -47,7 +49,7 @@ export default function EventDetails() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ participant: "api" }),
+          body: JSON.stringify({ participant: user.userData._id }),
         });
 
         if (response.ok) {
@@ -138,7 +140,10 @@ export default function EventDetails() {
           <div className="mr-2 mt-2">
             <ProfileAdd size="32" color="#d9e3f0" />
           </div>
-          Enter Event
+          {event.participants &&
+          event.participants.some((e) => e._id === user.userData._id)
+            ? "Leave Event"
+            : "Join Event"}
         </button>
       </div>
       <div className="w-full max-w-md pl-4 pt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-8 pb-10">
