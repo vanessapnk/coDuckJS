@@ -84,7 +84,7 @@ export default function GroupDetails() {
     <>
       <AspectRatio ratio={16 / 12} className="bg-muted mb-7">
         <Image
-          src={group.img}
+          src={group.photo_url}
           alt="Photo by Drew Beamer"
           fill
           className="object-cover"
