@@ -6,6 +6,7 @@ import { NavEditGroup } from "./NavEditGroup";
 import { Message, ProfileAdd } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 
+
 export default function GroupDetails() {
   const router = useRouter();
   const { groupId } = router.query;

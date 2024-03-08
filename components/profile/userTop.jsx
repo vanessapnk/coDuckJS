@@ -42,11 +42,11 @@ export function UserTop({ github, location, name, age, job, about, groups, event
       </div>
       <div className="flex gap-4 flex-col">
         <div className="flex gap-4">
-          <PorfileItemCard bg="bg-yellow-400" value={"10"} name={"Groups"} />
-          <PorfileItemCard bg="bg-purple-400" value={"8"} name={"Events"} />
+          <PorfileItemCard bg="bg-custom-yellow" value={groups} name={groups === 1 ? "Group" :"Groups"} />
+          <PorfileItemCard bg="bg-custom-lilac" value={"8"} name={"Events"} />
         </div>
         <div className="flex gap-4">
-          <PorfileItemCard bg="bg-green-400" value={"10"} name={"Stacks"} />
+          <PorfileItemCard bg="bg-custom-green" value={"10"} name={"Stacks"} />
         </div>
       </div>
       <div className="flex gap-2 items-center"></div>

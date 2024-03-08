@@ -14,15 +14,20 @@ export default function Profile() {
     const { authenticatedUser } = useAuth();
     console.log("authenticatedUser: " + authenticatedUser)
     const [userData, setUserData] = useState(null);
+    const [groupsData, setGroupsData] = useState(null);
     const fetchUserData = async () => {
         try {
-            const response = await fetch(`/api/users/${id}`);
-            if (response.ok) {
-                const data = await response.json();
-                setUserData(data);
-                console.log("data" + data.Name)
+            const userResponse = await fetch(`/api/users/${id}`);
+            const groupResponse = await fetch(`/api/users/${id}/mygroups`);
+            
+            if (userResponse.ok /*&& groupResponse.ok */) {
+                const udata = await userResponse.json();
+                setUserData(udata);
+                const gdata = await groupResponse.json();
+                setGroupsData(gdata.numberOfGroups);
+                console.log("gdata" + gdata.numberOfGroups)
             } else {
-                console.error("Error fetching user data:", response.statusText);
+                console.error("Error fetching user or group data:", userResponse.statusText);
             }
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -47,7 +52,7 @@ export default function Profile() {
                     age={userData.age}
                     job={userData.job}
                     about={userData.about}
-                    groups={"5"}
+                    groups={groupsData}
                     events={"3"}
                     langueges={"3"}
                 />
