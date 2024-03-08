@@ -11,7 +11,11 @@ export default async function handler(req, res) {
     const creatorId = /* userId || */ creator;
 
     try {
-        await createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, date, endDate);
+        // Convert date strings to Date objects
+        const startDateObj = new Date(date);
+        const endDateObj = new Date(endDate);
+
+        await createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, startDateObj, endDateObj);
         return res.status(201).json({ message: 'Event created successfully' });
     } catch (error) {
         console.error('Error creating group:', error);

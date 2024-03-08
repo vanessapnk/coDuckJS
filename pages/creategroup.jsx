@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ArrowCircleLeft } from "iconsax-react";
+import { useUserAuth } from "./_app";
 
 export default function CreateGroup() {
+  const { user } = useUserAuth((state) => state);
+
   const [groupData, setGroupData] = useState({
     name: "",
     creator: "",
@@ -14,11 +17,20 @@ export default function CreateGroup() {
     modality: "",
     city: "",
     usersLimit: 0,
-    members: []
+    members: [],
   });
 
   const [groupCreated, setGroupCreated] = useState(false); // State to track group creation
   const router = useRouter();
+
+  useEffect(() => {
+    if (user && user.userData && user.userData._id) {
+      setGroupData((prevData) => ({
+        ...prevData,
+        creator: user.userData._id,
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

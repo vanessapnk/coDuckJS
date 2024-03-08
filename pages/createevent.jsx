@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useUserAuth } from "./_app";
 
 export default function CreateEvent() {
+  const { user } = useUserAuth((state) => state);
+
   const [eventData, setEventData] = useState({
     name: "",
-    creator: "",
+    creator: user && user.userData ? user.userData._id : "", // Initialize with user ID if available
     description: "",
     category: "",
     stacks: [],
@@ -13,7 +16,7 @@ export default function CreateEvent() {
     modality: "",
     city: "",
     usersLimit: 0,
-    members: [],
+    members: [], // Include members field
     exactLocation: "",
     date: "",
     endDate: "",
@@ -45,12 +48,19 @@ export default function CreateEvent() {
     e.preventDefault();
 
     try {
+      // Convert date strings to Date objects
+      const formattedEventData = {
+        ...eventData,
+        date: new Date(eventData.date),
+        endDate: new Date(eventData.endDate),
+      };
+
       const response = await fetch("/api/events/createEvent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(eventData),
+        body: JSON.stringify(formattedEventData),
       });
 
       if (!response.ok) {
