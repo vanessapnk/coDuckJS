@@ -50,14 +50,13 @@ export default function Login() {
     <>
       <div className="flex items-center flex-col gap-4 justify-center h-dvh">
         <div className="container flex flex-col gap-6">
-          <div className="flex items-center justify-center">
-            {/* <Image
-              className="p-2 bg-zinc-700 rounded-2xl"
-              src="/images/Saly-38.png"
+          <div className="flex items-center justify-center py-20">
+            <Image
+              src="/images/coduck2.png"
               alt="Descrição da imagem"
-              width={200}
-              height={200}
-            /> */}
+              width={300}
+              height={300}
+            />
           </div>
           <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
             Be part of the <span className="text-yellow-400">community </span>of
