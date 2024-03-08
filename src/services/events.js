@@ -4,7 +4,7 @@ import { getEventById } from "@/src/data/events";
 import { getMyEvents } from "@/src/data/events";
 
 
-export async function createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, dateString, endDateString) {
+export async function createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, dateString, endDateString, photo_url) {
     try {
         const collection = await connectToCollection("eventData");
 
@@ -30,7 +30,8 @@ export async function createEvent(name, creatorId, description, category, stacks
             participants: [creatorId],
             exactLocation: exactLocation || undefined,
             date: dateString || undefined,
-            endDate: endDateString || undefined
+            endDate: endDateString || undefined,
+            photo_url: photo_url || undefined
         });
         return { success: true };
     } catch (error) {

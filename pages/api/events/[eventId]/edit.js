@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'PATCH') {
         try {
-            const { name, description, category, stackLevel, modality, city, usersLimit, exactLocation, date, endDate } = req.body;
+            const { name, description, category, stackLevel, modality, city, usersLimit, exactLocation, date, endDate, photo_url } = req.body;
             const collection = await connectToCollection("eventData");
 
             const event = await collection.findOne({ _id: new ObjectId(eventId) });
@@ -25,6 +25,7 @@ export default async function handler(req, res) {
             if (exactLocation !== undefined) updateObject.exactLocation = exactLocation;
             if (date !== undefined) updateObject.date = date;
             if (endDate !== undefined) updateObject.endDate = endDate;
+            if (photo_url !== undefined) updateObject.photo_url = photo_url;
             if (usersLimit !== undefined && usersLimit >= currentParticipants) {
                 updateObject.usersLimit = usersLimit;
             } else if (usersLimit !== undefined && usersLimit < currentParticipants) {

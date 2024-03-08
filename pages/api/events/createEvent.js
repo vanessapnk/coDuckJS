@@ -5,17 +5,13 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const { name, creator, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, date, endDate } = req.body;
+    const { name, creator, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, date, endDate, photo_url } = req.body;
 
     // Use the provided user ID if it's provided, or null otherwise
     const creatorId = /* userId || */ creator;
 
     try {
-        // Convert date strings to Date objects
-        const startDateObj = new Date(date);
-        const endDateObj = new Date(endDate);
-
-        await createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, startDateObj, endDateObj);
+        await createEvent(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, exactLocation, date, endDate, photo_url);
         return res.status(201).json({ message: 'Event created successfully' });
     } catch (error) {
         console.error('Error creating group:', error);

@@ -19,7 +19,7 @@ export default function CreateEvent() {
     members: [], // Include members field
     exactLocation: "",
     date: "",
-    endDate: "",
+    endDate: ""
   });
 
   const [eventCreated, setEventCreated] = useState(false); // State to track event creation

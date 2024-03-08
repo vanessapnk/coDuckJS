@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message, ProfileAdd, FilterSearch } from "iconsax-react";
+import { Message, ProfileAdd, FilterSearch, ArrowLeft } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -72,6 +72,7 @@ export default function GroupDetails() {
   if (!group) {
     return (
       <div className="flex justify-center items-center h-screen ">
+
         <img
           src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/f9aea342094811.57c019c4f089a.gif"
           alt="Loading"
@@ -82,14 +83,20 @@ export default function GroupDetails() {
 
   return (
     <>
-      <AspectRatio ratio={16 / 12} className="bg-muted mb-7">
+      <AspectRatio ratio={16 / 12} className="bg-muted mb-7 relative">
         <Image
           src={group.photo_url}
           alt="Photo by Drew Beamer"
           fill
           className="object-cover"
         />
+        <Link href={"/groups"}>
+          <div className="absolute top-2 left-2 ">
+            <ArrowLeft size="32" className="dark:text-slate-950" variant="Bold" />
+          </div>
+        </Link>
       </AspectRatio>
+
       <div className="px-4 flex flex-col gap-4">
         <div className="flex flex-col content-normal justify-between gap-5">
           <div className="flex gap-2">
