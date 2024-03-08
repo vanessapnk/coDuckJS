@@ -42,7 +42,7 @@ export function CardItem({
     'Frontend': 'bg-custom-blue',
     'Backend': 'bg-custom-green',
     'Data Analysis': 'bg-custom-lilac',
-    'Other': 'bg-custom-green',
+    'Other': 'bg-custom-orange',
     // Add more categories and colors as needed
   }
 
