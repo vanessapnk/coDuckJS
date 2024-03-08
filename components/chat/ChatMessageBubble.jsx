@@ -2,7 +2,15 @@ import React, { useState } from "react";
 
 const ChatMessageBubble = ({ chat }) => {
   // State to track the current user
-  const [currentUser, setCurrentUser] = useState("hxyu3n");
+  const [currentUser, setCurrentUser] = useState("65e9aaea7743cf134d7e5a07");
+
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp);
+    const day = date.toLocaleDateString(undefined, { weekday: "short" }); // Get short weekday name
+    const hour = date.getHours().toString().padStart(2, "0");
+    const minute = date.getMinutes().toString().padStart(2, "0");
+    return `${day}, ${hour}:${minute}`;
+  };
 
   return (
     <ul className="space-y-5">
@@ -13,11 +21,11 @@ const ChatMessageBubble = ({ chat }) => {
 
           // Apply different CSS classes based on whether the message is from the current user or not
           const bubbleClass = isCurrentUser
-            ? "flex justify-end"
+            ? "flex justify-end bg-"
             : "flex justify-start";
 
           const bubbleContentClass = isCurrentUser
-            ? "bg-blue-600 text-white"
+            ? "bg-custom-blue text-white"
             : "bg-gray-200 text-black";
 
           return (
@@ -27,13 +35,22 @@ const ChatMessageBubble = ({ chat }) => {
                   className={`inline-block rounded-lg p-4 shadow-sm ${bubbleContentClass}`}
                 >
                   <p className="text-sm">{message.content}</p>
+                  <p className="text-xs text-gray-500">
+                    {formatTime(message.timestamp)}
+                  </p>
                 </div>
               </div>
             </li>
           );
         })
       ) : (
-        <p>No chat messages found</p>
+        <div className="flex justify-center items-center h-screen ">
+          <p>No chat messages found</p>
+          <img
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/9beea042094811.57c019c567886.gif"
+            alt="Loading"
+          />
+        </div>
       )}
     </ul>
   );

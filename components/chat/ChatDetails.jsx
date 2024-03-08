@@ -176,7 +176,7 @@ export default function ChatDetails() {
                     )}
                   </div>
                 </section>
-                <div className="pt-8">
+                <div className="pt-8 mb-24 pb-6">
                   <ChatMessageBubble chat={chat} />
                 </div>
               </>
@@ -184,15 +184,20 @@ export default function ChatDetails() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 w-full bg-gray-100 p-5 flex items-center">
+      <div className="fixed bottom-0 w-full bg-gray-100 p-5  flex items-center">
         <Textarea
           id="messageTextarea"
           className="mr-2 flex-grow"
           value={messageContent}
           onChange={(e) => setMessageContent(e.target.value)}
         />
-        <button className="px-2 py-2 text-white rounded" onClick={sendMessage}>
-          <Send2 size="32" color="#2ccce4" variant="Bold" />
+        <button
+          className="px-2 py-2 mr-2 text-white rounded"
+          onClick={sendMessage}
+        >
+          <div className="mr-2">
+            <Send2 size="32" color="#2ccce4" variant="Bold" />
+          </div>
         </button>
       </div>
     </div>

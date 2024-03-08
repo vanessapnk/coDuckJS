@@ -9,6 +9,7 @@ export default function EventDetails() {
   const router = useRouter();
   const { eventId } = router.query; // Get the event ID from the URL query params
   const [event, setEvent] = useState(null);
+  const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -16,6 +17,17 @@ export default function EventDetails() {
         const res = await fetch(`/api/events/${eventId}`); // Use the dynamic event ID from the URL
         const data = await res.json();
         setEvent(data);
+        // Assuming the event object contains participant IDs
+        if (data && data.participants) {
+          // Fetch participant details based on participant IDs
+          const participantDetails = await Promise.all(
+            data.participants.map(async (participantId) => {
+              const participantRes = await fetch(`/api/users/${participantId}`); // Adjust the API endpoint as needed
+              return participantRes.json();
+            })
+          );
+          setParticipants(participantDetails);
+        }
       } catch (error) {
         console.error("Error fetching event details:", error);
       }
@@ -140,26 +152,24 @@ export default function EventDetails() {
             role="list"
             className="divide-y divide-gray-200 dark:divide-gray-700"
           >
-            {event.participants
-              .filter((m) => m != null)
-              .map((participant, index) => (
-                <li key={index} className="py-3 sm:py-4">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
-                        alt={`${participant} image`}
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0 ms-4">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {participant}
-                      </p>
-                    </div>
+            {participants.map((participant, index) => (
+              <li key={index} className="py-3 sm:py-4">
+                <div className="flex items-center">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="w-8 h-8 rounded-full"
+                      src={`https://github.com/${participant.githubUsername}.png`}
+                      alt={`${participant.name} image`}
+                    />
                   </div>
-                </li>
-              ))}
+                  <div className="flex-1 min-w-0 ms-4">
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                      {participant.name}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
