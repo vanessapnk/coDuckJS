@@ -155,7 +155,7 @@ export default function GroupDetails() {
             {group.members
               .filter((m) => m != null)
               .map((member, index) => (
-                <Link key={member._id} href={`/profile/${member._id}`}>
+                <Link key={member._id} href={`/profile2/${member._id}`}>
                   <li key={index} className="py-3 sm:py-4">
                     <div className="flex items-center">
                       <div className="flex-shrink-0">
