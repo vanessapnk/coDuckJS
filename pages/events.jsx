@@ -6,8 +6,10 @@ import { CardItem } from "@/components/custom/cardItem";
 import { FilterTab } from "@/components/custom/filterTab";
 import { Location } from "iconsax-react";
 import { Button } from "@/components/ui/button";
+import { useUserAuth } from "./_app";
 
 export default function Events() {
+  const { user, login } = useUserAuth((state) => state);
   const [events, setEvents] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // State to manage filter options visibility
   const router = useRouter();
@@ -15,7 +17,7 @@ export default function Events() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/users/65e9aaea7743cf134d7e5a06/myevents");
+        const res = await fetch(`/api/users/65e9aaea7743cf134d7e5a05/myevents`);
         const data = await res.json();
         setEvents(data.userEvents);
       } catch (error) {

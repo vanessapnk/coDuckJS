@@ -15,11 +15,17 @@ export function Navbar({
   eventsActive,
 }) {
   const { user, login } = useUserAuth((state) => state);
+  console.log(user);
+
+  if (Object.keys(user).length === 0) {
+    return <div>LOADING PROFILE</div>;
+  }
+
   return (
     <div className="p-4">
       <div className="bg-zinc-100 dark:bg-zinc-900 p-2 text-center rounded-3xl fixed bottom-4 left-4 right-4 ">
         <div className="h-full  flex gap-2 items-center justify-evenly align-center">
-          <Link href={`/profile/${user.userId}`}>
+          <Link href={`/profile/${user.userData._id}`}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <User
                 className={`${
