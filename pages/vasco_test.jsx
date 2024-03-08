@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ChatCard from "@/components/chat/ChatCard";
 import ChatMessageBubble from "@/components/chat/ChatMessageBubble";
@@ -87,3 +87,4 @@ export default function Chat_Test() {
     </div>
   );
 }
+ */

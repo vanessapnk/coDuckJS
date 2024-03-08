@@ -3,7 +3,7 @@ import { getGroupById } from "@/src/data/groups";
 import { getMyGroups } from "@/src/data/groups";
 import { getUserById } from "../data/users";
 
-export async function createGroup(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit) {
+export async function createGroup(name, creatorId, description, category, stacks, stackLevel, languagesSpoken, modality, city, usersLimit, photo_url) {
     try {
         const collection = await connectToCollection("groupData");
         await collection.insertOne({
@@ -17,7 +17,8 @@ export async function createGroup(name, creatorId, description, category, stacks
             modality: modality || "", // [remote, presential or flexible]
             city: city || undefined, // so preenchido no caso de presencial ou flexible
             usersLimit: usersLimit || undefined, // Optional
-            members: [creatorId] // Always start with the creator
+            members: [creatorId], // Always start with the creator
+            photo_url: photo_url || undefined
         });
         return { success: true };
     } catch (error) {
