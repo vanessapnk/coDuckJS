@@ -5,10 +5,10 @@ import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
 import { Message, ProfileAdd, FilterSearch, ArrowLeft } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
-import Image from "next/image"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "../ui/badge";
 import { NavAction } from "../custom/navAction";
 
@@ -72,7 +72,6 @@ export default function GroupDetails() {
   if (!group) {
     return (
       <div className="flex justify-center items-center h-screen ">
-
         <img
           src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/f9aea342094811.57c019c4f089a.gif"
           alt="Loading"
@@ -92,7 +91,11 @@ export default function GroupDetails() {
         />
         <Link href={"/groups"}>
           <div className="absolute top-2 left-2 ">
-            <ArrowLeft size="32" className="dark:text-slate-950" variant="Bold" />
+            <ArrowLeft
+              size="32"
+              className="dark:text-slate-950"
+              variant="Bold"
+            />
           </div>
         </Link>
       </AspectRatio>
@@ -104,11 +107,9 @@ export default function GroupDetails() {
             <Badge variant="outline">{group.stackLevel} </Badge>
             <Badge variant="outline">{group.modality} </Badge>
           </div>
-          <div>
-
-          </div>
+          <div></div>
           <h1 className="text-3xl"> {group.name} </h1>
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit reiciendis consequatur debitis maxime perferendis, eligendi cumque? Placeat vel recusandae totam eligendi, aliquid repellat quasi, excepturi unde expedita est numquam consequuntur.</p>
+          <p> {group.description}</p>
         </div>
         <div className="flex flex-col gap-4">
           <h1 className="text-xl">Covered stacks</h1>
@@ -136,9 +137,7 @@ export default function GroupDetails() {
             <p className="text-lg font-semibold">
               {group.members.length}/{group.usersLimit}
             </p>
-            <p className="text-lg ">
-              Participants
-            </p>
+            <p className="text-lg ">Participants</p>
           </div>
         </div>
         <div className=" items-center pr-2 pt-4  flex gap-1">
@@ -147,10 +146,10 @@ export default function GroupDetails() {
             .map((member, index) => (
               <Link key={member._id} href={`/profile2/${member._id}`}>
                 <Avatar className="h-10 w-10 ">
-                  <AvatarImage src={`https://github.com/${member.githubUsername}.png`} />
-                  <AvatarFallback>
-                    
-                  </AvatarFallback>
+                  <AvatarImage
+                    src={`https://github.com/${member.githubUsername}.png`}
+                  />
+                  <AvatarFallback></AvatarFallback>
                 </Avatar>
               </Link>
             ))}

@@ -5,7 +5,7 @@ const ChatMessageBubble = ({ chat }) => {
   // State to track the current user
   const { user, login } = useUserAuth((state) => state);
 
-  const [currentUser, setCurrentUser] = useState(user.userData.id);
+  const [currentUser, setCurrentUser] = useState(user.userData._id);
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
