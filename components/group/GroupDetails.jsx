@@ -156,7 +156,7 @@ export default function GroupDetails() {
         </div>
       </div>
 
-      <NavAction title="Join on Group" url={`/chat/${groupId}`} />
+      <NavAction title="Join on Group" onClick={handleEnterGroup} url={`/chat/${groupId}`} />
     </>
   );
 }
