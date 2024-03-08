@@ -111,10 +111,9 @@ export default function CreateEvent() {
             <option value="" disabled hidden>
               Select Modality
             </option>
-            <option value="presential">Presential</option>
-            <option value="hybrid">Hybrid</option>
-            <option value="online">Online</option>
-            <option value="Other">Other</option>
+            <option value="Flexible">Presential</option>
+            <option value="Online">Hybrid</option>
+            <option value="Presential">Online</option>
           </select>
         </div>
         <label className="flex flex-col space-y-2">
@@ -245,10 +244,10 @@ const languageList = [
   "English",
   "Mandarin",
   "Spanish",
-  "Hindi",
   "Arabic",
   "Portuguese",
-  "French",
   "German",
+  "Russian",
+  "French",
   "Other",
 ];
