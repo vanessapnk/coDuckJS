@@ -20,7 +20,7 @@ export function NavAction({ title, url, onClick }) {
 
 
           <Link href={url}>
-            <Button handdle={handdle} className="text-slate-800 w-full">
+            <Button className="text-slate-800 w-full">
               <div className="flex items-center justify-center gap-2">
                 Chat
                 <Message2 size="16" variant="Bold" />
