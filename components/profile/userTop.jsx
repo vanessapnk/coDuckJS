@@ -14,6 +14,7 @@ export function UserTop({
   groups,
   events,
   languages,
+  stacks,
 }) {
   return (
     <div>
@@ -38,7 +39,8 @@ export function UserTop({
           <div className="flex gap-2 items-center opacity-70">
             <MapPin size={12} strokeWidth={2} />
             <h2 className="text-sm">
-              {location}{" "}
+              {location}
+              {"   "}
               {github && (
                 <a
                   href={`https://github.com/${github}`}
@@ -51,10 +53,24 @@ export function UserTop({
           </div>
         </div>
       </div>
+
       <div className="flex flex-col gap-1">
-        <p className="text-base font-semibold">Bio</p>
-        <p className="text-sm pb-4">{about}</p>
+        <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r to-custom-green from-custom-yellow">
+            User Bio
+          </span>
+          {/*  Scalable AI. */}
+          <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+            {about}
+          </p>
+        </h1>
       </div>
+      {
+        <div className="flex flex-col gap-1">
+          <p className="text-base font-semibold">Bio</p>
+          <p className="text-sm pb-4">{about}</p>
+        </div>
+      }
       <div className="flex gap-4 flex-col">
         <div className="flex gap-4">
           <PorfileItemCard
@@ -69,7 +85,11 @@ export function UserTop({
           />
         </div>
         <div className="flex gap-4">
-          <PorfileItemCard bg="bg-custom-green" value={"10"} name={"Stacks"} />
+          <PorfileItemCard
+            bg="bg-custom-green"
+            value={stacks.length}
+            name={"Stacks"}
+          />
         </div>
       </div>
       <div className="flex gap-2 items-center"></div>

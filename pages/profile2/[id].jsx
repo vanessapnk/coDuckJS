@@ -60,6 +60,7 @@ export default function Profile2() {
           groups={groupsData}
           events={eventsData}
           langueges={"3"}
+          stacks={userData.stacks}
         />
       )}
       {userData && (
