@@ -5,12 +5,18 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "./context/authContext";
 import { useAuth } from "@/context/authContext";
 import { useEffect } from "react";
+import { create } from "zustand";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
 })
 
+export const useUserAuth = create((set) => ({
+  user: {},
+  login: (user) => set((state) => ({ user: user })),
+  logout: () => set({ user: {} }),
+}))
 
 export default function App({ Component, pageProps }) {
   return (

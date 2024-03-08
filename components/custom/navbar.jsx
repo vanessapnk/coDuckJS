@@ -1,3 +1,4 @@
+import { useUserAuth } from "@/pages/_app";
 import {
   User,
   SearchNormal1,
@@ -13,21 +14,24 @@ export function Navbar({
   groupsActive,
   eventsActive,
 }) {
+  const { user, login } = useUserAuth((state) => state);
   return (
     <div className="p-4">
       <div className="bg-zinc-100 dark:bg-zinc-900 p-2 text-center rounded-3xl fixed bottom-4 left-4 right-4 ">
         <div className="h-full  flex gap-2 items-center justify-evenly align-center">
-          <Link href={"/profile"}>
+          <Link href={`/profile/${user.userId}`}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <User
-                className={`${profileActive ? "text-blue-400" : "text-white-400"
-                  }`}
+                className={`${
+                  profileActive ? "text-blue-400" : "text-white-400"
+                }`}
                 size="24"
                 variant={profileActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${profileActive ? "text-blue-400" : "text-white-400"
-                  }`}
+                className={`${
+                  profileActive ? "text-blue-400" : "text-white-400"
+                }`}
               >
                 Profile
               </p>
@@ -37,12 +41,16 @@ export function Navbar({
           <Link href={"/explore"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <SearchNormal1
-                className={`${exploreActive ? "text-blue-400" : "text-white-400"}`}
+                className={`${
+                  exploreActive ? "text-blue-400" : "text-white-400"
+                }`}
                 size="24"
                 variant={exploreActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${exploreActive ? "text-blue-400" : "text-white-400"}`}
+                className={`${
+                  exploreActive ? "text-blue-400" : "text-white-400"
+                }`}
               >
                 Explore
               </p>
@@ -52,14 +60,16 @@ export function Navbar({
           <Link href={"/groups"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <People
-                className={`${groupsActive ? "text-blue-400" : "text-white-400"
-                  }`}
+                className={`${
+                  groupsActive ? "text-blue-400" : "text-white-400"
+                }`}
                 size="24"
                 variant={groupsActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${groupsActive ? "text-blue-400" : "text-white-400"
-                  }`}
+                className={`${
+                  groupsActive ? "text-blue-400" : "text-white-400"
+                }`}
               >
                 Groups
               </p>
@@ -69,14 +79,16 @@ export function Navbar({
           <Link href={"/events"}>
             <div className="flex items-center flex-col justify-center cursor-pointer">
               <Calendar2
-                className={`${eventsActive ? "text-blue-400" : "text-white-400"
-                  }`}
+                className={`${
+                  eventsActive ? "text-blue-400" : "text-white-400"
+                }`}
                 size="24"
                 variant={eventsActive ? "Bulk" : "Outline"}
               />
               <p
-                className={`${eventsActive ? "text-blue-400" : "text-white-400"
-                  }`}
+                className={`${
+                  eventsActive ? "text-blue-400" : "text-white-400"
+                }`}
               >
                 Events
               </p>

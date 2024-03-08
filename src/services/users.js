@@ -55,7 +55,8 @@ async function loginHandler(req, res) {
         return res.status(200).json(
             {
                 message: 'Authentication successful',
-                id: existingUser._id
+                id: existingUser._id,
+                user: existingUser
             });
 
     } catch (error) {
@@ -64,7 +65,7 @@ async function loginHandler(req, res) {
     }
 }
 
-async function loadMyGroups(req, res){
+async function loadMyGroups(req, res) {
     const myGroups = await getMyGroups
 }
 

@@ -6,8 +6,10 @@ import { Navbar } from "../custom/navbar";
 import Link from "next/link";
 import { Back, Send2 } from "iconsax-react";
 import { Card } from "../ui/card";
+import { useUserAuth } from "@/pages/_app";
 
 export default function ChatDetails() {
+  const { user } = useUserAuth((state) => state);
   const [chat, setChat] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,7 +51,7 @@ export default function ChatDetails() {
   const sendMessage = async () => {
     try {
       const senderId = "hxyu3n";
-
+      console.log(user);
       const res = await fetch("/api/chat/sendmsg", {
         method: "POST",
         headers: {

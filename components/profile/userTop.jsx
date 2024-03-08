@@ -86,11 +86,11 @@ export function UserTop({
           />
         </div>
         <div className="flex gap-4">
-          <PorfileItemCard
+          {/* <PorfileItemCard
             bg="bg-custom-green"
             value={stacks.length}
             name={"Stacks"}
-          />
+          /> */}
         </div>
       </div>
       <div className="flex gap-2 items-center"></div>
