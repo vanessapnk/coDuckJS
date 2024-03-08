@@ -34,9 +34,9 @@ export default function Groups() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/groups");
+        const res = await fetch("/api/users/65e9aaea7743cf134d7e5a06/mygroups"); //aqui vai o [id]
         const data = await res.json();
-        setGroups(data);
+        setGroups(data.userGroups); // Set groups to data.userGroups
       } catch (error) {
         console.error("Error fetching groups:", error);
       }
