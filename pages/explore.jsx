@@ -100,33 +100,37 @@ export default function Explore() {
                             <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4">
-                        {filterGroups.map((group) => (
-                            <Link key={group._id} href={`/groups/${group._id}`}>
-                                <CardItem
-                                    members={group.members}
-                                    usersMin={group.members.length}
-                                    usersLimit={group.usersLimit}
-                                    category={group.category}
-                                    profileCheck={true}
-                                    location={group.city}
-                                    modality={group.modality}
-                                    languege={group.languagesSpoken[0]}
-                                    profileImage={
-                                        group.photo_url ||
-                                        "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    }
-                                    title={group.name}
-                                    description={group.description}
-                                    likes={group.likes}
-                                    stacks={group.stacks}
-                                />
-                            </Link>
-                        ))}
-                    </div>
+                    {filterGroups.length > 0 ? (
+                        <div className="flex flex-col gap-4">
+                            {filterGroups.map((group) => (
+                                <Link key={group._id} href={`/groups/${group._id}`}>
+                                    <CardItem
+                                        members={group.members}
+                                        usersMin={group.members.length}
+                                        usersLimit={group.usersLimit}
+                                        category={group.category}
+                                        profileCheck={true}
+                                        location={group.city}
+                                        modality={group.modality}
+                                        languege={group.languagesSpoken[0]}
+                                        profileImage={
+                                            group.photo_url ||
+                                            "https://images.pexels.com/photos/3471028/pexels-photo-3471028.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                        }
+                                        title={group.name}
+                                        description={group.description}
+                                        likes={group.likes}
+                                        stacks={group.stacks}
+                                    />
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-center text-gray-500">No groups found.</p>
+                    )}
                 </TabsContent>
                 <TabsContent value="events">
-                <div className='flex gap-4 py-4'>
+                    <div className='flex gap-4 py-4'>
                         <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
                             <SheetFilters onApplyFilters={handleApplyFilters} />
                         </div>
@@ -134,9 +138,9 @@ export default function Explore() {
                             <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-4">
-                        {filterEvents.length > 0 &&
-                            filterEvents.map((event) => (
+                    {filterEvents.length > 0 ? (
+                        <div className="flex flex-col gap-4">
+                            {filterEvents.map((event) => (
                                 <Link key={event._id} href={`/events/${event._id}`}>
                                     <CardItem
                                         members={event.participants}
@@ -157,7 +161,10 @@ export default function Explore() {
                                     />
                                 </Link>
                             ))}
-                    </div>
+                        </div>
+                    ) : (
+                        <p className="text-center text-gray-500">No events found.</p>
+                    )}
                 </TabsContent>
             </Tabs>
 
