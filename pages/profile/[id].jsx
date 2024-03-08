@@ -66,7 +66,7 @@ export default function Profile() {
       )}
       {user.userData && (
         <>
-          {JSON.stringify(user.userData)}
+          {/*  {JSON.stringify(user.userData)} */}
           <UserBody
             stacks={user.userData.stacks}
             hobbies={user.userData.hobbies}
