@@ -28,7 +28,7 @@ export default function Events() {
     if (user && user.userData && user.userData._id) {
       fetchData(user.userData._id); // Pass the user ID
     } else {
-      router.push("/login");
+      // router.push("/login");
     }
   }, []);
 

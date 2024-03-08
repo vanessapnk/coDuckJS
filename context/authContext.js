@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         if (storedUser) {
             setAuthenticatedUser(JSON.parse(storedUser));
         } else {
-            router.push("/login")
+            // router.push("/login")
         }
     }, []);
 
