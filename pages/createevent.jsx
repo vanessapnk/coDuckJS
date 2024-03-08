@@ -16,7 +16,7 @@ export default function CreateEvent() {
     members: [],
     exactLocation: "",
     date: "",
-    endDate: "",
+    endDate: ""
   });
 
   const [eventCreated, setEventCreated] = useState(false); // State to track event creation
