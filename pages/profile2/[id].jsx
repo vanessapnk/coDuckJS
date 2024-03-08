@@ -47,7 +47,7 @@ export default function Profile2() {
 
   return (
     <div className="px-4 flex flex-col gap-2">
-      <NavInternal2 backLink={"/"} editLink={"/"} />
+      <NavInternal2 backLink={"/explore"} editLink={"/"} />
       {userData && (
         <UserTop
           userId={userData.id}
