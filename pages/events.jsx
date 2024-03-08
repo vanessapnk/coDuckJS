@@ -37,7 +37,7 @@ export default function Events() {
   };
 
   return (
-    <div className="pb-16">
+    <div className="pb-16 p-4">
       <div className="flex justify-between items-center gap-6 pb-6">
         <h1 className="text-xl font-medium">My Events</h1>
         <Button onClick={() => router.push("/createevent")}>
