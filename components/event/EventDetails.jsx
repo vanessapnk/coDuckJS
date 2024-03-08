@@ -157,12 +157,12 @@ export default function EventDetails() {
               </p>
               <p className="text-lg ">Participants</p>
             </div>
-            <Button>
+            {/* <Button>
               {event.participants &&
                 event.participants.some((e) => e._id === user.userData._id)
                 ? "Leave Event"
                 : "Join Event"}
-            </Button>
+            </Button> */}
           </div>
           <div className="w-full">
             <div className="flex items-center justify-between flex-wrap mb-4">
@@ -189,7 +189,10 @@ export default function EventDetails() {
 
 
           </div>
-          <NavEvent title="Join on Event" onClick={handleEnterEvent} />
+          <NavEvent title={event.participants &&
+            event.participants.some((e) => e._id === user.userData._id)
+            ? "Leave Event"
+            : "Join Event"} />
         </div>
       </div>
     </>
