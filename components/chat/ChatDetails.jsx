@@ -50,7 +50,7 @@ export default function ChatDetails() {
 
   const sendMessage = async () => {
     try {
-      const senderId = "hxyu3n";
+      const senderId = user.userData.id;
       console.log(user);
       const res = await fetch("/api/chat/sendmsg", {
         method: "POST",

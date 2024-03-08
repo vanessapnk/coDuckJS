@@ -17,35 +17,36 @@ export default function Profile() {
   const { user, login } = useUserAuth((state) => state);
   const [groupsData, setGroupsData] = useState(null);
   const [eventsData, setEventsData] = useState(null);
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const userResponse = await fetch(`/api/users/${id}`);
-  //       const groupResponse = await fetch(`/api/users/${id}/mygroups`);
-  //       const eventResponse = await fetch(`/api/users/${id}/myevents`);
 
-  //       if (userResponse.ok && groupResponse.ok && eventResponse.ok) {
-  //         const udata = await userResponse.json();
-  //         setUserData(udata);
-  //         const gdata = await groupResponse.json();
-  //         setGroupsData(gdata.numberOfGroups);
-  //         const edata = await eventResponse.json();
-  //         setEventsData(edata.numberOfEvents);
-  //       } else {
-  //         console.error(
-  //           "Error fetching user or group data:",
-  //           userResponse.statusText
-  //         );
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     }
-  //   };
+  const fetchUserData = async () => {
+    try {
+      const userResponse = await fetch(`/api/users/${id}`);
+      const groupResponse = await fetch(`/api/users/${id}/mygroups`);
+      const eventResponse = await fetch(`/api/users/${id}/myevents`);
 
-  //   useEffect(() => {
-  //     if (id !== undefined) {
-  //       fetchUserData();
-  //     }
-  //   }, [id]);
+      if (userResponse.ok && groupResponse.ok && eventResponse.ok) {
+        // const udata = await userResponse.json();
+        // setUserData(udata);
+        const gdata = await groupResponse.json();
+        setGroupsData(gdata.numberOfGroups);
+        const edata = await eventResponse.json();
+        setEventsData(edata.numberOfEvents);
+      } else {
+        console.error(
+          "Error fetching user or group data:",
+          userResponse.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (id !== undefined) {
+      fetchUserData();
+    }
+  }, [id]);
 
   return (
     <div className="px-4 flex flex-col gap-2">
@@ -66,7 +67,7 @@ export default function Profile() {
       )}
       {user.userData && (
         <>
-          {JSON.stringify(user.userData)}
+          {/*  {JSON.stringify(user.userData)} */}
           <UserBody
             stacks={user.userData.stacks}
             hobbies={user.userData.hobbies}

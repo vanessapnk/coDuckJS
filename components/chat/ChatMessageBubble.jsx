@@ -1,8 +1,11 @@
+import { useUserAuth } from "@/pages/_app";
 import React, { useState } from "react";
 
 const ChatMessageBubble = ({ chat }) => {
   // State to track the current user
-  const [currentUser, setCurrentUser] = useState("65e9aaea7743cf134d7e5a07");
+  const { user, login } = useUserAuth((state) => state);
+
+  const [currentUser, setCurrentUser] = useState(user.userData.id);
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
@@ -21,12 +24,12 @@ const ChatMessageBubble = ({ chat }) => {
 
           // Apply different CSS classes based on whether the message is from the current user or not
           const bubbleClass = isCurrentUser
-            ? "flex justify-end bg-"
+            ? "flex justify-end"
             : "flex justify-start";
 
           const bubbleContentClass = isCurrentUser
-            ? "bg-custom-blue text-white"
-            : "bg-gray-200 text-black";
+            ? "bg-custom-blue text-white rounded-br-none"
+            : "bg-gray-200 text-black rounded-bl-none";
 
           return (
             <li key={index} className={bubbleClass}>
