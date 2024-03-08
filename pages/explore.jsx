@@ -76,7 +76,7 @@ export default function Explore() {
     };
 
     return (
-        <div className='pb-12'>
+        <div className='pb-12 p-4'>
             <div className='flex gap-2 justify-start items-center'>
                 <h1 className='text-xl mb-6'>Explore</h1>
             </div>
