@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message, ProfileAdd } from "iconsax-react";
+import { Message, ProfileAdd, FilterSearch } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 
 
@@ -146,6 +146,8 @@ export default function GroupDetails() {
             Members
           </h5>
         </div>
+        {/*         <div>{JSON.stringify(group.members)}</div>
+         */}
         <div className="flow-root">
           <ul
             role="list"
@@ -159,7 +161,7 @@ export default function GroupDetails() {
                     <div className="flex-shrink-0">
                       <img
                         className="w-8 h-8 rounded-full"
-                        src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*RZc0lk7gkMGXv6nEOwc7Ng.jpeg"
+                        src={`https://github.com/${member.githubUsername}.png`}
                         alt={`${member} image`}
                       />
                     </div>
