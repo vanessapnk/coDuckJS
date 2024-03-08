@@ -18,9 +18,9 @@ import { DarkModeSwitch } from "../custom/darkModeSwitch";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const category = ["Frontend", "Backend", "Design", "Data Analysis", "Other"];
+const category = ["Frontend", "Backend", "Data Analysis", "Design", "Other"];
 const levels = ["Beginner", "Junior", "Intermediate", "Senior"];
-const modality = ["presential", "hybrid", "online"];
+const modality = ["Online", "Flexible", "Presential"];
 
 export function NavEditEvent({ backLink, editLink }) {
   const router = useRouter();
