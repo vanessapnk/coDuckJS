@@ -36,23 +36,21 @@ export default function Groups() {
   //Se existir, carrega os grupos do id
   //Caso contrário, reencaminha para o login
   useEffect(() => {
-    const fetchData = async (id) => {
-      try {
-        console.log(`Getting groups for user with ID: ${id}`); // Log the user ID
-        const res = await fetch(`/api/users/${id}/mygroups`); //aqui vai o [id]
-        const data = await res.json();
-        setGroups(data.userGroups); // Set groups to data.userGroups
-      } catch (error) {
-        console.error("Error fetching groups:", error);
-      }
-    };
-
     if (user && user.userData && user.userData._id) {
+      const fetchData = async (id) => {
+        try {
+          console.log(`Getting groups for user with ID: ${id}`); // Log the user ID
+          const res = await fetch(`/api/users/${id}/mygroups`); //aqui vai o [id]
+          const data = await res.json();
+          setGroups(data.userGroups); // Set groups to data.userGroups
+        } catch (error) {
+          console.error("Error fetching groups:", error);
+        }
+      };
+
       fetchData(user.userData._id); // Pass the user ID
-    } else {
-      router.push("/login");
     }
-  }, []);
+  }, [user]);
 
   const toggleFilters = () => {
     setShowFilters(!showFilters);

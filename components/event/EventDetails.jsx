@@ -13,12 +13,14 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Badge } from "../ui/badge";
 import { NavAction } from "../custom/navAction";
 import { NavEvent } from "../custom/navEvent";
+import { useUserAuth } from "@/pages/_app";
 
 export default function EventDetails() {
   const router = useRouter();
   const { eventId } = router.query; // Get the event ID from the URL query params
   const [event, setEvent] = useState(null);
   const [participants, setParticipants] = useState([]);
+  const { user } = useUserAuth((state) => state);
 
   useEffect(() => {
     const fetchEventData = async () => {
@@ -55,7 +57,7 @@ export default function EventDetails() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ participant: "api" }),
+          body: JSON.stringify({ participant: user.userData._id }),
         });
 
         if (response.ok) {
@@ -155,6 +157,17 @@ export default function EventDetails() {
             </p>
             <p className="text-lg ">Participants</p>
           </div>
+          {event.participants &&
+          event.participants.some((e) => e._id === user.userData._id)
+            ? "Leave Event"
+            : "Join Event"}
+        </button>
+      </div>
+      <div className="w-full max-w-md pl-4 pt-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mt-8 pb-10">
+        <div className="flex items-center justify-between mb-4">
+          <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Participants
+          </h5>
         </div>
 
 

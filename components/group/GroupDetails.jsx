@@ -3,7 +3,13 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message, ProfileAdd, FilterSearch, ArrowLeft } from "iconsax-react";
+import {
+  Message,
+  ProfileAdd,
+  FilterSearch,
+  ArrowLeft,
+  Message2,
+} from "iconsax-react";
 import { useAuth } from "@/context/authContext";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,34 +17,37 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "../ui/badge";
 import { NavAction } from "../custom/navAction";
+import { useUserAuth } from "@/pages/_app";
+import { Button } from "../ui/button";
 
 export default function GroupDetails() {
   const router = useRouter();
   const { groupId } = router.query;
   const [group, setGroup] = useState(null);
   const [navBarVisible, setNavBarVisible] = useState(true);
+  const { user } = useUserAuth((state) => state);
 
-  const { authenticatedUser } = useAuth() || {};
-  const userId2 = authenticatedUser ? authenticatedUser.userId : "teste";
-
-  useEffect(() => {
-    const fetchGroupData = async () => {
-      try {
-        const res = await fetch(`/api/groups/${groupId}`);
-        if (!res.ok) {
-          throw new Error("Failed to fetch group details");
-        }
-        const data = await res.json();
-        setGroup(data);
-      } catch (error) {
-        console.error("Error fetching group details:", error);
+  const fetchGroupData = async () => {
+    try {
+      console.log(groupId, user.userData._id);
+      const res = await fetch(`/api/groups/${groupId}`);
+      if (!res.ok) {
+        throw new Error("Failed to fetch group details");
       }
-    };
-
-    if (groupId) {
-      fetchGroupData();
+      const data = await res.json();
+      setGroup(data);
+    } catch (error) {
+      console.error("Error fetching group details:", error);
     }
-  }, [groupId, navBarVisible]);
+  };
+  useEffect(() => {
+    console.log(user);
+    if (user && user.userData && user.userData._id) {
+      if (groupId) {
+        fetchGroupData();
+      }
+    }
+  }, [groupId, navBarVisible, user]);
 
   const handleNavBarHide = () => {
     setNavBarVisible(false);
@@ -52,10 +61,11 @@ export default function GroupDetails() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ member: "api" }),
+          body: JSON.stringify({ member: user.userData._id }),
         });
 
         if (response.ok) {
+          fetchGroupData();
           console.log("User entered the group successfully");
           // You may want to update the UI to reflect the user joining the group
         } else {
@@ -99,7 +109,6 @@ export default function GroupDetails() {
           </div>
         </Link>
       </AspectRatio>
-
       <div className="px-4 flex flex-col gap-4 pb-12">
         <div className="flex flex-col content-normal justify-between gap-5">
           <div className="flex gap-2">
@@ -155,8 +164,40 @@ export default function GroupDetails() {
             ))}
         </div>
       </div>
+      {/* <NavAction
+        title={
+          group.members &&
+          group.members.some((e) => e._id === user.userData._id)
+            ? "Leave Group"
+            : "Join on Group"
+        } */}
+      {/* onClick={handleEnterGroup}
+        url={`/chat/${groupId}`}
+      /> */}
+      <div className="p-4">
+        <div className="bg-zinc-100 dark:bg-slate-900 p-2 text-center  fixed bottom-0 left-0 right-0 ">
+          <div className="h-full flex gap-2 items-center justify-evenly align-center">
+            <Button
+              onClick={handleEnterGroup}
+              className="text-slate-800 w-full"
+            >
+              {group.members &&
+              group.members.some((e) => e._id === user.userData._id)
+                ? "Leave Group"
+                : "Join on Group"}
+            </Button>
 
-      <NavAction title="Join on Group" onClick={handleEnterGroup} url={`/chat/${groupId}`} />
+            <Link href={`/chat/${groupId}`}>
+              <Button className="text-slate-800 w-full">
+                <div className="flex items-center justify-center gap-2">
+                  Chat
+                  <Message2 size="16" variant="Bold" />
+                </div>
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -59,7 +59,7 @@ export default function Profile2() {
           about={userData.about}
           groups={groupsData}
           events={eventsData}
-          langueges={"3"}
+          languages={"3"}
           stacks={userData.stacks}
         />
       )}

@@ -63,7 +63,7 @@ export default function Profile() {
           about={user.userData.about}
           groups={groupsData}
           events={eventsData}
-          langueges={"3"}
+          languages={"3"}
         />
       )}
       {user.userData && (
