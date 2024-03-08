@@ -21,12 +21,12 @@ const ChatMessageBubble = ({ chat }) => {
 
           // Apply different CSS classes based on whether the message is from the current user or not
           const bubbleClass = isCurrentUser
-            ? "flex justify-end bg-"
+            ? "flex justify-end"
             : "flex justify-start";
 
           const bubbleContentClass = isCurrentUser
-            ? "bg-custom-blue text-white"
-            : "bg-gray-200 text-black";
+            ? "bg-custom-blue text-white rounded-br-none"
+            : "bg-gray-200 text-black rounded-bl-none";
 
           return (
             <li key={index} className={bubbleClass}>
