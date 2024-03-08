@@ -16,11 +16,12 @@ export function UserTop({
   languages,
   stacks,
 }) {
+  console.log(stacks)
   return (
     <div>
       <div className="flex flex-row gap-4 py-6">
         <div>
-          <Avatar className="rounded-2xl h-20 w-20">
+          <Avatar className="rounded-2xl h-32 w-32">
             <AvatarImage
               src={`https://github.com/${github}.png`}
               alt="@shadcn"
@@ -31,11 +32,15 @@ export function UserTop({
           </Avatar>
         </div>
         <div></div>
-        <div>
-          <h1 className="text-xl">
-            {name}, {age}
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r to-blue-300   from-custom-yellow">
+            {/* User Bio */}
+            {name}
           </h1>
-          <p className="text-sm opacity-70">{job}</p>
+          <h1 className="text-xl">
+            {job}
+          </h1>
+          <p className="text-sm opacity-70">{age} years old</p>
           <div className="flex gap-2 items-center opacity-70">
             <MapPin size={12} strokeWidth={2} />
             <h2 className="text-sm">
@@ -56,10 +61,7 @@ export function UserTop({
 
       <div className="flex flex-col gap-1">
         <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r to-custom-green from-custom-yellow">
-            {/* User Bio */}
-            {name}
-          </span>
+          
           {/*  Scalable AI. */}
           <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
             {about}
@@ -80,13 +82,13 @@ export function UserTop({
             name={groups === 1 ? "Group" : "Groups"}
           />
           <PorfileItemCard
-            bg="bg-custom-lilac"
+            bg="bg-blue-300"
             value={events}
             name={"Events"}
           />
         </div>
         <div className="flex gap-4">
-          {<PorfileItemCard bg="bg-custom-green" value={"1"} name={"Stacks"} />}
+          {<PorfileItemCard bg="bg-custom-green" value={"Javascript"} name={"Top Stack"} />}
         </div>
       </div>
       <div className="flex gap-2 items-center"></div>
