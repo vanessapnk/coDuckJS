@@ -93,11 +93,11 @@ export default function Explore() {
                 </TabsList>
                 <TabsContent value="groups">
                     <div className='flex gap-4 py-4'>
-                        <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
-                            <SheetFilters onApplyFilters={handleApplyFilters} />
-                        </div>
                         <div className='w-full'>
                             <Input className="py-4" type="search" placeholder="Search groups here" onChange={handleSearchInputChange} />
+                        </div>
+                        <div className='flex items-center justify-center content-center text-slate-900 bg-yellow-400 px-2 rounded-sm'>
+                            <SheetFilters onApplyFilters={handleApplyFilters} />
                         </div>
                     </div>
                     {filterGroups.length > 0 ? (

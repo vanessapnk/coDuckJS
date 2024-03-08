@@ -91,6 +91,13 @@ export function CardItem({
         <p className="text-base opacity-70 normal-case">
           {description}
         </p>
+        <div className="flex flex-wrap gap-2 ">
+              {stacks.map((stack, index) => (
+                <Badge key={index} variant="default" className={"bg-slate-300 text-black mt-2"}>
+                  {stack}
+                </Badge>
+              ))}
+            </div>
       </div>
     </Card>
   );
