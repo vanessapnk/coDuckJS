@@ -1,8 +1,11 @@
+import { useUserAuth } from "@/pages/_app";
 import React, { useState } from "react";
 
 const ChatMessageBubble = ({ chat }) => {
   // State to track the current user
-  const [currentUser, setCurrentUser] = useState("65e9aaea7743cf134d7e5a07");
+  const { user, login } = useUserAuth((state) => state);
+
+  const [currentUser, setCurrentUser] = useState(user.userData.id);
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);

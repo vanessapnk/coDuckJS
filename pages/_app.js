@@ -14,11 +14,35 @@ export const fontSans = FontSans({
 
 export const useUserAuth = create((set) => ({
   user: {},
-  login: (user) => set((state) => ({ user: user })),
-  logout: () => set({ user: {} }),
+  login: (user) => {
+    console.log("LOGGIN IN USER", user)
+    localStorage.setItem("token", user.userData._id)
+    set((state) => ({ user: user }))
+  },
+  logout: () => {
+    console.log("LOGGIN IN USER", user)
+    localStorage.removeItem("token")
+    set({ user: {} })
+  },
 }))
 
 export default function App({ Component, pageProps }) {
+  const { user, login } = useUserAuth((state) => state);
+
+  useEffect(() => {
+    if (!user.userData) {
+      console.log("Page opened, reading user from localstorage")
+      const token = localStorage.getItem("token")
+      if (token) {
+        fetch(`/api/users/${token}`)
+          .then((res) => res.json())
+          .then((user) => {
+            login({ userdId: user._id, userData: user })
+          })
+      }
+    }
+  }, [])
+
   return (
     <AuthProvider>
       <main className={cn(

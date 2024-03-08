@@ -21,20 +21,25 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { DarkModeSwitch } from "@/components/custom/darkModeSwitch";
-
-
+import { useUserAuth } from "./_app";
 
 export default function Groups() {
   const [groups, setGroups] = useState([]);
   const [showFilters, setShowFilters] = useState(false); // State to manage filter options visibility
   const router = useRouter();
+  const { user } = useUserAuth((state) => state);
 
+  //Quando a pagina abre
+  //Pega o id do usuario
+  //Se existir, carrega os grupos do id
+  //Caso contrário, reencaminha para o login
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (id) => {
       try {
-        const res = await fetch("/api/users/65e9aaea7743cf134d7e5a06/mygroups"); //aqui vai o [id]
+        console.log(`Getting groups for user with ID: ${id}`); // Log the user ID
+        const res = await fetch(`/api/users/${id}/mygroups`); //aqui vai o [id]
         const data = await res.json();
         setGroups(data.userGroups); // Set groups to data.userGroups
       } catch (error) {
@@ -42,7 +47,11 @@ export default function Groups() {
       }
     };
 
-    fetchData();
+    if (user && user.userData && user.userData._id) {
+      fetchData(user.userData._id); // Pass the user ID
+    } else {
+      router.push("/login");
+    }
   }, []);
 
   const toggleFilters = () => {
@@ -51,8 +60,8 @@ export default function Groups() {
 
   return (
     <div className="pb-12">
-      <div className='flex gap-2 justify-between  items-center pb-6'>
-        <h1 className='text-xl font-medium'>My Groups</h1>
+      <div className="flex gap-2 justify-between  items-center pb-6">
+        <h1 className="text-xl font-medium">My Groups</h1>
         <Button onClick={() => router.push("/creategroup")}>
           Create Group
         </Button>
@@ -61,7 +70,6 @@ export default function Groups() {
       {showFilters && (
         <div className="bg-gray-100 p-4 mb-4 rounded-md shadow">
           <p>Filter options go here...</p>
-
         </div>
       )}
       <div className="flex flex-col gap-4">
@@ -88,9 +96,7 @@ export default function Groups() {
           </Link>
         ))}
       </div>
-      <div>
-
-      </div>
+      <div></div>
       <Navbar homeActive={false} groupsActive={true} eventsActive={false} />
     </div>
   );
