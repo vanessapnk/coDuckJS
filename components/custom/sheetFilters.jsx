@@ -225,7 +225,7 @@ export default function SheetFilters({ onApplyFilters }) {
                             </div>
                             <div className='flex justify-between mt-2'>
                                 <Button onClick={applyFilters}>Apply Filters</Button>
-                                
+
                                 <Button className="bg-black" onClick={clearFilters}>Clear</Button>
                             </div>
 
