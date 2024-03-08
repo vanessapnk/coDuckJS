@@ -57,6 +57,7 @@ export default function Profile() {
           github={user.userData.githubUsername}
           location={user.userData.city}
           name={user.userData.name}
+
           age={user.userData.age}
           job={user.userData.job}
           about={user.userData.about}

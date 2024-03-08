@@ -164,179 +164,208 @@ export default function Register() {
                             onChange={(e) => setPasswordConfirmation(e.target.value)}
                         />
                         {/* {statusCode} */}
-                        <div className="w-full flex-col flex gap-2">
+                        <div className="w-full flex-col flex items-center justify-center gap-2">
                             <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
-                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back to Login</Button>
+                            <div>
+                                <Link href="/login">
+                                    <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back to login</Button>
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                )}
-                {step === 2 && (
-                    <div div className="flex flex-col gap-4">
-                        <FormEntry
-                            label="name"
-                            id="name"
-                            type="text"
-                            placeholder="Your Name"
-                            required="required"
-                            onChange={(e) => setName(e.target.value)}
-                        />
 
-                        <FormEntry
-                            label="age"
-                            id="age"
-                            type="number"
-                            placeholder="21"
-                            onChange={(e) => setAge(Number(e.target.value))}
-                        />
-                        <FormEntryBox
-                            label="about"
-                            id="about"
-                            type="text"
-                            placeholder="Little Things about you :)"
-                            onChange={(e) => setAbout(e.target.value)}
-                        />
-                        <div className="w-full flex-col flex gap-2">
-                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
-                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                )
+                }
+                {
+                    step === 2 && (
+                        <div div className="flex flex-col gap-4">
+                            <FormEntry
+                                label="name"
+                                id="name"
+                                type="text"
+                                placeholder="Your Name"
+                                required="required"
+                                onChange={(e) => setName(e.target.value)}
+                            />
+
+                            <FormEntry
+                                label="age"
+                                id="age"
+                                type="number"
+                                placeholder="21"
+                                onChange={(e) => setAge(Number(e.target.value))}
+                            />
+                            <FormEntryBox
+                                label="about"
+                                id="about"
+                                type="text"
+                                placeholder="Little Things about you :)"
+                                onChange={(e) => setAbout(e.target.value)}
+                            />
+                            <div className="w-full flex-col flex items-center justify-center gap-2">
+                                <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                                <div>
+                                    <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back</Button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                )}
-                {step === 3 && (
-                    <div div className="flex flex-col gap-4">
-                        <FormEntry
-                            label="city"
-                            id="city"
-                            type="text"
-                            placeholder="City where you live"
-                            required="required"
-                            onChange={(e) => setCity(e.target.value)}
-                        />
+                    )
+                }
+                {
+                    step === 3 && (
+                        <div div className="flex flex-col gap-4">
+                            <FormEntry
+                                label="city"
+                                id="city"
+                                type="text"
+                                placeholder="City where you live"
+                                required="required"
+                                onChange={(e) => setCity(e.target.value)}
+                            />
 
-                        <FormEntry
-                            label="occupation"
-                            id="occupation"
-                            type="text"
-                            placeholder="FrontEnd Developer"
-                            onChange={(e) => setJob(e.target.value)}
-                        />
+                            <FormEntry
+                                label="occupation"
+                                id="occupation"
+                                type="text"
+                                placeholder="FrontEnd Developer"
+                                onChange={(e) => setJob(e.target.value)}
+                            />
 
-                        <FormEntry
-                            label="gitHub ID"
-                            id="github"
-                            type="text"
-                            placeholder="YourGithubId"
-                            onChange={(e) => setGithubUsername(e.target.value)}
-                        />
-                        <div className="w-full flex-col flex gap-2">
-                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
-                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                            <FormEntry
+                                label="gitHub ID"
+                                id="github"
+                                type="text"
+                                placeholder="YourGithubId"
+                                onChange={(e) => setGithubUsername(e.target.value)}
+                            />
+                            <div className="w-full flex-col flex items-center justify-center gap-2">
+                                <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                                <div>
+                                    <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back</Button>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                )}
-                {step === 4 && (
-                    <>
+                    )
+                }
+                {
+                    step === 4 && (
+                        <>
+                            <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                                <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+                                    You want to
+                                    <span className="text-yellow-400"> learn </span>
+                                    , ou of your
+                                    <span className="text-blue-400"> interest </span>
+                                </h1>
+                                <div className="flex items-center gap-2 flex-wrap justify-center">
+                                    {stacksList.map((item, index) =>
+                                        <BadgeCheck key={index} label={item}
+                                            onStateChange={handleSendStacks}
+                                        />
+                                    )}
+                                </div>
+
+                                <div className="w-full flex-col flex items-center justify-center gap-2">
+                                    <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
+                                    <div>
+                                        <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back</Button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </>
+                    )
+                }
+                {
+                    step === 5 && (
                         <div div className="h-screen flex flex-col items-center justify-center gap-12">
                             <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
-                                Select the
-                                <span className="text-yellow-400"> technologies </span>
-                                you have already<span className="text-blue-400"> learned</span>
+                                In addition to learning,
+                                <span className="text-yellow-400"> find friends </span>
+                                who have<span className="text-blue-400"> common tastes</span>
                             </h1>
                             <div className="flex items-center gap-2 flex-wrap justify-center">
-                                {stacksList.map((item, index) =>
-                                    <BadgeCheck key={index} label={item}
-                                        onStateChange={handleSendStacks}
-                                    />
-                                )}
+                                <div className="flex items-center gap-2 flex-wrap justify-center">
+                                    {hobbiesList.map((item, index) =>
+                                        <BadgeCheck key={index} label={item}
+                                            onStateChange={handleSendHobbies}
+                                        />
+                                    )}
+                                </div>
                             </div>
-
-                            <div className="w-full flex-col flex gap-2">
+                            <div className="w-full flex-col flex items-center justify-center gap-2">
                                 <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
-                                <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
-                            </div>
-
-                        </div>
-                    </>
-                )}
-                {step === 5 && (
-                    <div div className="h-screen flex flex-col items-center justify-center gap-12">
-                        <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
-                            In addition to learning,
-                            <span className="text-yellow-400"> find friends </span>
-                            who have<span className="text-blue-400"> common tastes</span>
-                        </h1>
-                        <div className="flex items-center gap-2 flex-wrap justify-center">
-                            <div className="flex items-center gap-2 flex-wrap justify-center">
-                                {hobbiesList.map((item, index) =>
-                                    <BadgeCheck key={index} label={item}
-                                        onStateChange={handleSendHobbies}
-                                    />
-                                )}
+                                <div>
+                                    <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back</Button>
+                                </div>
                             </div>
                         </div>
-                        <div className="w-full flex-col flex gap-2">
-                            <Button className="dark:text-slate-900 w-full" onClick={nextStep}>Next</Button>
-                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
-                        </div>
-                    </div>
-                )}
-                {step === 6 && (
-                    <div div className="h-screen flex flex-col items-center justify-center gap-12">
-                        {/* <Image
+                    )
+                }
+                {
+                    step === 6 && (
+                        <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                            {/* <Image
                             className="p-2 rounded-2xl"
                             src="/gifs/duck-load.gif"
                             alt="Descrição da imagem"
                             width={200}
                             height={200}
                         /> */}
-                        <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
-                            What
-                            <span className="text-yellow-400"> languages </span>
-                            do you<span className="text-blue-400"> speak? </span>
-                        </h1>
-                        <div className="flex items-center gap-2 flex-wrap justify-center">
-                            {languageList.map((item, index) =>
-                                <BadgeCheck key={index} label={item}
-                                    onStateChange={handleSendLanguagesSpoken}
-                                />
-                            )}
-                        </div>
-
-                        <div className="w-full flex-col flex gap-2 ">
-                            {/* <Link href={"/explore"}> */}
-                            <Button className="dark:text-slate-900 w-full" onClick={nextStep} >
-                                Finish
-                            </Button>
-                            {/* </Link> */}
-                            <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
-                        </div>
-                    </div>
-                )
-                }
-                {step === 7 && (
-                    <>
-                        <div div className="h-screen flex flex-col items-center justify-center gap-12">
-                            <Image
-                                className="p-2 rounded-2xl"
-                                src="/gifs/duck-flowers.gif"
-                                alt="Descrição da imagem"
-                                width={200}
-                                height={200}
-                            />
                             <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
-                                Is all the data
-                                <span className="text-yellow-400"> correct? </span>
-                                If so<span className="text-blue-400"> Let's Go! </span>
+                                What
+                                <span className="text-yellow-400"> languages </span>
+                                do you<span className="text-blue-400"> speak? </span>
                             </h1>
-                            <div className="w-full flex-col flex gap-2">
-                                <Link href={"/explore"}>
-                                    <Button className="dark:text-slate-900 w-full" type="submit" onClick={() => createEntry()}>Finish
+                            <div className="flex items-center gap-2 flex-wrap justify-center">
+                                {languageList.map((item, index) =>
+                                    <BadgeCheck key={index} label={item}
+                                        onStateChange={handleSendLanguagesSpoken}
+                                    />
+                                )}
+                            </div>
+
+                            <div className="w-full flex-col items-center justify-center  flex gap-2 ">
+                                <Link href={"/explore"} className="w-12/12">
+                                    <Button className="dark:text-slate-900 w-full" onClick={nextStep} >
+                                        Finish
                                     </Button>
                                 </Link>
-                                <Button className="dark:text-slate-400 pt-10" variant="link" onClick={backStep}>Back</Button>
+                                <div>
+                                    <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back</Button>
+                                </div>
                             </div>
                         </div>
-                    </>
-                )
+                    )
+                }
+                {
+                    step === 7 && (
+                        <>
+                            <div div className="h-screen flex flex-col items-center justify-center gap-12">
+                                <Image
+                                    className="p-2 rounded-2xl"
+                                    src="/gifs/duck-flowers.gif"
+                                    alt="Descrição da imagem"
+                                    width={200}
+                                    height={200}
+                                />
+                                <h1 className="text-start text-[33px] pb-8 font-bold leading-10">
+                                    Is all the data
+                                    <span className="text-yellow-400"> correct? </span>
+                                    If so<span className="text-blue-400"> Let's Go! </span>
+                                </h1>
+                                <div className="w-full flex-col items-center justify-center flex gap-2">
+                                    <Link href={"/explore"}>
+                                        <Button className="dark:text-slate-900 w-full" type="submit" onClick={() => createEntry()}>Finish
+                                        </Button>
+                                    </Link>
+                                    <div>
+                                        <Button className="dark:text-slate-400 pt-20" variant="link" onClick={backStep}>Back</Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    )
                 }
             </form >
         </div >

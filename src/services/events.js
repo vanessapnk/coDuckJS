@@ -8,13 +8,13 @@ export async function createEvent(name, creatorId, description, category, stacks
     try {
         const collection = await connectToCollection("eventData");
 
-        function parseDateString(dateString) {
-            const [day, month, year, hours, minutes] = dateString.split(',');
-            return new Date(`${year}-${month}-${day}T${hours}:${minutes}`);
-        }
-        // NO JSON BODY
-        const date = parseDateString(dateString);       // "date": "day,month,year,hour,minutes",
-        const endDate = parseDateString(endDateString); // endDate": "day,month,year,hour,minutes",
+        /*  function parseDateString(dateString) {
+             const [day, month, year, hours, minutes] = dateString.split(',');
+             return new Date(`${year}-${month}-${day}T${hours}:${minutes}`);
+         }
+         // NO JSON BODY
+         const date = parseDateString(dateString);       // "date": "day,month,year,hour,minutes",
+         const endDate = parseDateString(endDateString); // endDate": "day,month,year,hour,minutes", */
 
         await collection.insertOne({
             name,
@@ -40,7 +40,7 @@ export async function createEvent(name, creatorId, description, category, stacks
     }
 }
 
-export async function loadMyEvents(id){
+export async function loadMyEvents(id) {
     const myEvents = await getMyEvents(id);
     return myEvents;
 }

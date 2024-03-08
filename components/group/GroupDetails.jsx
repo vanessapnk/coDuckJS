@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Navbar } from "../custom/navbar";
 import { NavEditGroup } from "./NavEditGroup";
-import { Message, ProfileAdd, FilterSearch } from "iconsax-react";
+import { Message, ProfileAdd, FilterSearch, ArrowLeft } from "iconsax-react";
 import { useAuth } from "@/context/authContext";
-import Image from "next/image"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "../ui/badge";
 import { NavAction } from "../custom/navAction";
 
@@ -82,46 +82,34 @@ export default function GroupDetails() {
 
   return (
     <>
-      <AspectRatio ratio={16 / 12} className="bg-muted mb-7">
+      <AspectRatio ratio={16 / 12} className="bg-muted mb-7 relative">
         <Image
           src={group.photo_url}
           alt="Photo by Drew Beamer"
           fill
           className="object-cover"
         />
+        <Link href={"/groups"}>
+          <div className="absolute top-2 left-2 ">
+            <ArrowLeft
+              size="32"
+              className="dark:text-slate-950"
+              variant="Bold"
+            />
+          </div>
+        </Link>
       </AspectRatio>
-      <div className="px-4 flex flex-col gap-4">
+
+      <div className="px-4 flex flex-col gap-4 pb-12">
         <div className="flex flex-col content-normal justify-between gap-5">
           <div className="flex gap-2">
             <Badge variant="outline">{group.category} </Badge>
             <Badge variant="outline">{group.stackLevel} </Badge>
             <Badge variant="outline">{group.modality} </Badge>
           </div>
-          <div>
-
-          </div>
+          <div></div>
           <h1 className="text-3xl"> {group.name} </h1>
-          <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit reiciendis consequatur debitis maxime perferendis, eligendi cumque? Placeat vel recusandae totam eligendi, aliquid repellat quasi, excepturi unde expedita est numquam consequuntur.</p>
-        </div>
-        <div className="flex items-center justify-between py-2">
-          <div className="flex gap-2 items-center">
-            <p className="text-lg font-semibold">
-              {group.members.length}/{group.usersLimit}
-            </p>
-            <p className="text-lg ">
-              Participants
-            </p>
-          </div>
-          <div className="flex items-center pr-2">
-            {group.members
-              .filter((m) => m != null)
-              .map((member, index) => (
-                <Avatar className="h-10 w-10 -mx-1.5">
-                  <AvatarImage src={`https://github.com/${member.githubUsername}.png`} />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-              ))}
-          </div>
+          <p> {group.description}</p>
         </div>
         <div className="flex flex-col gap-4">
           <h1 className="text-xl">Covered stacks</h1>
@@ -144,7 +132,30 @@ export default function GroupDetails() {
             ))}
           </div>
         </div>
+        <div className="flex items-center justify-between pt-4">
+          <div className="flex gap-2 items-center">
+            <p className="text-lg font-semibold">
+              {group.members.length}/{group.usersLimit}
+            </p>
+            <p className="text-lg ">Participants</p>
+          </div>
+        </div>
+        <div className=" items-center pr-2 pt-4  flex gap-1">
+          {group.members
+            .filter((m) => m != null)
+            .map((member, index) => (
+              <Link key={member._id} href={`/profile2/${member._id}`}>
+                <Avatar className="h-10 w-10 ">
+                  <AvatarImage
+                    src={`https://github.com/${member.githubUsername}.png`}
+                  />
+                  <AvatarFallback></AvatarFallback>
+                </Avatar>
+              </Link>
+            ))}
+        </div>
       </div>
+
       <NavAction title="Join on Group" url={`/chat/${groupId}`} />
     </>
   );
